@@ -1,0 +1,13 @@
+.button {
+    -fx-text-fill: green;
+}
+
+.item-pane,
+.draw-pane {
+    -fx-background-color: #dddddd;
+    -fx-background-radius: 5px;
+}
+
+.grid-pane {
+    -fx-background-color: #666666;
+}
