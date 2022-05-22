@@ -14,6 +14,8 @@ public class StartWindow extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(StartWindow.class.getResource("/de/legoshi/taskmodeller/start-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         scene.getStylesheets().add("styles.css");
+        stage.setMinWidth(800);
+        stage.setMinHeight(600);
         stage.setTitle("Model selection");
         stage.setScene(scene);
         stage.show();
