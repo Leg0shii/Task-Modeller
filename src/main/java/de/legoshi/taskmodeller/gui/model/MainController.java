@@ -7,43 +7,59 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import lombok.Getter;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+@Getter
 public class MainController implements Initializable {
 
-    @FXML
-    public ScrollPane scrollPane;
-    @FXML
-    public AnchorPane drawPane;
-    @FXML
-    public HBox itemPane;
+    @FXML public HBox itemPane;
+    @FXML public GridPane gridPane;
+    private PaintWindow selectedWindow;
+    private ArrayList<PaintWindow> allWindows;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         StandardItemBar standardItemBar = new StandardItemBar();
         standardItemBar.prepareItemBar();
 
+        this.allWindows = new ArrayList<>();
+
         for (Drawable d : standardItemBar.getItemBar()) {
             d.getShape().setOnMouseClicked(event -> {
-                drawPane.getChildren().add(d.getDuplicate());
+                selectedWindow.getAnchorPane().getChildren().add(d.getDuplicate());
                 event.consume();
             });
             itemPane.getChildren().add(d.getShape());
         }
+
+        selectedWindow = new PaintWindow(this);
+        allWindows.add(selectedWindow);
+        selectedWindow.initialize();
+        selectedWindow.addFirstWindow();
     }
 
     public void zoomIn(ActionEvent actionEvent) {
+        AnchorPane drawPane = selectedWindow.getAnchorPane();
         drawPane.setPrefHeight(drawPane.getPrefHeight()+200);
         drawPane.setPrefWidth(drawPane.getPrefWidth()+200);
-        System.out.println("X: " + drawPane.getHeight()*drawPane.getScaleX());
     }
 
     public void zoomOut(ActionEvent actionEvent) {
+        AnchorPane drawPane = selectedWindow.getAnchorPane();
         drawPane.setPrefHeight(drawPane.getPrefHeight()-200);
         drawPane.setPrefWidth(drawPane.getPrefWidth()-200);
-        System.out.println("X: " + drawPane.getHeight()*drawPane.getScaleX());
+    }
+
+    public void addWindow(ActionEvent actionEvent) {
+        PaintWindow paintWindow = new PaintWindow(this);
+        paintWindow.initialize();
+        allWindows.add(paintWindow);
+        paintWindow.addAnotherWindow(this.allWindows);
     }
 }
