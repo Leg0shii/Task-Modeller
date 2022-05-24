@@ -14,10 +14,10 @@ public abstract class Drawable implements IShape<Polygon> {
 
     private double lastX = 0;
     private double lastY = 0;
-    private static final int marginLeftX = 10;
-    private static final int marginTopY = 10;
-    private static final int marginRightX = 80;
-    private static final int marginBottomY = 210;
+    private static final int marginLeftX = 5; //10;
+    private static final int marginTopY = 5; //10;
+    private static final int marginRightX = 55; //110;
+    private static final int marginBottomY = 55; //240;
 
     public Drawable(UUID randomUUID, Polygon shape) {
         this.id = randomUUID;
@@ -33,7 +33,7 @@ public abstract class Drawable implements IShape<Polygon> {
 
     private void onMouseDrag(MouseEvent event, Polygon poly) {
         double polyTranslateX = poly.getTranslateX();
-        double sceneWidth = poly.getScene().getWidth();
+        double sceneWidth = poly.getParent().getLayoutBounds().getWidth();
 
         if(polyTranslateX < marginLeftX) poly.setTranslateX(marginLeftX);
         else if (polyTranslateX > (sceneWidth - marginRightX)) poly.setTranslateX((sceneWidth - marginRightX));
@@ -43,7 +43,7 @@ public abstract class Drawable implements IShape<Polygon> {
         }
 
         double polyTranslateY = poly.getTranslateY();
-        double sceneHeight = poly.getScene().getHeight();
+        double sceneHeight = poly.getParent().getLayoutBounds().getHeight();
 
         if(polyTranslateY < marginTopY) poly.setTranslateY(marginTopY);
         else if (polyTranslateY > (sceneHeight - marginBottomY)) poly.setTranslateY((sceneHeight - marginBottomY));
