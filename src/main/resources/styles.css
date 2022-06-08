@@ -8,6 +8,11 @@
     -fx-background-radius: 5px;
 }
 
+.active-pane {
+    -fx-border-color: red;
+    -fx-border-radius: 5px;
+}
+
 .draw-pane-bg {
     -fx-background-color: #dd0000;
 }

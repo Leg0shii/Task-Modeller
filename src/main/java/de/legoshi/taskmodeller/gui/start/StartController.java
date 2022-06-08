@@ -1,6 +1,5 @@
 package de.legoshi.taskmodeller.gui.start;
 
-import de.legoshi.taskmodeller.gui.model.MainController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

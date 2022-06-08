@@ -10,7 +10,8 @@ import java.util.UUID;
 public abstract class Drawable implements IShape<Polygon> {
 
     private final UUID id;
-    @Getter private final Polygon shape;
+    @Getter
+    private final Polygon shape;
 
     private double lastX = 0;
     private double lastY = 0;
@@ -33,20 +34,26 @@ public abstract class Drawable implements IShape<Polygon> {
 
     private void onMouseDrag(MouseEvent event, Polygon poly) {
         double polyTranslateX = poly.getTranslateX();
+        double objectScaleFactorWidth = poly.getScaleX() * poly.getLayoutBounds().getWidth() - poly.getLayoutBounds().getWidth();
         double sceneWidth = poly.getParent().getLayoutBounds().getWidth();
 
-        if(polyTranslateX < marginLeftX) poly.setTranslateX(marginLeftX);
-        else if (polyTranslateX > (sceneWidth - marginRightX)) poly.setTranslateX((sceneWidth - marginRightX));
+        if (polyTranslateX < (marginLeftX + objectScaleFactorWidth / 2))
+            poly.setTranslateX(marginLeftX + objectScaleFactorWidth / 2);
+        else if (polyTranslateX > (sceneWidth - marginRightX - (objectScaleFactorWidth / 2)))
+            poly.setTranslateX((sceneWidth - marginRightX - (objectScaleFactorWidth / 2)));
         else {
             poly.setTranslateX(polyTranslateX + event.getSceneX() - lastX);
             this.lastX = event.getSceneX();
         }
 
         double polyTranslateY = poly.getTranslateY();
+        double objectScaleFactorHeight = poly.getScaleX() * poly.getLayoutBounds().getWidth() - poly.getLayoutBounds().getHeight();
         double sceneHeight = poly.getParent().getLayoutBounds().getHeight();
 
-        if(polyTranslateY < marginTopY) poly.setTranslateY(marginTopY);
-        else if (polyTranslateY > (sceneHeight - marginBottomY)) poly.setTranslateY((sceneHeight - marginBottomY));
+        if (polyTranslateY < (marginTopY + objectScaleFactorHeight / 2))
+            poly.setTranslateY(marginTopY + objectScaleFactorHeight / 2);
+        else if (polyTranslateY > (sceneHeight - marginBottomY - (objectScaleFactorHeight / 2)))
+            poly.setTranslateY((sceneHeight - marginBottomY - (objectScaleFactorHeight / 2)));
         else {
             poly.setTranslateY(polyTranslateY + event.getSceneY() - lastY);
             this.lastY = event.getSceneY();
