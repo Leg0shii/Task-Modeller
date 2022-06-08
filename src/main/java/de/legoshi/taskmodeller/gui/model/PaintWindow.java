@@ -35,7 +35,6 @@ public class PaintWindow {
         anchorPane.getStyleClass().add("draw-pane-bg");
 
         scrollPane.getStyleClass().add("draw-pane");
-        // scrollPane.setPannable(true);
         scrollPane.setPadding(new Insets(15, 15, 15, 15));
         scrollPane.setContent(anchorPane);
 

@@ -31,9 +31,6 @@ public class MainController implements Initializable {
         StandardItemBar standardItemBar = new StandardItemBar();
         standardItemBar.prepareItemBar();
 
-        gridPane.setVgap(10);
-        gridPane.setHgap(10);
-
         this.allWindows = new ArrayList<>();
 
         for (Drawable d : standardItemBar.getItemBar()) {
@@ -77,11 +74,7 @@ public class MainController implements Initializable {
         }
     }
 
-    /**
-     *
-     * @param actionEvent
-     */
-    public void addWindow(ActionEvent actionEvent) {
+    public void addWindow() {
         PaintWindow paintWindow = new PaintWindow(this);
         paintWindow.initialize();
         allWindows.add(paintWindow);
