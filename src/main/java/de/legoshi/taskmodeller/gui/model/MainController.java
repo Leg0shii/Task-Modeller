@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Polygon;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ import org.controlsfx.control.PropertySheet;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 @Getter
 @Setter
@@ -53,10 +55,10 @@ public class MainController implements Initializable {
         for (Drawable d : itemBar) {
             d.getShape().setOnMouseClicked(event -> {
                 double scaleFactor = selectedWindow.getScaleFactor();
-                Polygon poly = d.getDuplicate();
-                poly.setScaleX(scaleFactor);
-                poly.setScaleY(scaleFactor);
-                selectedWindow.getAnchorPane().getChildren().add(poly);
+                StackPane stPane = d.getDuplicate();
+                stPane.setScaleX(scaleFactor);
+                stPane.setScaleY(scaleFactor);
+                selectedWindow.getAnchorPane().getChildren().add(stPane);
                 event.consume();
             });
             itemPane.getChildren().add(d.getShape());
