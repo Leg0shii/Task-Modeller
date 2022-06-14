@@ -1,4 +1,4 @@
-package de.legoshi.taskmodeller.gui.model.symbols;
+package de.legoshi.taskmodeller.gui.model.symbols.standard;
 
 import de.legoshi.taskmodeller.gui.model.symbols.helper.Drawable;
 import de.legoshi.taskmodeller.util.PolygonHelper;

@@ -11,11 +11,11 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <Label text="Select your starting model" />
-    <ComboBox fx:id="startCB" prefWidth="150.0" value="Text">
+    <ComboBox fx:id="startCB" prefWidth="150.0" value="Freies Modellieren">
         <items>
             <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Text" />
-                <String fx:value="CTTE" />
+                <String fx:value="Freies Modellieren" />
+                <String fx:value="CTT Modell" />
             </FXCollections>
         </items>
     </ComboBox>

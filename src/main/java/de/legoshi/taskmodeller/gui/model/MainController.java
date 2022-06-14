@@ -1,7 +1,10 @@
 package de.legoshi.taskmodeller.gui.model;
 
+import de.legoshi.taskmodeller.gui.model.itembar.CTTItemBar;
+import de.legoshi.taskmodeller.gui.model.itembar.ItemBar;
 import de.legoshi.taskmodeller.gui.model.itembar.StandardItemBar;
 import de.legoshi.taskmodeller.gui.model.symbols.helper.Drawable;
+import de.legoshi.taskmodeller.util.ModelType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Polygon;
 import lombok.Getter;
 import lombok.Setter;
+import org.controlsfx.control.PropertySheet;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,16 +28,29 @@ public class MainController implements Initializable {
     @FXML public HBox itemPane;
     @FXML public GridPane gridPane;
     private PaintWindow selectedWindow;
-    private ArrayList<PaintWindow> allWindows;
+    private ArrayList<PaintWindow> allWindows = new ArrayList<>();
+
+    private StandardItemBar standardItemBar = new StandardItemBar();
+    private CTTItemBar cttItemBar = new CTTItemBar();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        StandardItemBar standardItemBar = new StandardItemBar();
-        standardItemBar.prepareItemBar();
 
-        this.allWindows = new ArrayList<>();
+        onItemBarReload(ModelType.CTT);
 
-        for (Drawable d : standardItemBar.getItemBar()) {
+        selectedWindow = new PaintWindow(this, ModelType.CTT);
+        allWindows.add(selectedWindow);
+        selectedWindow.initialize();
+        selectedWindow.addFirstWindow();
+    }
+
+    public void onItemBarReload(ModelType modelType) {
+        ArrayList<Drawable> itemBar;
+        if (modelType.equals(ModelType.CTT)) itemBar = cttItemBar.itemBar;
+        else itemBar = standardItemBar.itemBar;
+
+        itemPane.getChildren().clear();
+        for (Drawable d : itemBar) {
             d.getShape().setOnMouseClicked(event -> {
                 double scaleFactor = selectedWindow.getScaleFactor();
                 Polygon poly = d.getDuplicate();
@@ -44,11 +61,6 @@ public class MainController implements Initializable {
             });
             itemPane.getChildren().add(d.getShape());
         }
-
-        selectedWindow = new PaintWindow(this);
-        allWindows.add(selectedWindow);
-        selectedWindow.initialize();
-        selectedWindow.addFirstWindow();
     }
 
     public void zoomIn() {
@@ -75,7 +87,7 @@ public class MainController implements Initializable {
     }
 
     public void addWindow() {
-        PaintWindow paintWindow = new PaintWindow(this);
+        PaintWindow paintWindow = new PaintWindow(this, ModelType.FREE);
         paintWindow.initialize();
         allWindows.add(paintWindow);
         paintWindow.addAnotherWindow(this.allWindows);

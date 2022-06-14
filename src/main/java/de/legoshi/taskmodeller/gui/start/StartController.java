@@ -1,5 +1,7 @@
 package de.legoshi.taskmodeller.gui.start;
 
+import de.legoshi.taskmodeller.gui.model.MainController;
+import de.legoshi.taskmodeller.util.ModelType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,16 +26,15 @@ public class StartController implements Initializable {
     }
 
     @FXML public void onStartButtonClick(ActionEvent event) throws IOException {
-        String selectedMode = startCB.getValue();
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/de/legoshi/taskmodeller/main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartWindow.class.getResource("/de/legoshi/taskmodeller/main-view.fxml"));
         Parent page = fxmlLoader.load();
         Scene pageScene = new Scene(page);
         pageScene.getStylesheets().add("styles.css");
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        // MainController mc = fxmlLoader.getController();
-        // mc.getSelectLID().setText(selectedMode);
+        MainController mc = fxmlLoader.getController();
+        String selectedMode = startCB.getValue();
+
         appStage.setScene(pageScene);
         appStage.show();
     }

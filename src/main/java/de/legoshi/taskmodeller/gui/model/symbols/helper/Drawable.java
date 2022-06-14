@@ -1,6 +1,5 @@
 package de.legoshi.taskmodeller.gui.model.symbols.helper;
 
-import de.legoshi.taskmodeller.gui.model.itembar.StandardItemBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import lombok.Getter;
@@ -23,7 +22,7 @@ public abstract class Drawable implements IShape<Polygon> {
     public Drawable(UUID randomUUID, Polygon shape) {
         this.id = randomUUID;
         this.shape = shape;
-        StandardItemBar.colorPoly(shape);
+        // StandardItemBar.colorPoly(shape);
     }
 
     private void onMouseClick(MouseEvent event) {

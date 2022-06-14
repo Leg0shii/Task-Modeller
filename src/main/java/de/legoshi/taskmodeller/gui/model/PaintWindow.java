@@ -1,5 +1,6 @@
 package de.legoshi.taskmodeller.gui.model;
 
+import de.legoshi.taskmodeller.util.ModelType;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
@@ -17,10 +18,12 @@ public class PaintWindow {
     public AnchorPane anchorPane;
     private double scaleFactor;
     private final MainController mainController;
+    private final ModelType modelType;
 
-    public PaintWindow(MainController mainController) {
+    public PaintWindow(MainController mainController, ModelType modelType) {
         this.mainController = mainController;
         this.scaleFactor = 1;
+        this.modelType = modelType;
     }
     public void initialize() {
         scrollPane = new ScrollPane();
@@ -42,6 +45,7 @@ public class PaintWindow {
             mainController.setSelectedWindow(this);
             for(PaintWindow paintWindow : mainController.getAllWindows()) {
                 paintWindow.getScrollPane().getStyleClass().remove("active-pane");
+                mainController.onItemBarReload(this.modelType);
             }
             scrollPane.getStyleClass().add("active-pane");
         });
