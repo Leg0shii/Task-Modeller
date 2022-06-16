@@ -6,15 +6,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -49,12 +47,13 @@ public abstract class Drawable implements IShape<StackPane> {
     }
 
     private void onMouseClick(MouseEvent event, StackPane stPane) {
-
         if (event.isSecondaryButtonDown()) {
             final Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setTitle("Bearbeite Objekt");
-            // dialog.initOwner(shape.getScene().getWindow());
+
+            Polygon polygon = (Polygon) stPane.getChildren().get(0);
+            Label label = (Label) stPane.getChildren().get(1);
 
             GridPane gridPane = new GridPane();
             gridPane.setPadding(new Insets(10, 10, 10, 10));
@@ -64,29 +63,29 @@ public abstract class Drawable implements IShape<StackPane> {
             TextField textField = new TextField();
             gridPane.add(new Text("Name: "), 0, 0);
             gridPane.add(textField, 1, 0);
-            // textField.textProperty()
 
-            System.out.println(stPane.getScaleX());
+            textField.textProperty().addListener((observableValue, s, t1) -> {
+                if (!(label.getBoundsInLocal().getWidth() < stPane.getBoundsInLocal().getWidth())) {
+                    label.setText(t1);
+                    return;
+                }
+                label.setText(t1);
+            });
 
             Slider xSlider = new Slider(0.01, 5, stPane.getScaleX());
-            gridPane.add(new Text("X-Axis:"), 0, 1);
+            gridPane.add(new Text("Scale:"), 0, 1);
             gridPane.add(xSlider, 1, 1);
             xSlider.valueProperty().addListener((observableValue, number, t1) -> {
-                System.out.println("Number: " + number + " t1: " + t1);
-                stPane.setScaleX(stPane.getScaleX()*1+((double)t1-(double)number));
-                System.out.println(stPane.getScaleX());
+                stPane.setScaleX(stPane.getScaleX() * 1 + ((double) t1 - (double) number));
+                stPane.setScaleY(stPane.getScaleY() * 1 + ((double) t1 - (double) number));
+
+                label.setScaleX(1/stPane.getScaleX());
+                label.setScaleY(1/stPane.getScaleY());
             });
 
-            Slider ySlider = new Slider(0.01, 5, stPane.getScaleY());
-            gridPane.add(new Text("Y-Axis:"), 0, 2);
-            gridPane.add(ySlider, 1, 2);
-            ySlider.valueProperty().addListener((observableValue, number, t1) -> {
-                if ((double)t1 == 1) return;
-                stPane.setScaleY(stPane.getScaleY()*1+((double)t1-(double)number));
-            });
-
-            ColorPicker colorPicker = new ColorPicker();
+            ColorPicker colorPicker = new ColorPicker((Color) polygon.getFill());
             gridPane.add(colorPicker, 2, 0, 3, 3);
+            colorPicker.valueProperty().addListener((observableValue, color, t1) -> polygon.setFill(t1));
 
             Button closeBtn = new Button("Done");
             gridPane.add(closeBtn, 1, 10, 10, 1);
@@ -103,9 +102,6 @@ public abstract class Drawable implements IShape<StackPane> {
     }
 
     private void onMouseDrag(MouseEvent event, StackPane stPane) {
-        Polygon polygon = (Polygon) stPane.getChildren().get(0);
-        Text text = (Text) stPane.getChildren().get(1);
-
         double polyTranslateX = stPane.getTranslateX();
         double objectScaleFactorWidth = stPane.getScaleX() * stPane.getLayoutBounds().getWidth() - stPane.getLayoutBounds().getWidth();
         double sceneWidth = stPane.getParent().getLayoutBounds().getWidth();
@@ -142,11 +138,10 @@ public abstract class Drawable implements IShape<StackPane> {
         newPoly.setStroke(shape.getStroke());
         newPoly.setStrokeWidth(shape.getStrokeWidth());
 
+        Label label = new Label(UUID.randomUUID().toString().substring(0,3));
+
         stPane.getChildren().add(newPoly);
-        Text text = new Text("tessdsfsdfsdfsdft");
-        stPane.setLayoutX(newPoly.getLayoutX());
-        stPane.setLayoutY(newPoly.getLayoutY());
-        stPane.getChildren().add(text);
+        stPane.getChildren().add(label);
 
         newPoly.setOnMousePressed(event -> onMouseClick(event, stPane));
         newPoly.setOnMouseDragged(event -> onMouseDrag(event, stPane));
