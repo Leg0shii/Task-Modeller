@@ -1,6 +1,6 @@
 package de.legoshi.taskmodeller.gui.model.symbols.ctt;
 
-import de.legoshi.taskmodeller.gui.model.symbols.helper.Drawable;
+import de.legoshi.taskmodeller.gui.model.symbols.Drawable;
 import de.legoshi.taskmodeller.util.PolygonHelper;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Polygon;

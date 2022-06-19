@@ -1,11 +1,11 @@
 package de.legoshi.taskmodeller.gui.model;
 
 import de.legoshi.taskmodeller.gui.model.itembar.CTTItemBar;
-import de.legoshi.taskmodeller.gui.model.itembar.ItemBar;
 import de.legoshi.taskmodeller.gui.model.itembar.StandardItemBar;
-import de.legoshi.taskmodeller.gui.model.symbols.helper.Drawable;
+import de.legoshi.taskmodeller.gui.model.symbols.Drawable;
+import de.legoshi.taskmodeller.gui.model.symbols.DrawnSymbol;
+import de.legoshi.taskmodeller.gui.model.windows.PaintWindow;
 import de.legoshi.taskmodeller.util.ModelType;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -13,67 +13,78 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Polygon;
 import lombok.Getter;
 import lombok.Setter;
-import org.controlsfx.control.PropertySheet;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Stack;
 
 @Getter
 @Setter
 public class MainController implements Initializable {
 
-    @FXML public HBox itemPane;
     @FXML public GridPane gridPane;
-    private PaintWindow selectedWindow;
-    private ArrayList<PaintWindow> allWindows = new ArrayList<>();
+    @FXML public HBox itemPane;
 
-    private StandardItemBar standardItemBar = new StandardItemBar();
-    private CTTItemBar cttItemBar = new CTTItemBar();
+    @Getter public static MainController mainController;
+
+    private ArrayList<PaintWindow> allWindows = new ArrayList<>();
+    @Getter private PaintWindow selectedWindow;
+
+    private final StandardItemBar standardItemBar = new StandardItemBar();
+    private final CTTItemBar cttItemBar = new CTTItemBar();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        mainController = this;
 
-        onItemBarReload(ModelType.CTT);
-
-        selectedWindow = new PaintWindow(this, ModelType.CTT);
-        allWindows.add(selectedWindow);
-        selectedWindow.initialize();
-        selectedWindow.addFirstWindow();
+        reloadItemBarWithModel(ModelType.CTT);
+        this.selectedWindow = new PaintWindow(this, ModelType.CTT);
+        addFirstWindow(this.selectedWindow);
     }
 
-    public void onItemBarReload(ModelType modelType) {
+    public void reloadItemBarWithModel(ModelType modelType) {
         ArrayList<Drawable> itemBar;
         if (modelType.equals(ModelType.CTT)) itemBar = cttItemBar.itemBar;
         else itemBar = standardItemBar.itemBar;
 
         itemPane.getChildren().clear();
-        for (Drawable d : itemBar) {
-            d.getShape().setOnMouseClicked(event -> {
-                double scaleFactor = selectedWindow.getScaleFactor();
-                StackPane stPane = d.getDuplicate();
-                stPane.setScaleX(scaleFactor);
-                stPane.setScaleY(scaleFactor);
-                selectedWindow.getAnchorPane().getChildren().add(stPane);
+        for (Drawable drawable : itemBar) {
+            drawable.getPolyShape().setOnMouseClicked(event -> {
+                DrawnSymbol drawnSymbol = drawable.getDuplicate();
+                selectedWindow.getDrawArea().addNode(drawnSymbol);
                 event.consume();
             });
-            itemPane.getChildren().add(d.getShape());
+            itemPane.getChildren().add(drawable.getPolyShape());
         }
     }
 
+    private void addWindow(PaintWindow paintWindow) {
+        this.allWindows.add(paintWindow);
+    }
+
+    private void addFirstWindow(PaintWindow paintWindow) {
+        getGridPane().add(paintWindow, 0, 1, 2, 2);
+        addWindow(paintWindow);
+    }
+
+    @FXML
+    public void onAddAnotherWindow() {
+        addWindow(new PaintWindow(this, ModelType.FREE));
+
+        gridPane.getChildren().remove(2);
+        gridPane.add(allWindows.get(0), 0, 1, 1, 2);
+        gridPane.add(allWindows.get(1), 1, 1, 1, 2);
+    }
+
     public void zoomIn() {
-        AnchorPane drawPane = selectedWindow.getAnchorPane();
-        selectedWindow.setScaleFactor(selectedWindow.getScaleFactor()*1.2);
+        AnchorPane drawPane = selectedWindow.getDrawArea();
         scaleDrawPane(drawPane, 1.2);
     }
 
     public void zoomOut() {
-        AnchorPane drawPane = selectedWindow.getAnchorPane();
-        selectedWindow.setScaleFactor(selectedWindow.getScaleFactor()*0.8);
+        AnchorPane drawPane = selectedWindow.getDrawArea();
         scaleDrawPane(drawPane, 0.8);
     }
 
@@ -88,10 +99,8 @@ public class MainController implements Initializable {
         }
     }
 
-    public void addWindow() {
-        PaintWindow paintWindow = new PaintWindow(this, ModelType.FREE);
-        paintWindow.initialize();
-        allWindows.add(paintWindow);
-        paintWindow.addAnotherWindow(this.allWindows);
+    public static MainController getInstance() {
+        return mainController;
     }
+
 }

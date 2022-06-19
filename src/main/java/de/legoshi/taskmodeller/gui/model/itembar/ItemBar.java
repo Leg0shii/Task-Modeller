@@ -1,6 +1,6 @@
 package de.legoshi.taskmodeller.gui.model.itembar;
 
-import de.legoshi.taskmodeller.gui.model.symbols.helper.Drawable;
+import de.legoshi.taskmodeller.gui.model.symbols.Drawable;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 

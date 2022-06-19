@@ -11,4 +11,6 @@ module de.legoshi.taskmodeller {
     exports de.legoshi.taskmodeller.util;
     opens de.legoshi.taskmodeller.util to javafx.fxml;
     exports de.legoshi.taskmodeller.gui.model;
+    exports de.legoshi.taskmodeller.gui.model.windows;
+    exports de.legoshi.taskmodeller.gui.model.symbols;
 }

@@ -20,4 +20,5 @@ public class StandardItemBar extends ItemBar {
         itemBar.add(new Triangle(colorPoly(Triangle.generateTriangle())));
         itemBar.add(new SmallLine(colorPoly(SmallLine.generateLine())));
     }
+
 }
