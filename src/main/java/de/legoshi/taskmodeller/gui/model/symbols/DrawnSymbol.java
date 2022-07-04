@@ -17,6 +17,8 @@ public class DrawnSymbol extends StackPane {
     private boolean attemptsConnect = false;
 
     public DrawnSymbol(Polygon polyShape) {
+        this.setId(UUID.randomUUID().toString());
+
         Polygon newPoly = new Polygon();
 
         newPoly.getPoints().addAll(polyShape.getPoints());

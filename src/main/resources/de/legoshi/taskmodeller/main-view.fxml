@@ -43,7 +43,7 @@
                  <MenuItem mnemonicParsing="false" onAction="#zoomOut" text="Zoom out" />
              </items>
              <items>
-                 <MenuItem mnemonicParsing="false" onAction="#onAddAnotherWindow" text="Add Window" />
+                 <MenuItem mnemonicParsing="false" onAction="#onAddAnotherPaintWindow" text="Add Window" />
              </items>
          </Menu>
        <Menu mnemonicParsing="false" text="Help">

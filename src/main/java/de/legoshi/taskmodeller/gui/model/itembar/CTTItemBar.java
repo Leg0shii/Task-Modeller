@@ -2,10 +2,7 @@ package de.legoshi.taskmodeller.gui.model.itembar;
 
 import de.legoshi.taskmodeller.gui.model.symbols.ctt.AbstractTask;
 import de.legoshi.taskmodeller.gui.model.symbols.ctt.SimpleTask;
-import de.legoshi.taskmodeller.gui.model.symbols.standard.Square;
-import de.legoshi.taskmodeller.gui.model.symbols.standard.Triangle;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 
 import java.util.ArrayList;
 

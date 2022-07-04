@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class ItemEditWindow extends Stage {
 
-    private DrawnSymbol drawnSymbol;
+    private final DrawnSymbol drawnSymbol;
 
     public ItemEditWindow(DrawnSymbol drawnSymbol) {
         this.drawnSymbol = drawnSymbol;
@@ -50,6 +50,10 @@ public class ItemEditWindow extends Stage {
         gridPane.add(connectBtn, 1, 3, 10, 1);
         connectBtn.setOnMouseClicked(mouseEvent -> onConnect());
 
+        Button deleteBtn = new Button("Löschen");
+        gridPane.add(deleteBtn, 1, 4, 10, 1);
+        deleteBtn.setOnMouseClicked(mouseEvent -> onDelete());
+
         Button closeBtn = new Button("Fertig");
         gridPane.add(closeBtn, 1, 10, 10, 1);
         closeBtn.setOnMouseClicked(mouseEvent -> this.close());
@@ -60,7 +64,7 @@ public class ItemEditWindow extends Stage {
 
     private void onConnect() {
         MainController mainController = MainController.getInstance();
-        for (DrawnSymbol dS : mainController.getSelectedWindow().getDrawArea().getDrawnNodes()) {
+        for (DrawnSymbol dS : mainController.getSelectedPaintWindow().getDrawArea().getDrawnNodes()) {
             dS.setAttemptsConnect(false);
         }
         drawnSymbol.setAttemptsConnect(true);
@@ -77,6 +81,13 @@ public class ItemEditWindow extends Stage {
 
         // polyShape.getStrokeWidth()
         polygon.setStrokeWidth(3/drawnSymbol.getScaleX());
+    }
+
+    private void onDelete() {
+        MainController mainController = MainController.getInstance();
+        DrawArea drawArea = mainController.getSelectedPaintWindow().getDrawArea();
+        drawArea.removeNode(this.drawnSymbol);
+        this.close();
     }
 
 }

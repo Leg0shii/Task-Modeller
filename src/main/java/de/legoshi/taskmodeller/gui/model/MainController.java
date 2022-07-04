@@ -12,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,7 +29,7 @@ public class MainController implements Initializable {
     @Getter public static MainController mainController;
 
     private ArrayList<PaintWindow> allWindows = new ArrayList<>();
-    @Getter private PaintWindow selectedWindow;
+    @Getter private PaintWindow selectedPaintWindow;
 
     private final StandardItemBar standardItemBar = new StandardItemBar();
     private final CTTItemBar cttItemBar = new CTTItemBar();
@@ -40,8 +39,8 @@ public class MainController implements Initializable {
         mainController = this;
 
         reloadItemBarWithModel(ModelType.CTT);
-        this.selectedWindow = new PaintWindow(this, ModelType.CTT);
-        addFirstWindow(this.selectedWindow);
+        this.selectedPaintWindow = new PaintWindow(this, ModelType.CTT);
+        addFirstPaintWindow(this.selectedPaintWindow);
     }
 
     public void reloadItemBarWithModel(ModelType modelType) {
@@ -53,7 +52,7 @@ public class MainController implements Initializable {
         for (Drawable drawable : itemBar) {
             drawable.getPolyShape().setOnMouseClicked(event -> {
                 DrawnSymbol drawnSymbol = drawable.getDuplicate();
-                selectedWindow.getDrawArea().addNode(drawnSymbol);
+                selectedPaintWindow.getDrawArea().addNode(drawnSymbol);
                 event.consume();
             });
             itemPane.getChildren().add(drawable.getPolyShape());
@@ -64,13 +63,13 @@ public class MainController implements Initializable {
         this.allWindows.add(paintWindow);
     }
 
-    private void addFirstWindow(PaintWindow paintWindow) {
+    private void addFirstPaintWindow(PaintWindow paintWindow) {
         getGridPane().add(paintWindow, 0, 1, 2, 2);
         addWindow(paintWindow);
     }
 
     @FXML
-    public void onAddAnotherWindow() {
+    public void onAddAnotherPaintWindow() {
         addWindow(new PaintWindow(this, ModelType.FREE));
 
         gridPane.getChildren().remove(2);
@@ -79,12 +78,12 @@ public class MainController implements Initializable {
     }
 
     public void zoomIn() {
-        AnchorPane drawPane = selectedWindow.getDrawArea();
+        AnchorPane drawPane = selectedPaintWindow.getDrawArea();
         scaleDrawPane(drawPane, 1.2);
     }
 
     public void zoomOut() {
-        AnchorPane drawPane = selectedWindow.getDrawArea();
+        AnchorPane drawPane = selectedPaintWindow.getDrawArea();
         scaleDrawPane(drawPane, 0.8);
     }
 

@@ -5,12 +5,9 @@ import de.legoshi.taskmodeller.gui.model.windows.DrawArea;
 import de.legoshi.taskmodeller.gui.model.windows.ItemEditWindow;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Polygon;
 import lombok.Getter;
-
-import java.util.UUID;
 
 public abstract class Drawable extends StackPane {
 
@@ -24,7 +21,7 @@ public abstract class Drawable extends StackPane {
     private static final int marginRightX = 55; //110;
     private static final int marginBottomY = 55; //240;
 
-    public Drawable(UUID randomUUID, Polygon polyShape) {
+    public Drawable(Polygon polyShape) {
         this.polyShape = polyShape;
         this.getChildren().add(polyShape);
     }
@@ -32,14 +29,12 @@ public abstract class Drawable extends StackPane {
     private void onMouseClick(MouseEvent event, DrawnSymbol drawnSymbol) {
 
         MainController mainController = MainController.getInstance();
-        DrawArea drawArea = mainController.getSelectedWindow().getDrawArea();
+        DrawArea drawArea = mainController.getSelectedPaintWindow().getDrawArea();
         for (DrawnSymbol dS : drawArea.getDrawnNodes()) {
             if (dS.isAttemptsConnect()) {
-                System.out.println(".s.sd.sd");
                 if (dS.equals(drawnSymbol)) return;
                 NodeConnection nodeConnection = new NodeConnection(dS, drawnSymbol);
-                mainController.getSelectedWindow().getDrawArea().addConnection(nodeConnection);
-                nodeConnection.draw(drawArea);
+                mainController.getSelectedPaintWindow().getDrawArea().addConnection(nodeConnection);
                 dS.setAttemptsConnect(false);
             }
 
@@ -81,6 +76,15 @@ public abstract class Drawable extends StackPane {
             stPane.setTranslateY(polyTranslateY + event.getSceneY() - lastY);
             this.lastY = event.getSceneY();
         }
+
+        MainController mainController = MainController.getInstance();
+        DrawArea drawArea = mainController.getSelectedPaintWindow().getDrawArea();
+        for (NodeConnection nC : drawArea.getConnections()) {
+            if (nC.getNode1().getId().equals(stPane.getId()) || nC.getNode2().getId().equals(stPane.getId())) {
+                if (nC.isPosition()) nC.recalculateBindings();
+            }
+        }
+
     }
 
     public DrawnSymbol getDuplicate() {

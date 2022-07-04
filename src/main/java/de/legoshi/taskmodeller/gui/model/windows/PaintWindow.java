@@ -34,7 +34,7 @@ public class PaintWindow extends ScrollPane {
         this.setContent(drawArea);
 
         this.setOnMouseClicked(mouseEvent -> {
-            mainController.setSelectedWindow(this);
+            mainController.setSelectedPaintWindow(this);
             for(PaintWindow paintWindow : mainController.getAllWindows()) {
                 paintWindow.getStyleClass().remove("active-pane");
                 mainController.reloadItemBarWithModel(this.modelType);

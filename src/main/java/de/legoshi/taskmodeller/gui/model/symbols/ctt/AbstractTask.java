@@ -5,12 +5,10 @@ import de.legoshi.taskmodeller.util.PolygonHelper;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Polygon;
 
-import java.util.UUID;
-
 public class AbstractTask extends Drawable {
 
     public AbstractTask(Polygon shape) {
-        super(UUID.randomUUID(), shape);
+        super(shape);
     }
 
     public static Polygon generateAbstractTask() {
