@@ -4,59 +4,38 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="gridPane" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="grid-pane" vgap="10.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.legoshi.taskmodeller.gui.model.MainController">
-    <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    </columnConstraints>
-    <rowConstraints>
-      <RowConstraints maxHeight="152.0" minHeight="0.0" prefHeight="28.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" valignment="TOP" vgrow="ALWAYS" />
-        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" valignment="TOP" vgrow="ALWAYS" />
-        <RowConstraints maxHeight="102.0" minHeight="-Infinity" vgrow="SOMETIMES" />
-    </rowConstraints>
-    <HBox fx:id="itemPane" prefHeight="0.0" prefWidth="880.0" styleClass="item-pane" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
-        <GridPane.margin>
-          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-        </GridPane.margin>
-      <padding>
-         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-      </padding>
-    </HBox>
-   <MenuBar prefHeight="25.0" prefWidth="627.0" GridPane.columnSpan="2" GridPane.valignment="TOP">
-     <menus>
-       <Menu mnemonicParsing="false" text="File">
-         <items>
-           <MenuItem mnemonicParsing="false" text="Close" />
-         </items>
-       </Menu>
-       <Menu mnemonicParsing="false" text="Edit">
-         <items>
-           <MenuItem mnemonicParsing="false" text="Delete" />
-         </items>
-       </Menu>
-         <Menu mnemonicParsing="false" text="View">
-             <items>
-                 <MenuItem mnemonicParsing="false" onAction="#zoomIn" text="Zoom in" />
-             </items>
-             <items>
-                 <MenuItem mnemonicParsing="false" onAction="#zoomOut" text="Zoom out" />
-             </items>
-             <items>
-                 <MenuItem mnemonicParsing="false" onAction="#onAddAnotherPaintWindow" text="Add Window" />
-             </items>
-         </Menu>
-       <Menu mnemonicParsing="false" text="Help">
-         <items>
-           <MenuItem mnemonicParsing="false" text="About" />
-         </items>
-       </Menu>
-     </menus>
-      <GridPane.margin>
-         <Insets />
-      </GridPane.margin>
-   </MenuBar>
-   <opaqueInsets>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </opaqueInsets>
-</GridPane>
+<VBox fx:id="mainFrame" minHeight="580.0" minWidth="850.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.legoshi.taskmodeller.MainController">
+   <children>
+       <MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="627.0">
+           <Menu mnemonicParsing="false" text="File">
+               <MenuItem mnemonicParsing="false" onAction="#createProject" text="New Project" />
+               <MenuItem mnemonicParsing="false" text="Open Project" />
+               <MenuItem mnemonicParsing="false" text="Save Project" />
+           </Menu>
+           <Menu mnemonicParsing="false" text="View">
+               <MenuItem mnemonicParsing="false" onAction="#zoomIn" text="Zoom in" />
+               <MenuItem mnemonicParsing="false" onAction="#zoomOut" text="Zoom out" />
+               <MenuItem mnemonicParsing="false" text="Center" />
+               <MenuItem mnemonicParsing="false" text="Rearrange" />
+           </Menu>
+           <Menu mnemonicParsing="false" text="Help">
+               <MenuItem mnemonicParsing="false" text="About" />
+               <MenuItem mnemonicParsing="false" text="Shortcuts" />
+               <MenuItem mnemonicParsing="false" text="Help" />
+           </Menu>
+       </MenuBar>
+      <ScrollPane fx:id="contentPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="526.0" prefWidth="880.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
+       <HBox fx:id="toolBar" prefHeight="0.0" prefWidth="880.0" styleClass="tool-bar">
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" />
+         </children>
+       </HBox>
+   </children>
+</VBox>

@@ -1,6 +1,6 @@
 package de.legoshi.taskmodeller.gui.model.windows;
 
-import de.legoshi.taskmodeller.gui.model.MainController;
+import de.legoshi.taskmodeller.MainController;
 import de.legoshi.taskmodeller.gui.model.symbols.DrawnSymbol;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -64,7 +64,7 @@ public class ItemEditWindow extends Stage {
 
     private void onConnect() {
         MainController mainController = MainController.getInstance();
-        for (DrawnSymbol dS : mainController.getSelectedPaintWindow().getDrawArea().getDrawnNodes()) {
+        for (DrawnSymbol dS : mainController.getProject().getSelectedPaintWindow().getDrawnNodes()) {
             dS.setAttemptsConnect(false);
         }
         drawnSymbol.setAttemptsConnect(true);
@@ -85,8 +85,8 @@ public class ItemEditWindow extends Stage {
 
     private void onDelete() {
         MainController mainController = MainController.getInstance();
-        DrawArea drawArea = mainController.getSelectedPaintWindow().getDrawArea();
-        drawArea.removeNode(this.drawnSymbol);
+        PaintWindow paintWindow = mainController.getProject().getSelectedPaintWindow();
+        paintWindow.removeNode(this.drawnSymbol);
         this.close();
     }
 

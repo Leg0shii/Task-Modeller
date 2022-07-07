@@ -1,8 +1,8 @@
 package de.legoshi.taskmodeller.gui.model.symbols;
 
-import de.legoshi.taskmodeller.gui.model.MainController;
-import de.legoshi.taskmodeller.gui.model.windows.DrawArea;
+import de.legoshi.taskmodeller.MainController;
 import de.legoshi.taskmodeller.gui.model.windows.ItemEditWindow;
+import de.legoshi.taskmodeller.gui.model.windows.PaintWindow;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -29,12 +29,12 @@ public abstract class Drawable extends StackPane {
     private void onMouseClick(MouseEvent event, DrawnSymbol drawnSymbol) {
 
         MainController mainController = MainController.getInstance();
-        DrawArea drawArea = mainController.getSelectedPaintWindow().getDrawArea();
-        for (DrawnSymbol dS : drawArea.getDrawnNodes()) {
+        PaintWindow paintWindow = mainController.getProject().getSelectedPaintWindow();
+        for (DrawnSymbol dS : paintWindow.getDrawnNodes()) {
             if (dS.isAttemptsConnect()) {
                 if (dS.equals(drawnSymbol)) return;
                 NodeConnection nodeConnection = new NodeConnection(dS, drawnSymbol);
-                mainController.getSelectedPaintWindow().getDrawArea().addConnection(nodeConnection);
+                paintWindow.addConnection(nodeConnection);
                 dS.setAttemptsConnect(false);
             }
 
@@ -78,8 +78,8 @@ public abstract class Drawable extends StackPane {
         }
 
         MainController mainController = MainController.getInstance();
-        DrawArea drawArea = mainController.getSelectedPaintWindow().getDrawArea();
-        for (NodeConnection nC : drawArea.getConnections()) {
+        PaintWindow paintWindow = mainController.getProject().getSelectedPaintWindow();
+        for (NodeConnection nC : paintWindow.getConnections()) {
             if (nC.getNode1().getId().equals(stPane.getId()) || nC.getNode2().getId().equals(stPane.getId())) {
                 if (nC.isPosition()) nC.recalculateBindings();
             }

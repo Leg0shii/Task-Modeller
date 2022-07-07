@@ -2,21 +2,23 @@
     -fx-text-fill: green;
 }
 
-.item-pane,
+.tool-bar {
+
+}
 .draw-pane {
     -fx-background-color: #dddddd;
-    -fx-background-radius: 5px;
+    -fx-background-radius: 0px;
 }
 
 .active-pane {
     -fx-border-color: red;
-    -fx-border-radius: 5px;
+    -fx-border-radius: 0px;
 }
 
 .draw-pane-bg {
-    -fx-background-color: #dd0000;
+    -fx-background-color: #ff9090;
 }
 
 .grid-pane {
-    -fx-background-color: #666666;
+    -fx-background-color: #b6afaf;
 }

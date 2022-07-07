@@ -70,7 +70,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>de.legoshi.taskmodeller/de.legoshi.taskmodeller.gui.start.StartWindow</mainClass>
+                            <mainClass>de.legoshi.taskmodeller/de.legoshi.taskmodeller.Main</mainClass>
                         </configuration>
                     </execution>
                 </executions>
