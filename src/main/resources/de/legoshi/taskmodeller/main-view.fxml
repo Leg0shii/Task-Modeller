@@ -29,12 +29,34 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>
       </ScrollPane>
-       <HBox fx:id="toolBar" prefHeight="0.0" prefWidth="880.0" styleClass="tool-bar">
-         <padding>
-            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-         </padding>
+       <HBox prefHeight="100.0" prefWidth="880.0" styleClass="tool-bar">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" />
+            <HBox fx:id="toolBar" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </HBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                <fx:define>
+                    <ToggleGroup fx:id="group" />
+                </fx:define>
+               <children>
+                  <RadioButton fx:id="standardRBTN" mnemonicParsing="false" text="Standard">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="group" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="connectionRBTN" mnemonicParsing="false" text="Connections" toggleGroup="$group" />
+                  <RadioButton fx:id="miscRBTN" mnemonicParsing="false" text="Misc." toggleGroup="$group" />
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding></VBox>
          </children>
        </HBox>
    </children>

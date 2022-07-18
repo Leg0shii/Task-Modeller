@@ -95,4 +95,8 @@ public class MainController implements Initializable {
         newProjectCountWindow.show();
     }
 
+    private void onRadioButtonChange() {
+        // exchange the hotbars
+    }
+
 }
