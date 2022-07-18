@@ -4,19 +4,34 @@ Ziel der Bachelorarbeit ist es, ein prototypisches Werkzeug zu entwickeln, welch
 Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (z.B. CTT) und Aufgabenobjekte stützen, diesen aber auch adaptieren.
 
 ### TODO
+- [ ] code rework
 
 #### Important
-- [ ] implement CTT symbols as a toolbar
-- [ ] split toolbar into two areas
-- [ ] right click symbol for changing it
+- [x] implement CTT symbols as a toolbar
+- [x] right click symbol for changing it
   - name
   - color
   - size (?)
   - connection
+- [ ] implement selection into the hotbar
+- [ ] implement CTT properties into the hotbar
+- [ ] select symbols
+- [ ] copy and paste of part trees and trees
+- [ ] possibly descriptions to tasks
+- [ ] add annotation/text over the canvas
+- [ ] allow connections be made between two drawing areas
+- [ ] generealise models as descripted in paper
+- [ ] add a todo/guidelines you can tick (toggle in menu)
+
+- [ ] save and load data and ctte trees (into squares)
 
 #### Enhancements
-- [ ] drawing area positioning in the middle
-- [ ] both drawing screens start at the same size
-- [ ] be able to resize the drawing screens
+- [x] drawing area positioning in the middle
+- [ ] fix resizing of zoom
 - [ ] zoom in/out with hotkeys
-- [ ] 
+- [ ] centering the screens
+- [ ] fix screen resize
+- [ ] center on one model
+- [ ] colorize different models
+- [ ] showcase with colors modelchanges (toggle in menu)
+- [ ] layers
