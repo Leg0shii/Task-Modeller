@@ -25,10 +25,10 @@ public class PaintWindow extends AnchorPane {
     private final StatusType statusType;
     private final ModelType modelType;
 
-    public PaintWindow(MainController mainController, ModelType modelType) {
+    public PaintWindow(MainController mainController, StatusType statusType, ModelType modelType) {
         this.mainController = mainController;
         this.modelType = modelType;
-        this.statusType = StatusType.EXISTANT;
+        this.statusType = statusType;
         initialize();
     }
 

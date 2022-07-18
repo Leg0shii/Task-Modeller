@@ -51,6 +51,8 @@ public abstract class Drawable extends StackPane {
     }
 
     private void onMouseDrag(MouseEvent event, DrawnSymbol stPane) {
+        MainController mainController = MainController.getInstance();
+
         double polyTranslateX = stPane.getTranslateX();
         double objectScaleFactorWidth = stPane.getScaleX() * stPane.getLayoutBounds().getWidth() - stPane.getLayoutBounds().getWidth();
         double sceneWidth = stPane.getParent().getLayoutBounds().getWidth();
@@ -60,7 +62,7 @@ public abstract class Drawable extends StackPane {
         else if (polyTranslateX > (sceneWidth - marginRightX - (objectScaleFactorWidth / 2)))
             stPane.setTranslateX((sceneWidth - marginRightX - (objectScaleFactorWidth / 2)));
         else {
-            stPane.setTranslateX(polyTranslateX + event.getSceneX() - lastX);
+            stPane.setTranslateX(polyTranslateX + (event.getSceneX() - lastX)/mainController.project.getScaleX());
             this.lastX = event.getSceneX();
         }
 
@@ -73,11 +75,10 @@ public abstract class Drawable extends StackPane {
         else if (polyTranslateY > (sceneHeight - marginBottomY - (objectScaleFactorHeight / 2)))
             stPane.setTranslateY((sceneHeight - marginBottomY - (objectScaleFactorHeight / 2)));
         else {
-            stPane.setTranslateY(polyTranslateY + event.getSceneY() - lastY);
+            stPane.setTranslateY(polyTranslateY + (event.getSceneY() - lastY)/mainController.project.getScaleY());
             this.lastY = event.getSceneY();
         }
 
-        MainController mainController = MainController.getInstance();
         PaintWindow paintWindow = mainController.getProject().getSelectedPaintWindow();
         for (NodeConnection nC : paintWindow.getConnections()) {
             if (nC.getNode1().getId().equals(stPane.getId()) || nC.getNode2().getId().equals(stPane.getId())) {
