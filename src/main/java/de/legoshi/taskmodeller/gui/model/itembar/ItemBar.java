@@ -10,7 +10,7 @@ public abstract class ItemBar {
 
     public ArrayList<Drawable> itemBar = new ArrayList<>();
     public Color color = Color.YELLOW;
-    public  Color border = Color.BLACK;
+    public Color border = Color.BLACK;
     public int strokeWidth = 3;
 
     public Polygon colorPoly(Polygon shape) {
@@ -20,8 +20,6 @@ public abstract class ItemBar {
         return shape;
     }
 
-    void prepareItemBar() {
-
-    }
+    abstract void prepareItemBar();
 
 }

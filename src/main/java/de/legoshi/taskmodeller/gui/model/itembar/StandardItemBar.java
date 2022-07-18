@@ -4,13 +4,10 @@ import de.legoshi.taskmodeller.gui.model.symbols.standard.Square;
 import de.legoshi.taskmodeller.gui.model.symbols.standard.Triangle;
 import lombok.Getter;
 
-import java.util.ArrayList;
-
 @Getter
 public class StandardItemBar extends ItemBar {
 
     public StandardItemBar() {
-        this.itemBar = new ArrayList<>();
         prepareItemBar();
     }
 

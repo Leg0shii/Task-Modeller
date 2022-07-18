@@ -4,12 +4,9 @@ import de.legoshi.taskmodeller.gui.model.symbols.ctt.AbstractTask;
 import de.legoshi.taskmodeller.gui.model.symbols.ctt.SimpleTask;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-
 public class CTTItemBar extends ItemBar {
 
     public CTTItemBar() {
-        this.itemBar = new ArrayList<>();
         this.color = Color.ALICEBLUE;
         prepareItemBar();
     }
