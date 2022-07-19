@@ -25,6 +25,10 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 
 - [ ] save and load data and ctte trees (into squares)
 
+- [ ] other edit display for CTT
+- [ ] delete sub tree when deleting for CTT (maybe?)
+- [ ] other sizes for modelling
+
 #### Enhancements
 - [x] drawing area positioning in the middle
 - [ ] fix resizing of zoom
