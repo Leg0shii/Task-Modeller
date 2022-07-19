@@ -1,6 +1,7 @@
 package de.legoshi.taskmodeller.gui.model.windows;
 
 import de.legoshi.taskmodeller.MainController;
+import de.legoshi.taskmodeller.gui.model.symbols.DrawnSymbol;
 import de.legoshi.taskmodeller.util.ModelType;
 import de.legoshi.taskmodeller.util.StatusType;
 import javafx.scene.control.ComboBox;
@@ -26,6 +27,7 @@ public class ProjectWindow extends GridPane {
     private ArrayList<PaintWindow> envisionedWindows;
 
     private PaintWindow selectedPaintWindow;
+    private DrawnSymbol selectedSymbol;
 
     public ProjectWindow() {
         this.setHgap(100);
@@ -70,6 +72,5 @@ public class ProjectWindow extends GridPane {
             i++;
         }
     }
-
 
 }

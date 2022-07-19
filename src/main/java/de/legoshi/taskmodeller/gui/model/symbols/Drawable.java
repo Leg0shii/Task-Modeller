@@ -27,9 +27,10 @@ public abstract class Drawable extends StackPane {
     }
 
     private void onMouseClick(MouseEvent event, DrawnSymbol drawnSymbol) {
-
         MainController mainController = MainController.getInstance();
         PaintWindow paintWindow = mainController.getProject().getSelectedPaintWindow();
+        mainController.getProject().setSelectedSymbol(drawnSymbol);
+
         for (DrawnSymbol dS : paintWindow.getDrawnNodes()) {
             if (dS.isAttemptsConnect()) {
                 if (dS.equals(drawnSymbol)) return;
@@ -37,7 +38,6 @@ public abstract class Drawable extends StackPane {
                 paintWindow.addConnection(nodeConnection);
                 dS.setAttemptsConnect(false);
             }
-
         }
 
         if (event.isSecondaryButtonDown()) {

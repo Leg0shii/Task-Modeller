@@ -24,9 +24,9 @@
                <MenuItem mnemonicParsing="false" text="Help" />
            </Menu>
        </MenuBar>
-      <ScrollPane fx:id="contentPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="526.0" prefWidth="880.0">
+      <ScrollPane fx:id="contentPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>
       </ScrollPane>
        <HBox prefHeight="100.0" prefWidth="880.0" styleClass="tool-bar">
@@ -37,9 +37,6 @@
                </padding>
             </HBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
-                <fx:define>
-                    <ToggleGroup fx:id="group" />
-                </fx:define>
                <children>
                   <RadioButton fx:id="standardRBTN" mnemonicParsing="false" text="Standard">
                      <toggleGroup>
