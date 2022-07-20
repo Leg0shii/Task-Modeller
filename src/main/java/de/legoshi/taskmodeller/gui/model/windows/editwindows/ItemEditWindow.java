@@ -3,47 +3,45 @@ package de.legoshi.taskmodeller.gui.model.windows.editwindows;
 import de.legoshi.taskmodeller.MainController;
 import de.legoshi.taskmodeller.gui.model.symbols.DrawnSymbol;
 import de.legoshi.taskmodeller.gui.model.windows.PaintWindow;
+import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
 
 public class ItemEditWindow extends EditWindow<DrawnSymbol> {
 
-    public ItemEditWindow(DrawnSymbol drawnSymbol) {
-        super(drawnSymbol, "Bearbeite Objekt");
+    public ItemEditWindow(DrawnSymbol item) {
+        super(item, "Bearbeite Objekt");
 
-        this.initModality(Modality.APPLICATION_MODAL);
-        this.setTitle("Bearbeite Objekt");
-
-        Polygon polygon = (Polygon) drawnSymbol.getChildren().get(0);
-        Label label = (Label) drawnSymbol.getChildren().get(1);
+        Rectangle shape = (Rectangle) item.getChildren().get(0);
+        Label label = (Label) item.getChildren().get(1);
 
         TextField textField = new TextField(label.getText());
         this.gridPane.add(new Text("Name: "), 0, 0);
         this.gridPane.add(textField, 1, 0);
-
-        TextArea textArea = new TextArea(drawnSymbol.getDescription());
-        this.gridPane.add(new Text("Description: "), 0, 1);
-        this.gridPane.add(textArea, 1, 1);
-        textArea.textProperty().addListener((observableValue, s, t1) -> drawnSymbol.setDescription(t1));
-
         textField.textProperty().addListener((observableValue, s, t1) -> label.setText(t1));
 
-        Slider slider = new Slider(0.4, 5, drawnSymbol.getScaleX());
+        TextArea textArea = new TextArea(item.getDescription());
+        this.gridPane.add(new Text("Description: "), 0, 1);
+        this.gridPane.add(textArea, 1, 1);
+        textArea.textProperty().addListener((observableValue, s, t1) -> item.setDescription(t1));
+
+
+        Slider slider = new Slider(0.4, 5, item.getScaleX());
         this.gridPane.add(new Text("Skalieren:"), 0, 2);
         this.gridPane.add(slider, 1, 2);
-        slider.valueProperty().addListener((observableValue, number, t1) -> onScale(drawnSymbol, number.doubleValue(), t1.doubleValue()));
+        slider.valueProperty().addListener((observableValue, number, t1) -> onScale(item, number.doubleValue(), t1.doubleValue()));
 
         Button connectBtn = new Button("Verbindung");
         this.gridPane.add(connectBtn, 0, 3);
         connectBtn.setOnMouseClicked(mouseEvent -> onConnect());
 
-        ColorPicker colorPicker = new ColorPicker((Color) polygon.getFill());
+        ColorPicker colorPicker = new ColorPicker((Color) shape.getFill());
         this.gridPane.add(colorPicker, 1, 3);
-        colorPicker.valueProperty().addListener((observableValue, color, t1) -> polygon.setFill(t1));
+        colorPicker.valueProperty().addListener((observableValue, color, t1) -> shape.setFill(t1));
 
         this.deleteBtn.setOnMouseClicked(mouseEvent -> onDelete());
     }
@@ -58,7 +56,7 @@ public class ItemEditWindow extends EditWindow<DrawnSymbol> {
     }
 
     private void onScale(DrawnSymbol drawnSymbol, double number, double t1) {
-        Polygon polygon = (Polygon) drawnSymbol.getChildren().get(0);
+        Rectangle polygon = (Rectangle) drawnSymbol.getChildren().get(0);
         Label label = (Label) drawnSymbol.getChildren().get(1);
 
         drawnSymbol.setScaleX(drawnSymbol.getScaleX() + (t1 - number));
@@ -70,8 +68,7 @@ public class ItemEditWindow extends EditWindow<DrawnSymbol> {
 
     private void onDelete() {
         MainController mainController = MainController.getInstance();
-        PaintWindow paintWindow = mainController.getProject().getSelectedPaintWindow();
-        paintWindow.removeNode(this.item);
+        mainController.getProject().getChildren().remove(this.item);
         this.close();
     }
 

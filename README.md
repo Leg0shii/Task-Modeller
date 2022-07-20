@@ -4,8 +4,6 @@ Ziel der Bachelorarbeit ist es, ein prototypisches Werkzeug zu entwickeln, welch
 Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (z.B. CTT) und Aufgabenobjekte stützen, diesen aber auch adaptieren.
 
 ### TODO
-- [ ] code rework
-
 #### Important
 - [x] implement CTT symbols as a toolbar
 - [x] right click symbol for changing it
@@ -18,7 +16,7 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [ ] select symbols
 - [ ] copy and paste of part trees and trees
 - [x] possibly descriptions to tasks
-- [ ] add annotation/text over the canvas
+- [x] add annotation/text over the canvas
 - [ ] allow connections be made between two drawing areas
 - [ ] generealise models as descripted in paper
 - [ ] add a todo/guidelines you can tick (toggle in menu)
@@ -40,3 +38,4 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [ ] showcase with colors modelchanges (toggle in menu)
 - [ ] layers
 - [ ] indicate connection process
+- [ ] dont switch toolbar when on misc/conn and selecting window

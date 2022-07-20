@@ -13,7 +13,7 @@ public class StandardItemBar extends ItemBar {
 
     public void prepareItemBar() {
         itemBar.add(new Square(colorPoly(Square.generateSquare())));
-        itemBar.add(new Triangle(colorPoly(Triangle.generateTriangle())));
+        // itemBar.add(new Triangle(colorPoly(Triangle.generateTriangle())));
     }
 
 }

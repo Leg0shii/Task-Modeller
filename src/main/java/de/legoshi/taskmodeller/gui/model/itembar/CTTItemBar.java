@@ -14,6 +14,6 @@ public class CTTItemBar extends ItemBar {
     @Override
     public void prepareItemBar() {
         itemBar.add(new AbstractTask(colorPoly(AbstractTask.generateAbstractTask())));
-        itemBar.add(new SimpleTask(colorPoly(SimpleTask.createSimpleTask())));
+        // itemBar.add(new SimpleTask(colorPoly(SimpleTask.createSimpleTask())));
     }
 }

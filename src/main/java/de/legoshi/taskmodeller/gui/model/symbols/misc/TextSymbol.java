@@ -1,4 +1,4 @@
-package de.legoshi.taskmodeller.gui.model.symbols.ctt;
+package de.legoshi.taskmodeller.gui.model.symbols.misc;
 
 import de.legoshi.taskmodeller.gui.model.symbols.Drawable;
 import de.legoshi.taskmodeller.util.PolygonHelper;
@@ -6,13 +6,13 @@ import javafx.geometry.Point2D;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
-public class AbstractTask extends Drawable {
+public class TextSymbol extends Drawable {
 
-    public AbstractTask(Rectangle shape) {
-        super(shape);
+    public TextSymbol(Rectangle polyShape) {
+        super(polyShape);
     }
 
-    public static Rectangle generateAbstractTask() {
+    public static Rectangle generateTextSymbol() {
         return new Rectangle(50, 50);
     }
 }

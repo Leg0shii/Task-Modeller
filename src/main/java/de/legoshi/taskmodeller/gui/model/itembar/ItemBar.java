@@ -3,6 +3,7 @@ package de.legoshi.taskmodeller.gui.model.itembar;
 import de.legoshi.taskmodeller.gui.model.symbols.Drawable;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public abstract class ItemBar {
     public Color border = Color.BLACK;
     public int strokeWidth = 3;
 
-    public Polygon colorPoly(Polygon shape) {
+    public Rectangle colorPoly(Rectangle shape) {
         shape.setFill(color);
         shape.setStroke(border);
         shape.setStrokeWidth(strokeWidth);

@@ -38,12 +38,12 @@
             </HBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
                <children>
-                  <RadioButton fx:id="standardRBTN" mnemonicParsing="false" text="Standard">
+                  <RadioButton fx:id="standardRBTN" onAction="#onRadioButtonChange" mnemonicParsing="false" text="Standard">
                      <toggleGroup>
                         <ToggleGroup fx:id="group" />
                      </toggleGroup></RadioButton>
-                  <RadioButton fx:id="connectionRBTN" mnemonicParsing="false" text="Connections" toggleGroup="$group" />
-                  <RadioButton fx:id="miscRBTN" mnemonicParsing="false" text="Misc." toggleGroup="$group" />
+                  <RadioButton fx:id="connectionRBTN" onAction="#onRadioButtonChange" mnemonicParsing="false" text="Connections" toggleGroup="$group" />
+                  <RadioButton fx:id="miscRBTN" onAction="#onRadioButtonChange" mnemonicParsing="false" text="Misc." toggleGroup="$group" />
                </children>
                <HBox.margin>
                   <Insets />

@@ -1,6 +1,8 @@
 package de.legoshi.taskmodeller;
 
 import de.legoshi.taskmodeller.gui.model.itembar.CTTItemBar;
+import de.legoshi.taskmodeller.gui.model.itembar.ConnectionItemBar;
+import de.legoshi.taskmodeller.gui.model.itembar.MiscItemBar;
 import de.legoshi.taskmodeller.gui.model.itembar.StandardItemBar;
 import de.legoshi.taskmodeller.gui.model.symbols.Drawable;
 import de.legoshi.taskmodeller.gui.model.symbols.DrawnSymbol;
@@ -17,13 +19,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,21 +45,24 @@ public class MainController implements Initializable {
     @Getter
     public static MainController mainController;
 
-    @FXML
     public VBox mainFrame;
 
-    @FXML
     public MenuBar menuBar;
-    @FXML
     public ScrollPane contentPane;
-    @FXML
+    private Group scrollPaneContent;
     public HBox toolBar;
 
     public ProjectWindow project;
 
+    public RadioButton standardRBTN;
+    public RadioButton connectionRBTN;
+    public RadioButton miscRBTN;
+
     private StandardItemBar standardItemBar;
     private CTTItemBar cttItemBar;
-
+    private ConnectionItemBar connectionItemBar;
+    private MiscItemBar miscItemBar;
+    private Group commentGroup;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -62,9 +70,13 @@ public class MainController implements Initializable {
 
         this.standardItemBar = new StandardItemBar();
         this.cttItemBar = new CTTItemBar();
+        this.connectionItemBar = new ConnectionItemBar();
+        this.miscItemBar = new MiscItemBar();
 
         this.project = new ProjectWindow();
-        this.contentPane.setContent(new Group(project));
+        this.commentGroup = new Group(project);
+        this.scrollPaneContent = new Group(commentGroup);
+        this.contentPane.setContent(this.scrollPaneContent);
 
         contentPane.addEventFilter(ScrollEvent.ANY, (scrollEvent -> {
                 if (!scrollEvent.isShiftDown()) return;
@@ -82,32 +94,37 @@ public class MainController implements Initializable {
     public void reloadItemBarWithModel(ModelType modelType) {
         ArrayList<Drawable> itemBar;
         if (modelType.equals(ModelType.CTT)) itemBar = cttItemBar.itemBar;
+        else if (modelType.equals(ModelType.CONN)) itemBar = connectionItemBar.itemBar;
+        else if (modelType.equals(ModelType.MISC)) itemBar = miscItemBar.itemBar;
         else itemBar = standardItemBar.itemBar;
 
+
+        PaintWindow selectedWindow = project.getSelectedPaintWindow();
         toolBar.getChildren().clear();
+
+        // handle this
         for (Drawable drawable : itemBar) {
             drawable.getPolyShape().setOnMouseClicked(event -> {
-                PaintWindow selectedWindow = project.getSelectedPaintWindow();
-
                 if (modelType.equals(ModelType.FREE)) {
-                    DrawnSymbol drawnSymbol = drawable.getDuplicate();
+                    DrawnSymbol drawnSymbol = drawable.getDuplicate(false);
                     selectedWindow.addNode(drawnSymbol);
                     project.setSelectedSymbol(drawnSymbol);
                     event.consume();
                 } else if (modelType.equals(ModelType.CTT)) {
                     DrawnSymbol parent = project.getSelectedSymbol();
-                    DrawnSymbol child = drawable.getDuplicate();
-
+                    DrawnSymbol child = drawable.getDuplicate(false);
                     if (parent == null) {
                         selectedWindow.addNode(child);
                         project.setSelectedSymbol(child);
                         return;
                     }
-
                     selectedWindow.addNode(child);
                     project.setSelectedSymbol(child);
                     NodeConnection nodeConnection = new NodeConnection(parent, child);
                     selectedWindow.addConnection(nodeConnection);
+                } else if (modelType.equals(ModelType.MISC)) {
+                    DrawnSymbol drawnSymbol = drawable.getDuplicate(true);
+                    this.commentGroup.getChildren().add(drawnSymbol);
                 }
             });
             toolBar.getChildren().add(drawable.getPolyShape());
@@ -123,9 +140,9 @@ public class MainController implements Initializable {
     }
 
     private void scaleProjectView(double scalingFactor) {
-        GridPane drawPane = this.project;
-        drawPane.setScaleX(drawPane.getScaleX() * scalingFactor);
-        drawPane.setScaleY(drawPane.getScaleY() * scalingFactor);
+        Group group = this.commentGroup;
+        group.setScaleX(group.getScaleX() * scalingFactor);
+        group.setScaleY(group.getScaleY() * scalingFactor);
     }
 
     public static MainController getInstance() {
@@ -137,8 +154,15 @@ public class MainController implements Initializable {
         newProjectCountWindow.show();
     }
 
+    @FXML
     private void onRadioButtonChange() {
-        // exchange the hotbars
+        ModelType modelType = ModelType.MISC;
+        if (standardRBTN.isSelected()) {
+            if (this.project.getSelectedPaintWindow() == null) return;
+            modelType = this.project.getSelectedPaintWindow().getModelType();
+        }
+        else if (connectionRBTN.isSelected()) modelType = ModelType.CONN;
+        reloadItemBarWithModel(modelType);
     }
 
 }
