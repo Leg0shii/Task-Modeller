@@ -15,6 +15,7 @@ import java.util.UUID;
 public class DrawnSymbol extends StackPane {
 
     private boolean attemptsConnect = false;
+    private String description;
 
     public DrawnSymbol(Polygon polyShape) {
         this.setId(UUID.randomUUID().toString());

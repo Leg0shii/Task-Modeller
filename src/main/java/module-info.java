@@ -12,4 +12,5 @@ module de.legoshi.taskmodeller {
     exports de.legoshi.taskmodeller.gui.model.symbols;
     exports de.legoshi.taskmodeller;
     exports de.legoshi.taskmodeller.gui.model.itembar;
+    exports de.legoshi.taskmodeller.gui.model.windows.editwindows;
 }

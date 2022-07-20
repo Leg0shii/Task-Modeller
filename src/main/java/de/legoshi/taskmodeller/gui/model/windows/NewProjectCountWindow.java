@@ -34,28 +34,17 @@ public class NewProjectCountWindow extends Stage {
 
         Button continueBtn = new Button("Continue");
         continueBtn.setOnMouseClicked(mouseEvent -> {
-            int existentCount;
-            int compositeCount;
-            int envisionedCount;
-
             try {
-                existentCount = Integer.parseInt(existingTF.getText());
-                compositeCount = Integer.parseInt(compositeTF.getText());
-                envisionedCount = Integer.parseInt(envisionedTF.getText());
+                project.setExistentCount(Integer.parseInt(existingTF.getText()));
+                project.setCompositeCount(Integer.parseInt(compositeTF.getText()));
+                project.setEnvisionedCount(Integer.parseInt(envisionedTF.getText()));
+                new NewProjectSettingsWindow(project).show();
             } catch (NumberFormatException exception) {
                 exception.printStackTrace();
                 System.out.println("New Project ERROR");
+            } finally {
                 this.close();
-                return;
             }
-
-            project.setExistentCount(existentCount);
-            project.setCompositeCount(compositeCount);
-            project.setEnvisionedCount(envisionedCount);
-
-            NewProjectSettingsWindow newProjectSettingsWindow = new NewProjectSettingsWindow(project);
-            newProjectSettingsWindow.show();
-            this.close();
         });
 
         gridPane.add(cancelBtn, 0, 3, 2, 1);
