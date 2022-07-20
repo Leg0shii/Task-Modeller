@@ -4,6 +4,7 @@ Ziel der Bachelorarbeit ist es, ein prototypisches Werkzeug zu entwickeln, welch
 Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (z.B. CTT) und Aufgabenobjekte stützen, diesen aber auch adaptieren.
 
 ### TODO
+- [ ] reorganise structure
 #### Important
 - [x] implement CTT symbols as a toolbar
 - [x] right click symbol for changing it
@@ -24,7 +25,6 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [ ] save and load data and ctte trees (into squares)
 
 - [ ] other edit display for CTT
-- [ ] delete sub tree when deleting for CTT (maybe?)
 - [ ] other sizes for modelling
 
 #### Enhancements
@@ -38,4 +38,10 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [ ] showcase with colors modelchanges (toggle in menu)
 - [ ] layers
 - [ ] indicate connection process
+- [ ] max size for drawing boards (becuse of moving around objects)
+- [ ] delete sub tree when deleting for CTT (maybe?)
+- [ ] add padding around the models
+
+#### Bugs
 - [ ] dont switch toolbar when on misc/conn and selecting window
+- [ ] check entered values on creation
