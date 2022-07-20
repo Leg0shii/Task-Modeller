@@ -2,8 +2,6 @@ package de.legoshi.taskmodeller.gui.model.itembar;
 
 import de.legoshi.taskmodeller.gui.model.symbols.Drawable;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -14,11 +12,12 @@ public abstract class ItemBar {
     public Color border = Color.BLACK;
     public int strokeWidth = 3;
 
-    public Rectangle colorPoly(Rectangle shape) {
-        shape.setFill(color);
-        shape.setStroke(border);
-        shape.setStrokeWidth(strokeWidth);
-        return shape;
+    public void colorize() {
+        for (Drawable drawable : itemBar) {
+            drawable.getPolyShape().setFill(this.color);
+            drawable.getPolyShape().setStroke(this.border);
+            drawable.getPolyShape().setStrokeWidth(this.strokeWidth);
+        }
     }
 
     abstract void prepareItemBar();

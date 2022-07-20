@@ -11,31 +11,18 @@ import de.legoshi.taskmodeller.gui.model.windows.NewProjectCountWindow;
 import de.legoshi.taskmodeller.gui.model.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.model.windows.ProjectWindow;
 import de.legoshi.taskmodeller.util.ModelType;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Shape;
-import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.ResourceBundle;
 
 @Getter

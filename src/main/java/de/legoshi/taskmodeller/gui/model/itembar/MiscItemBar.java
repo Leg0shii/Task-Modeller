@@ -12,7 +12,8 @@ public class MiscItemBar extends ItemBar {
 
     @Override
     void prepareItemBar() {
-        itemBar.add(new TextSymbol(colorPoly(TextSymbol.generateTextSymbol())));
+        itemBar.add(TextSymbol.generateShape());
+        colorize();
     }
 
 }

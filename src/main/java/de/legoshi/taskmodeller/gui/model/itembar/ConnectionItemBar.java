@@ -10,7 +10,9 @@ public class ConnectionItemBar extends ItemBar {
     }
 
     @Override
-    void prepareItemBar() {
+    public void prepareItemBar() {
 
+        colorize();
     }
+
 }

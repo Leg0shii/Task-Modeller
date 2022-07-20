@@ -1,7 +1,7 @@
 package de.legoshi.taskmodeller.gui.model.itembar;
 
+import de.legoshi.taskmodeller.gui.model.symbols.standard.CTriangle;
 import de.legoshi.taskmodeller.gui.model.symbols.standard.Square;
-import de.legoshi.taskmodeller.gui.model.symbols.standard.Triangle;
 import lombok.Getter;
 
 @Getter
@@ -11,9 +11,11 @@ public class StandardItemBar extends ItemBar {
         prepareItemBar();
     }
 
+    @Override
     public void prepareItemBar() {
-        itemBar.add(new Square(colorPoly(Square.generateSquare())));
-        // itemBar.add(new Triangle(colorPoly(Triangle.generateTriangle())));
+        itemBar.add(Square.generateShape());
+        itemBar.add(CTriangle.generateShape());
+        colorize();
     }
 
 }

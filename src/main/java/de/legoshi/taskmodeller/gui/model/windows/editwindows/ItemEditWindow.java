@@ -3,11 +3,9 @@ package de.legoshi.taskmodeller.gui.model.windows.editwindows;
 import de.legoshi.taskmodeller.MainController;
 import de.legoshi.taskmodeller.gui.model.symbols.DrawnSymbol;
 import de.legoshi.taskmodeller.gui.model.windows.PaintWindow;
-import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -16,7 +14,7 @@ public class ItemEditWindow extends EditWindow<DrawnSymbol> {
     public ItemEditWindow(DrawnSymbol item) {
         super(item, "Bearbeite Objekt");
 
-        Rectangle shape = (Rectangle) item.getChildren().get(0);
+        Shape shape = (Shape) item.getChildren().get(0);
         Label label = (Label) item.getChildren().get(1);
 
         TextField textField = new TextField(label.getText());
@@ -56,7 +54,7 @@ public class ItemEditWindow extends EditWindow<DrawnSymbol> {
     }
 
     private void onScale(DrawnSymbol drawnSymbol, double number, double t1) {
-        Rectangle polygon = (Rectangle) drawnSymbol.getChildren().get(0);
+        Shape polygon = (Shape) drawnSymbol.getChildren().get(0);
         Label label = (Label) drawnSymbol.getChildren().get(1);
 
         drawnSymbol.setScaleX(drawnSymbol.getScaleX() + (t1 - number));
@@ -68,7 +66,9 @@ public class ItemEditWindow extends EditWindow<DrawnSymbol> {
 
     private void onDelete() {
         MainController mainController = MainController.getInstance();
-        mainController.getProject().getChildren().remove(this.item);
+        for (PaintWindow paintWindow : mainController.getProject().getAllWindows()) {
+            paintWindow.removeNode(this.item);
+        }
         this.close();
     }
 

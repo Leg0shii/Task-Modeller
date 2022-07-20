@@ -13,7 +13,15 @@ public class CTTItemBar extends ItemBar {
 
     @Override
     public void prepareItemBar() {
-        itemBar.add(new AbstractTask(colorPoly(AbstractTask.generateAbstractTask())));
-        // itemBar.add(new SimpleTask(colorPoly(SimpleTask.createSimpleTask())));
+        itemBar.add(AbstractTask.generateShape());
+        itemBar.add(SimpleTask.generateShape());
+        colorize();
     }
+
+
+    /* @Override
+    public void prepareItemBar() {
+        itemBar.add(new AbstractTask(colorPoly(AbstractTask.generateAbstractTask())));
+        itemBar.add(new SimpleTask(colorPoly(SimpleTask.createSimpleTask())));
+    } */
 }

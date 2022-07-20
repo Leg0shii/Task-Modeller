@@ -1,18 +1,17 @@
 package de.legoshi.taskmodeller.gui.model.symbols.ctt;
 
 import de.legoshi.taskmodeller.gui.model.symbols.Drawable;
-import de.legoshi.taskmodeller.util.PolygonHelper;
-import javafx.geometry.Point2D;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
 
 public class AbstractTask extends Drawable {
 
-    public AbstractTask(Rectangle shape) {
+    public AbstractTask(Shape shape) {
         super(shape);
     }
 
-    public static Rectangle generateAbstractTask() {
-        return new Rectangle(50, 50);
+    public static Drawable generateShape() {
+        return new AbstractTask(new Circle(25));
     }
+
 }

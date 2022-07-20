@@ -7,13 +7,13 @@ import de.legoshi.taskmodeller.gui.model.windows.PaintWindow;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import lombok.Getter;
 
 public abstract class Drawable extends StackPane {
 
     @Getter
-    private final Rectangle polyShape;
+    private final Shape polyShape;
 
     private double lastX = 0;
     private double lastY = 0;
@@ -22,7 +22,7 @@ public abstract class Drawable extends StackPane {
     private static final int marginRightX = 55; //110;
     private static final int marginBottomY = 55; //240;
 
-    public Drawable(Rectangle polyShape) {
+    public Drawable(Shape polyShape) {
         this.polyShape = polyShape;
         this.getChildren().add(polyShape);
     }

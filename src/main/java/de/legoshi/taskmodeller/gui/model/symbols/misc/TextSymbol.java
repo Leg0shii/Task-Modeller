@@ -1,18 +1,17 @@
 package de.legoshi.taskmodeller.gui.model.symbols.misc;
 
 import de.legoshi.taskmodeller.gui.model.symbols.Drawable;
-import de.legoshi.taskmodeller.util.PolygonHelper;
-import javafx.geometry.Point2D;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 public class TextSymbol extends Drawable {
 
-    public TextSymbol(Rectangle polyShape) {
+    public TextSymbol(Shape polyShape) {
         super(polyShape);
     }
 
-    public static Rectangle generateTextSymbol() {
-        return new Rectangle(50, 50);
+    public static Drawable generateShape() {
+        return new TextSymbol(new Rectangle(50, 50));
     }
+
 }
