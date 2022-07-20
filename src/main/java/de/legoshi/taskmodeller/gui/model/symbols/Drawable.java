@@ -1,7 +1,7 @@
 package de.legoshi.taskmodeller.gui.model.symbols;
 
 import de.legoshi.taskmodeller.MainController;
-import de.legoshi.taskmodeller.gui.model.windows.ItemEditWindow;
+import de.legoshi.taskmodeller.gui.model.windows.editwindows.ItemEditWindow;
 import de.legoshi.taskmodeller.gui.model.windows.PaintWindow;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
@@ -77,13 +77,6 @@ public abstract class Drawable extends StackPane {
         else {
             stPane.setTranslateY(polyTranslateY + (event.getSceneY() - lastY)/mainController.project.getScaleY());
             this.lastY = event.getSceneY();
-        }
-
-        PaintWindow paintWindow = mainController.getProject().getSelectedPaintWindow();
-        for (NodeConnection nC : paintWindow.getConnections()) {
-            if (nC.getNode1().getId().equals(stPane.getId()) || nC.getNode2().getId().equals(stPane.getId())) {
-                if (nC.isPosition()) nC.recalculateBindings();
-            }
         }
 
     }

@@ -107,7 +107,6 @@ public class MainController implements Initializable {
                     selectedWindow.addNode(child);
                     project.setSelectedSymbol(child);
                     NodeConnection nodeConnection = new NodeConnection(parent, child);
-                    nodeConnection.setPosition(true);
                     selectedWindow.addConnection(nodeConnection);
                 }
             });

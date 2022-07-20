@@ -104,6 +104,6 @@ public class PaintWindow extends AnchorPane {
     }
 
     public void draw(NodeConnection nodeConnection) {
-        this.getChildren().add(nodeConnection);
+        this.getChildren().add(0, nodeConnection);
     }
 }
