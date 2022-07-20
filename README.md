@@ -13,11 +13,11 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
   - color
   - size (?)
   - connection
-- [ ] implement selection into the hotbar
-- [ ] implement CTT properties into the hotbar
+- [x] implement selection into the hotbar
+- [x] implement CTT properties into the hotbar
 - [ ] select symbols
 - [ ] copy and paste of part trees and trees
-- [ ] possibly descriptions to tasks
+- [x] possibly descriptions to tasks
 - [ ] add annotation/text over the canvas
 - [ ] allow connections be made between two drawing areas
 - [ ] generealise models as descripted in paper
@@ -31,11 +31,12 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 
 #### Enhancements
 - [x] drawing area positioning in the middle
-- [ ] fix resizing of zoom
-- [ ] zoom in/out with hotkeys
+- [x] fix resizing of zoom
+- [x] zoom in/out with hotkeys
 - [ ] centering the screens
-- [ ] fix screen resize
+- [x] fix screen resize
 - [ ] center on one model
 - [ ] colorize different models
 - [ ] showcase with colors modelchanges (toggle in menu)
 - [ ] layers
+- [ ] indicate connection process
