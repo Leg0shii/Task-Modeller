@@ -7,9 +7,10 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class EditWindow<T> extends Stage {
+public abstract class EditWindow<T> extends Stage {
 
     public GridPane gridPane;
+
     public final T item;
     public Button deleteBtn;
 
@@ -35,8 +36,6 @@ public class EditWindow<T> extends Stage {
         this.setScene(dialogScene);
     }
 
-    private void onDelete() {
-
-    };
+    public abstract void onDelete();
 
 }

@@ -23,7 +23,8 @@ public class CommentEditWindow extends EditWindow<DrawnSymbol> {
         this.deleteBtn.setOnMouseClicked(mouseEvent -> onDelete());
     }
 
-    private void onDelete() {
+    @Override
+    public void onDelete() {
         MainController mainController = MainController.getInstance();
          mainController.getCommentGroup().getChildren().remove(this.item);
         this.close();

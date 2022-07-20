@@ -16,7 +16,8 @@ public class LineEditWindow extends EditWindow<NodeConnection> {
         this.deleteBtn.setOnMouseClicked(mouseEvent -> onDelete());
     }
 
-    private void onDelete() {
+    @Override
+    public void onDelete() {
         MainController mainController = MainController.getInstance();
         PaintWindow paintWindow = mainController.getProject().getSelectedPaintWindow();
         paintWindow.removeConnection(this.item);

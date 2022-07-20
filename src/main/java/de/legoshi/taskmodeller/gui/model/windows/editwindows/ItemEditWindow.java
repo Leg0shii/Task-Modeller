@@ -64,7 +64,8 @@ public class ItemEditWindow extends EditWindow<DrawnSymbol> {
         polygon.setStrokeWidth(3/drawnSymbol.getScaleX());
     }
 
-    private void onDelete() {
+    @Override
+    public void onDelete() {
         MainController mainController = MainController.getInstance();
         for (PaintWindow paintWindow : mainController.getProject().getAllWindows()) {
             paintWindow.removeNode(this.item);
