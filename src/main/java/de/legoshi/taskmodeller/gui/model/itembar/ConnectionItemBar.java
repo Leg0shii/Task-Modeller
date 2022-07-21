@@ -11,7 +11,6 @@ public class ConnectionItemBar extends ItemBar {
 
     @Override
     public void prepareItemBar() {
-
         colorize();
     }
 

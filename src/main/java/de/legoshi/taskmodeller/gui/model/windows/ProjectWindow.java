@@ -1,7 +1,5 @@
 package de.legoshi.taskmodeller.gui.model.windows;
 
-import de.legoshi.taskmodeller.MainController;
-import de.legoshi.taskmodeller.gui.model.symbols.DrawnSymbol;
 import de.legoshi.taskmodeller.util.ModelType;
 import de.legoshi.taskmodeller.util.StatusType;
 import javafx.scene.control.ComboBox;
@@ -18,6 +16,8 @@ import java.util.ArrayList;
 @Setter
 public class ProjectWindow extends GridPane {
 
+    private final Workplace workplace;
+
     private int existentCount = 1;
     private int compositeCount = 1;
     private int envisionedCount = 1;
@@ -26,16 +26,15 @@ public class ProjectWindow extends GridPane {
     private ArrayList<PaintWindow> compositeWindows;
     private ArrayList<PaintWindow> envisionedWindows;
 
-    private PaintWindow selectedPaintWindow;
-    private DrawnSymbol selectedSymbol;
-
-    public ProjectWindow() {
+    public ProjectWindow(Workplace workplace) {
+        this.workplace = workplace;
         this.setHgap(100);
         this.setVgap(100);
 
-        this.existentWindows = new ArrayList<>();
-        this.compositeWindows = new ArrayList<>();
-        this.envisionedWindows = new ArrayList<>();
+        existentWindows = new ArrayList<>();
+        compositeWindows = new ArrayList<>();
+        envisionedWindows = new ArrayList<>();
+
     }
 
     public ArrayList<PaintWindow> getAllWindows() {
@@ -64,7 +63,7 @@ public class ProjectWindow extends GridPane {
             StatusType statusType = StatusType.values()[xShift];
             ModelType modelType = ModelType.valueOf(cB.getValue());
 
-            PaintWindow paintWindow = new PaintWindow(MainController.getMainController(), statusType, modelType);
+            PaintWindow paintWindow = new PaintWindow(this.workplace, statusType, modelType);
             paintWindow.setName(tf.getText());
             paintWindow.getChildren().add(new Label(tf.getText() + " (" + modelType.name() + ", " + statusType.name() + ")"));
             windows.add(paintWindow);

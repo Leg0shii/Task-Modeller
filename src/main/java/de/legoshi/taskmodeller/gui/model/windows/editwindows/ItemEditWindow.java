@@ -1,18 +1,22 @@
 package de.legoshi.taskmodeller.gui.model.windows.editwindows;
 
-import de.legoshi.taskmodeller.MainController;
-import de.legoshi.taskmodeller.gui.model.symbols.DrawnSymbol;
+import de.legoshi.taskmodeller.gui.model.symbols.ModelNode;
 import de.legoshi.taskmodeller.gui.model.windows.PaintWindow;
+import de.legoshi.taskmodeller.gui.model.windows.Workplace;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class ItemEditWindow extends EditWindow<DrawnSymbol> {
+public class ItemEditWindow extends EditWindow<ModelNode> {
 
-    public ItemEditWindow(DrawnSymbol item) {
+    private final Workplace workplace;
+
+    public ItemEditWindow(Workplace workplace, ModelNode item) {
         super(item, "Bearbeite Objekt");
+
+        this.workplace = workplace;
 
         Shape shape = (Shape) item.getChildren().get(0);
         Label label = (Label) item.getChildren().get(1);
@@ -45,29 +49,27 @@ public class ItemEditWindow extends EditWindow<DrawnSymbol> {
     }
 
     private void onConnect() {
-        MainController mainController = MainController.getInstance();
-        for (DrawnSymbol dS : mainController.getProject().getSelectedPaintWindow().getDrawnNodes()) {
+        for (ModelNode dS : workplace.getSelectedPaintWindow().getDrawnNodes()) {
             dS.setAttemptsConnect(false);
         }
         this.item.setAttemptsConnect(true);
         this.close();
     }
 
-    private void onScale(DrawnSymbol drawnSymbol, double number, double t1) {
-        Shape polygon = (Shape) drawnSymbol.getChildren().get(0);
-        Label label = (Label) drawnSymbol.getChildren().get(1);
+    private void onScale(ModelNode modelNode, double number, double t1) {
+        Shape polygon = (Shape) modelNode.getChildren().get(0);
+        Label label = (Label) modelNode.getChildren().get(1);
 
-        drawnSymbol.setScaleX(drawnSymbol.getScaleX() + (t1 - number));
-        drawnSymbol.setScaleY(drawnSymbol.getScaleY() + (t1 - number));
-        label.setFont(new Font("Arial", 12/drawnSymbol.getScaleX()));
+        modelNode.setScaleX(modelNode.getScaleX() + (t1 - number));
+        modelNode.setScaleY(modelNode.getScaleY() + (t1 - number));
+        label.setFont(new Font("Arial", 12/ modelNode.getScaleX()));
 
-        polygon.setStrokeWidth(3/drawnSymbol.getScaleX());
+        polygon.setStrokeWidth(3/ modelNode.getScaleX());
     }
 
     @Override
     public void onDelete() {
-        MainController mainController = MainController.getInstance();
-        for (PaintWindow paintWindow : mainController.getProject().getAllWindows()) {
+        for (PaintWindow paintWindow : workplace.getAllWindows()) {
             paintWindow.removeNode(this.item);
         }
         this.close();

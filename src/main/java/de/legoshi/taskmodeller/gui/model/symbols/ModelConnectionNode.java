@@ -1,25 +1,28 @@
 package de.legoshi.taskmodeller.gui.model.symbols;
 
+import de.legoshi.taskmodeller.gui.model.windows.Workplace;
 import de.legoshi.taskmodeller.gui.model.windows.editwindows.LineEditWindow;
 import javafx.beans.binding.DoubleBinding;
 import javafx.scene.shape.Line;
 import lombok.Getter;
 
 @Getter
-public class NodeConnection extends Line {
+public class ModelConnectionNode extends Line {
 
-    // FIX on scaling
     // HIGHLIGHT when connection is ready
+    private final Workplace workplace;
 
-    private final DrawnSymbol node1;
-    private final DrawnSymbol node2;
+    private final ModelNode node1;
+    private final ModelNode node2;
 
     private DoubleBinding xStartProperty;
     private DoubleBinding yStartProperty;
     private DoubleBinding xEndProperty;
     private DoubleBinding yEndProperty;
 
-    public NodeConnection(DrawnSymbol node1, DrawnSymbol node2) {
+    public ModelConnectionNode(Workplace workplace, ModelNode node1, ModelNode node2) {
+        this.workplace = workplace;
+
         this.node1 = node1;
         this.node2 = node2;
         this.setStrokeWidth(3);
@@ -28,8 +31,7 @@ public class NodeConnection extends Line {
 
         this.setOnMousePressed(mouseEvent -> {
             if (mouseEvent.isSecondaryButtonDown()) {
-                LineEditWindow lineEditWindow = new LineEditWindow(this);
-                lineEditWindow.show();
+                new LineEditWindow(workplace, this).show();
             }
         });
     }

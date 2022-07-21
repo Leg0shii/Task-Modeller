@@ -16,13 +16,13 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class DrawnSymbol extends StackPane {
+public class ModelNode extends StackPane {
 
     private boolean projectObject;
     private boolean attemptsConnect = false;
     private String description;
 
-    public DrawnSymbol(Shape polyShape, boolean projectObject) {
+    public ModelNode(Shape polyShape, boolean projectObject) {
         this.setId(UUID.randomUUID().toString());
         this.projectObject = projectObject;
 

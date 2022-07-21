@@ -1,15 +1,18 @@
 package de.legoshi.taskmodeller.gui.model.windows.editwindows;
 
-import de.legoshi.taskmodeller.MainController;
-import de.legoshi.taskmodeller.gui.model.symbols.DrawnSymbol;
+import de.legoshi.taskmodeller.gui.model.symbols.ModelNode;
+import de.legoshi.taskmodeller.gui.model.windows.Workplace;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 
-public class CommentEditWindow extends EditWindow<DrawnSymbol> {
+public class CommentEditWindow extends EditWindow<ModelNode> {
 
-    public CommentEditWindow(DrawnSymbol item) {
+    private final Workplace workplace;
+
+    public CommentEditWindow(Workplace workplace, ModelNode item) {
         super(item, "Bearbeite Kommentar");
+        this.workplace = workplace;
 
         Label label = (Label) item.getChildren().get(1);
 
@@ -25,8 +28,7 @@ public class CommentEditWindow extends EditWindow<DrawnSymbol> {
 
     @Override
     public void onDelete() {
-        MainController mainController = MainController.getInstance();
-         mainController.getCommentGroup().getChildren().remove(this.item);
+        workplace.getChildren().remove(this.item);
         this.close();
     }
 
