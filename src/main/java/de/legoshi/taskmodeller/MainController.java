@@ -1,8 +1,8 @@
 package de.legoshi.taskmodeller;
 
-import de.legoshi.taskmodeller.gui.model.windows.NewProjectCountWindow;
-import de.legoshi.taskmodeller.gui.model.windows.PaintWindow;
-import de.legoshi.taskmodeller.gui.model.windows.Workplace;
+import de.legoshi.taskmodeller.gui.windows.newwindow.NewProjectCountWindow;
+import de.legoshi.taskmodeller.gui.windows.PaintWindow;
+import de.legoshi.taskmodeller.gui.windows.Workplace;
 import de.legoshi.taskmodeller.util.ModelType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
