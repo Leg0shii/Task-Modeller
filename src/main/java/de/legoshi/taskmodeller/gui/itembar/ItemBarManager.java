@@ -63,6 +63,8 @@ public class ItemBarManager {
     private void onFreeAction(PaintWindow selectedWindow) {
         for (Drawable drawable : this.standardItemBar.itemBar) {
             drawable.getPolyShape().setOnMouseClicked(event -> {
+                selectedWindow.removeSelectedNodes();
+
                 ModelNode modelNode = (ModelNode) NodesHelper.getDuplicate(workplace, drawable);
                 selectedWindow.addNodeToCanvas(modelNode);
                 event.consume();
@@ -73,6 +75,8 @@ public class ItemBarManager {
     private void onCTTAction(PaintWindow selectedWindow) {
         for (Drawable drawable : this.cttItemBar.itemBar) {
             drawable.getPolyShape().setOnMouseClicked(event -> {
+                selectedWindow.removeSelectedNodes();
+
                 ModelNode parent = workplace.getSelectedSymbol();
                 ModelNode child = (ModelNode) NodesHelper.getDuplicate(workplace, drawable);
                 selectedWindow.addNodeToCanvas(child);

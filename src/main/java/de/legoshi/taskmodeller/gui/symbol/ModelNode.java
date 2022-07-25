@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.text.Font;
 import lombok.Getter;
@@ -79,8 +80,17 @@ public class ModelNode extends Drawable {
     @Override
     public void onMouseClick(Workplace workplace, MouseEvent event) {
         PaintWindow paintWindow = workplace.getSelectedPaintWindow();
+
+        // to prevent manipulation in item bar area
+        if (this.getParent() != null) performSingleSelection(paintWindow);
         if (paintWindow != null) {
-            if (event.getTarget() instanceof Label) workplace.setSelectedSymbol(this);
+            if (windowSwitch(paintWindow)) {
+                PaintWindow newlyActiveWindow = getPaintWindowOfNode(workplace);
+                if (newlyActiveWindow != null) {
+                    newlyActiveWindow.setActiveWindow();
+                    performSingleSelection(newlyActiveWindow);
+                }
+            }
 
             for (ModelNode dS : paintWindow.getDrawnNodes()) {
                 if (dS.isAttemptsConnect()) {
@@ -99,6 +109,31 @@ public class ModelNode extends Drawable {
             this.lastY = event.getSceneY();
             event.consume();
         }
+    }
+
+    public void colorSelected() {
+        this.getPolyShape().setStroke(Color.RED);
+    }
+
+    public void colorUnselected() {
+        this.getPolyShape().setStroke(Color.BLACK);
+    }
+
+    private void performSingleSelection(PaintWindow paintWindow) {
+        paintWindow.removeSelectedNodes();
+        this.colorSelected();
+        paintWindow.getSelectedNodes().add(this);
+    }
+
+    private boolean windowSwitch(PaintWindow currentActiveWindow) {
+        return !(currentActiveWindow.getChildren().contains(this));
+    }
+
+    private PaintWindow getPaintWindowOfNode(Workplace workplace) {
+        for (PaintWindow paintWindow : workplace.getAllWindows()) {
+            if (paintWindow.getChildren().contains(this)) return paintWindow;
+        }
+        return null;
     }
 
 }
