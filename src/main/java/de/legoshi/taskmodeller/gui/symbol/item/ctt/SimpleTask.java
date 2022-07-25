@@ -1,6 +1,5 @@
 package de.legoshi.taskmodeller.gui.symbol.item.ctt;
 
-import de.legoshi.taskmodeller.gui.symbol.Drawable;
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import javafx.scene.paint.Color;
@@ -13,7 +12,7 @@ public class SimpleTask extends ModelNode {
         super(shape);
     }
 
-    public static Drawable generateShape(Workplace workplace) {
+    public static SimpleTask generateShape(Workplace workplace) {
         Rectangle rectangle = new Rectangle(50, 50);
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);

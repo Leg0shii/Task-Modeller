@@ -22,12 +22,13 @@ public class ModelNode extends Drawable {
 
     private boolean attemptsConnect = false;
     private String description;
+    private Label label;
 
     public ModelNode(Shape shape) {
         super(shape);
         this.setId(UUID.randomUUID().toString());
 
-        Label label = new Label(UUID.randomUUID().toString().substring(0,3));
+        label = new Label(this.getId().substring(0,3));
         label.setPadding(new Insets(10, 10, 10, 10));
         label.setAlignment(Pos.CENTER);
         label.setFont(new Font("Arial", 12));

@@ -15,7 +15,7 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] implement selection into the hotbar
 - [x] implement CTT properties into the hotbar
 - [x] select symbols
-- [ ] copy and paste of part trees and trees
+- [x] copy and paste of part trees and trees
 - [x] possibly descriptions to tasks
 - [x] add annotation/text over the canvas
 - [ ] allow connections be made between two drawing areas
@@ -41,6 +41,7 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [ ] max size for drawing boards (becuse of moving around objects)
 - [ ] delete sub tree when deleting for CTT (maybe?)
 - [ ] add padding around the models
+- [ ] change position of multiple elements at once when selected
 
 #### Bugs
 - [ ] dont switch toolbar when on misc/conn and selecting window
@@ -51,3 +52,4 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] remove selection when adding new item to field
 - [x] uncolor nodes after switching window
 - [x] select window when item is selected
+- [ ] new symbol added is not connected with the selected one but the last

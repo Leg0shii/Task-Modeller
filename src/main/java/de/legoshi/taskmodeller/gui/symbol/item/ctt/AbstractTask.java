@@ -13,7 +13,7 @@ public class AbstractTask extends ModelNode {
         super(shape);
     }
 
-    public static Drawable generateShape(Workplace workplace) {
+    public static AbstractTask generateShape(Workplace workplace) {
         Circle circle = new Circle(25);
         circle.setFill(Color.WHITE);
         circle.setStroke(Color.BLACK);
