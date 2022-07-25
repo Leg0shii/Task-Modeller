@@ -4,7 +4,7 @@ Ziel der Bachelorarbeit ist es, ein prototypisches Werkzeug zu entwickeln, welch
 Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (z.B. CTT) und Aufgabenobjekte stützen, diesen aber auch adaptieren.
 
 ### TODO
-- [ ] refactor if necessary selection stuff
+- [ ] refactor selection stuff if necessary
 #### Important
 - [x] implement CTT symbols as a toolbar
 - [x] right click symbol for changing it
