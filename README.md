@@ -42,6 +42,7 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [ ] delete sub tree when deleting for CTT (maybe?)
 - [ ] add padding around the models
 - [ ] change position of multiple elements at once when selected
+- [ ] allow copy from model to model (different (set constraints))
 
 #### Bugs
 - [ ] dont switch toolbar when on misc/conn and selecting window
