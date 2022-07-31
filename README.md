@@ -19,13 +19,13 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] possibly descriptions to tasks
 - [x] add annotation/text over the canvas
 - [ ] allow connections be made between two drawing areas
-- [ ] generealise models as descripted in paper
+- [ ] generalise models as described in paper
 - [ ] add a todo/guidelines you can tick (toggle in menu)
+- [ ] other edit display for CTT (color)
+- [ ] other sizes for modelling
+- [ ] right click model to open editor window
 
 - [ ] save and load data and ctte trees (into squares)
-
-- [ ] other edit display for CTT
-- [ ] other sizes for modelling
 
 #### Enhancements
 - [x] drawing area positioning in the middle
@@ -35,18 +35,18 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] fix screen resize
 - [ ] center on one model
 - [ ] colorize different models
-- [ ] showcase with colors modelchanges (toggle in menu)
-- [ ] layers
 - [ ] indicate connection process
-- [ ] max size for drawing boards (becuse of moving around objects)
-- [ ] delete sub tree when deleting for CTT (maybe?)
 - [ ] add padding around the models
+
+- [ ] showcase with colors model-changes (toggle in menu)
+- [ ] layers
+- [ ] max size for drawing boards (because of moving around objects)
+- [ ] delete sub tree when deleting for CTT (maybe?)
 - [ ] change position of multiple elements at once when selected
 - [ ] allow copy from model to model (different (set constraints))
-- [ ] right click model to open editor window
 
 #### Bugs
-- [ ] dont switch toolbar when on misc/conn and selecting window
+- [ ] don't switch toolbar when on misc/conn and selecting window
 - [ ] check entered values on creation
 - [ ] only comments when project is created
 - [ ] init project only when init steps are done
