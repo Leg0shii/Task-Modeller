@@ -43,6 +43,7 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [ ] add padding around the models
 - [ ] change position of multiple elements at once when selected
 - [ ] allow copy from model to model (different (set constraints))
+- [ ] right click model to open editor window
 
 #### Bugs
 - [ ] dont switch toolbar when on misc/conn and selecting window
