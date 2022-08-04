@@ -55,3 +55,7 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] uncolor nodes after switching window
 - [x] select window when item is selected
 - [ ] new symbol added is not connected with the selected one but the last
+
+#### Thesis
+- [ ] Prototypisches Werkzeug Einleitung anpassen
+- [ ] Verbindungen fertig schreiben, sobald implementiert

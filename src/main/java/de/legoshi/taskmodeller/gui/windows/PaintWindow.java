@@ -2,7 +2,6 @@ package de.legoshi.taskmodeller.gui.windows;
 
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
 import de.legoshi.taskmodeller.gui.symbol.connection.ModelConnectionNode;
-import de.legoshi.taskmodeller.gui.symbol.connection.NormalConnection;
 import de.legoshi.taskmodeller.gui.symbol.item.SelectionRectangle;
 import de.legoshi.taskmodeller.util.ModelType;
 import de.legoshi.taskmodeller.util.StatusType;
