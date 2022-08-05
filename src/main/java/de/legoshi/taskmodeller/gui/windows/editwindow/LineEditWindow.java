@@ -1,15 +1,15 @@
 package de.legoshi.taskmodeller.gui.windows.editwindow;
 
-import de.legoshi.taskmodeller.gui.symbol.connection.ModelConnectionNode;
+import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import javafx.scene.control.Label;
 
-public class LineEditWindow extends EditWindow<ModelConnectionNode> {
+public class LineEditWindow extends EditWindow<Connection> {
 
     private final Workplace workplace;
 
-    public LineEditWindow(Workplace workplace, ModelConnectionNode item) {
+    public LineEditWindow(Workplace workplace, Connection item) {
         super(item, "Bearbeite Linie");
         this.workplace = workplace;
 
