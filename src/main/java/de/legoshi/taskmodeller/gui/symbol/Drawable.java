@@ -6,11 +6,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Shape;
 import lombok.Getter;
+import lombok.Setter;
 
 public abstract class Drawable extends StackPane {
 
-    @Getter
-    private final Shape polyShape;
+    @Getter @Setter
+    private Shape polyShape;
+    @Getter @Setter
+    private boolean representative;
 
     public double lastX = 0;
     public double lastY = 0;
@@ -21,12 +24,14 @@ public abstract class Drawable extends StackPane {
 
     public Drawable(Shape polyShape) {
         this.polyShape = polyShape;
+        this.representative = true;
     }
 
     public abstract void onMouseClick(Workplace workplace, MouseEvent event);
     public abstract void onMouseDrag(Workplace workplace, MouseEvent event);
 
     public void registerEvents(Workplace workplace) {
+        if (representative) return;
         for (Node n : this.getChildren()) {
             n.setOnMousePressed(event -> onMouseClick(workplace, event));
             n.setOnMouseDragged(event -> onMouseDrag(workplace, event));

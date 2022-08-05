@@ -8,17 +8,14 @@ import lombok.Getter;
 @Getter
 public class StandardItemBar extends ItemBar {
 
-    private final Workplace workplace;
-
-    public StandardItemBar(Workplace workplace) {
-        this.workplace = workplace;
+    public StandardItemBar() {
         prepareItemBar();
     }
 
     @Override
     public void prepareItemBar() {
-        itemBar.add(Square.generateShape(workplace));
-        itemBar.add(CTriangle.generateShape(this.workplace));
+        itemBar.add(Square.generateShape());
+        itemBar.add(CTriangle.generateShape());
     }
 
 }

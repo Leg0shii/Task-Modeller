@@ -28,7 +28,7 @@ public class ModelNode extends Drawable {
         super(shape);
         this.setId(UUID.randomUUID().toString());
 
-        label = new Label(this.getId().substring(0,3));
+        label = new Label("Task");
         label.setPadding(new Insets(10, 10, 10, 10));
         label.setAlignment(Pos.CENTER);
         label.setFont(new Font("Arial", 12));

@@ -1,7 +1,6 @@
 package de.legoshi.taskmodeller.gui.symbol.item.standard;
 
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
-import de.legoshi.taskmodeller.gui.windows.Workplace;
 import de.legoshi.taskmodeller.util.PolygonHelper;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
@@ -14,7 +13,7 @@ public class CTriangle extends ModelNode {
         super(shape);
     }
 
-    public static CTriangle generateShape(Workplace workplace) {
+    public static CTriangle generateShape() {
         Point2D p1 = new Point2D(0,0);
         Point2D p2 = new Point2D(25,50);
         Point2D p3 = new Point2D(50,0);
@@ -22,9 +21,7 @@ public class CTriangle extends ModelNode {
         polygon.setFill(Color.YELLOW);
         polygon.setStroke(Color.BLACK);
         polygon.setStrokeWidth(3);
-        CTriangle triangle = new CTriangle(polygon);
-        triangle.registerEvents(workplace);
-        return triangle;
+        return new CTriangle(polygon);
     }
 
 }

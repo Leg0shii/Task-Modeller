@@ -4,6 +4,7 @@ import de.legoshi.taskmodeller.gui.symbol.Drawable;
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
 import de.legoshi.taskmodeller.gui.symbol.item.ctt.AbstractTask;
 import de.legoshi.taskmodeller.gui.symbol.item.ctt.SimpleTask;
+import de.legoshi.taskmodeller.gui.symbol.item.misc.GeneralisedNode;
 import de.legoshi.taskmodeller.gui.symbol.item.misc.TextSymbol;
 import de.legoshi.taskmodeller.gui.symbol.item.standard.CTriangle;
 import de.legoshi.taskmodeller.gui.symbol.item.standard.Square;
@@ -12,11 +13,19 @@ import de.legoshi.taskmodeller.gui.windows.Workplace;
 public class NodesHelper {
 
     public static Drawable getDuplicate(Workplace workplace, Drawable drawable) {
-        if (drawable instanceof Square) return Square.generateShape(workplace);
-        else if (drawable instanceof CTriangle) return CTriangle.generateShape(workplace);
-        else if (drawable instanceof TextSymbol) return TextSymbol.generateShape(workplace);
-        else if (drawable instanceof SimpleTask) return SimpleTask.generateShape(workplace);
-        else return AbstractTask.generateShape(workplace);
+        if (drawable instanceof Square) return prepareDrawable(workplace, Square.generateShape());
+        else if (drawable instanceof CTriangle) return prepareDrawable(workplace, CTriangle.generateShape());
+        else if (drawable instanceof TextSymbol) return prepareDrawable(workplace, TextSymbol.generateShape());
+        else if (drawable instanceof SimpleTask) return prepareDrawable(workplace, SimpleTask.generateShape());
+        else if (drawable instanceof AbstractTask) return prepareDrawable(workplace, AbstractTask.generateShape());
+        else if (drawable instanceof GeneralisedNode) return prepareDrawable(workplace, GeneralisedNode.generateShape());
+        return null;
+    }
+
+    private static Drawable prepareDrawable(Workplace workplace, Drawable drawable) {
+        drawable.setRepresentative(false);
+        drawable.registerEvents(workplace);
+        return drawable;
     }
 
     public static void applyAttributes(ModelNode modelNode, ModelNode newNode) {

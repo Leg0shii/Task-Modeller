@@ -18,8 +18,8 @@ public class ItemEditWindow extends EditWindow<ModelNode> {
 
         this.workplace = workplace;
 
-        Shape shape = (Shape) item.getChildren().get(0);
-        Label label = (Label) item.getChildren().get(1);
+        Shape shape = item.getPolyShape();
+        Label label = item.getLabel();
 
         TextField textField = new TextField(label.getText());
         this.gridPane.add(new Text("Name: "), 0, 0);
@@ -57,14 +57,14 @@ public class ItemEditWindow extends EditWindow<ModelNode> {
     }
 
     private void onScale(ModelNode modelNode, double number, double t1) {
-        Shape polygon = (Shape) modelNode.getChildren().get(0);
-        Label label = (Label) modelNode.getChildren().get(1);
+        Shape polygon = modelNode.getPolyShape();
+        Label label = modelNode.getLabel();
 
         modelNode.setScaleX(modelNode.getScaleX() + (t1 - number));
         modelNode.setScaleY(modelNode.getScaleY() + (t1 - number));
         label.setFont(new Font("Arial", 12/ modelNode.getScaleX()));
 
-        polygon.setStrokeWidth(3/ modelNode.getScaleX());
+        polygon.setStrokeWidth(3 / modelNode.getScaleX());
     }
 
     @Override

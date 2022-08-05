@@ -26,10 +26,10 @@ public class ItemBarManager {
     private final MiscItemBar miscItemBar;
 
     public ItemBarManager(Workplace workplace, HBox toolBar) {
-        this.standardItemBar = new StandardItemBar(workplace);
-        this.cttItemBar = new CTTItemBar(workplace);
+        this.standardItemBar = new StandardItemBar();
+        this.cttItemBar = new CTTItemBar();
         this.connectionItemBar = new ConnectionItemBar();
-        this.miscItemBar = new MiscItemBar(workplace);
+        this.miscItemBar = new MiscItemBar();
         this.workplace = workplace;
         this.toolBar = toolBar;
     }
@@ -40,7 +40,7 @@ public class ItemBarManager {
         toolBar.getChildren().clear();
 
         for (Drawable drawable : itemBar) {
-            toolBar.getChildren().add(drawable.getPolyShape());
+            toolBar.getChildren().add(drawable);
         }
     }
 
@@ -62,7 +62,7 @@ public class ItemBarManager {
 
     private void onFreeAction(PaintWindow selectedWindow) {
         for (Drawable drawable : this.standardItemBar.itemBar) {
-            drawable.getPolyShape().setOnMouseClicked(event -> {
+            drawable.setOnMouseClicked(event -> {
                 selectedWindow.removeSelectedNodes();
 
                 ModelNode modelNode = (ModelNode) NodesHelper.getDuplicate(workplace, drawable);
@@ -74,7 +74,7 @@ public class ItemBarManager {
 
     private void onCTTAction(PaintWindow selectedWindow) {
         for (Drawable drawable : this.cttItemBar.itemBar) {
-            drawable.getPolyShape().setOnMouseClicked(event -> {
+            drawable.setOnMouseClicked(event -> {
                 selectedWindow.removeSelectedNodes();
 
                 ModelNode parent = workplace.getSelectedSymbol();
@@ -94,7 +94,7 @@ public class ItemBarManager {
 
     private void onMiscAction() {
         for (Drawable drawable : this.miscItemBar.itemBar) {
-            drawable.getPolyShape().setOnMouseClicked(event -> {
+            drawable.setOnMouseClicked(event -> {
                 WorkplaceNode modelNode = (WorkplaceNode) NodesHelper.getDuplicate(workplace, drawable);
                 workplace.getChildren().add(modelNode);
             });
