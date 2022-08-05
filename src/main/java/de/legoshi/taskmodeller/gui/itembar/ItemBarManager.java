@@ -2,9 +2,11 @@ package de.legoshi.taskmodeller.gui.itembar;
 
 import de.legoshi.taskmodeller.gui.symbol.Drawable;
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
-import de.legoshi.taskmodeller.gui.symbol.connection.ModelConnectionNode;
+import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
 import de.legoshi.taskmodeller.gui.symbol.WorkplaceNode;
 import de.legoshi.taskmodeller.gui.symbol.connection.NormalConnection;
+import de.legoshi.taskmodeller.gui.symbol.item.misc.GeneralisedNode;
+import de.legoshi.taskmodeller.gui.symbol.item.misc.TextSymbol;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import de.legoshi.taskmodeller.util.ModelType;
@@ -82,8 +84,8 @@ public class ItemBarManager {
                 selectedWindow.addNodeToCanvas(child);
                 if (parent == null) return;
 
-                ModelConnectionNode modelConnectionNode = NormalConnection.generateShape(workplace, parent, child);
-                selectedWindow.addConnection(modelConnectionNode);
+                Connection connection = NormalConnection.generateShape(workplace, parent, child);
+                selectedWindow.addConnection(connection);
             });
         }
     }
@@ -95,7 +97,9 @@ public class ItemBarManager {
     private void onMiscAction() {
         for (Drawable drawable : this.miscItemBar.itemBar) {
             drawable.setOnMouseClicked(event -> {
-                WorkplaceNode modelNode = (WorkplaceNode) NodesHelper.getDuplicate(workplace, drawable);
+                Drawable modelNode = NodesHelper.getDuplicate(workplace, drawable);
+                if (modelNode instanceof GeneralisedNode) workplace.getGeneralisedList().add((ModelNode) modelNode);
+                else if (modelNode instanceof TextSymbol) workplace.getCommentList().add((WorkplaceNode) modelNode);
                 workplace.getChildren().add(modelNode);
             });
         }
