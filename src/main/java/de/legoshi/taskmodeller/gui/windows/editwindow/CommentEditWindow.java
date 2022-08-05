@@ -14,10 +14,10 @@ public class CommentEditWindow extends EditWindow<WorkplaceNode> {
         super(item, "Bearbeite Kommentar");
         this.workplace = workplace;
 
-        Label label = (Label) item.getChildren().get(1);
+        Label label = item.getLabel();
 
         TextArea textArea = new TextArea(label.getText());
-        this.gridPane.add(new Text("Kommentar: "), 0, 0);
+        this.gridPane.add(new Text("Comment: "), 0, 0);
         this.gridPane.add(textArea, 1, 0);
         textArea.textProperty().addListener((observableValue, s, t1) -> {
             label.setText(t1);
