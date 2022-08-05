@@ -8,20 +8,20 @@ import javafx.scene.shape.Line;
 import lombok.Getter;
 
 @Getter
-public class ModelConnectionNode extends Line {
+public class Connection extends Line {
 
     // HIGHLIGHT when connection is ready
     private final Workplace workplace;
 
-    private final ModelNode node1;
-    private final ModelNode node2;
+    final ModelNode node1;
+    final ModelNode node2;
 
-    private DoubleBinding xStartProperty;
-    private DoubleBinding yStartProperty;
-    private DoubleBinding xEndProperty;
-    private DoubleBinding yEndProperty;
+    DoubleBinding xStartProperty;
+    DoubleBinding yStartProperty;
+    DoubleBinding xEndProperty;
+    DoubleBinding yEndProperty;
 
-    public ModelConnectionNode(Workplace workplace, ModelNode node1, ModelNode node2) {
+    public Connection(Workplace workplace, ModelNode node1, ModelNode node2) {
         this.setStrokeWidth(3);
 
         this.workplace = workplace;
