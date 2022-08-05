@@ -18,8 +18,8 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] copy and paste of part trees and trees
 - [x] possibly descriptions to tasks
 - [x] add annotation/text over the canvas
-- [ ] allow connections be made between two drawing areas
-- [ ] generalise models as described in paper
+- [x] allow connections be made between two drawing areas
+- [x] generalise models as described in paper
 - [ ] add a todo/guidelines you can tick (toggle in menu)
 - [ ] other edit display for CTT (color)
 - [ ] other sizes for modelling
@@ -57,5 +57,5 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [ ] new symbol added is not connected with the selected one but the last
 
 #### Thesis
-- [ ] Prototypisches Werkzeug Einleitung anpassen
+- [x] Prototypisches Werkzeug Einleitung anpassen
 - [ ] Verbindungen fertig schreiben, sobald implementiert
