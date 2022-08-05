@@ -1,9 +1,9 @@
 package de.legoshi.taskmodeller.gui.windows;
 
-import de.legoshi.taskmodeller.gui.itembar.ConnectionItemBar;
 import de.legoshi.taskmodeller.gui.itembar.ItemBarManager;
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
-import de.legoshi.taskmodeller.gui.symbol.connection.ModelConnectionNode;
+import de.legoshi.taskmodeller.gui.symbol.WorkplaceNode;
+import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
 import de.legoshi.taskmodeller.util.ModelType;
 import javafx.scene.Group;
 import javafx.scene.layout.HBox;
@@ -20,9 +20,10 @@ public class Workplace extends Group {
 
     private ModelType copiedFromModelType;
     private ArrayList<ModelNode> copiedSymbols;
-    private ArrayList<ModelConnectionNode> copiedConnections;
+    private ArrayList<Connection> copiedConnections;
 
-    private ArrayList<ModelNode> commentList;
+    private ArrayList<WorkplaceNode> commentList;
+    private ArrayList<ModelNode> generalisedList;
 
     private ItemBarManager itemBarManager;
 
@@ -34,6 +35,8 @@ public class Workplace extends Group {
         this.itemBarManager = new ItemBarManager(this, toolBar);
         this.copiedSymbols = new ArrayList<>();
         this.copiedConnections = new ArrayList<>();
+        this.commentList = new ArrayList<>();
+        this.generalisedList = new ArrayList<>();
 
         this.getChildren().add(projectWindow);
     }

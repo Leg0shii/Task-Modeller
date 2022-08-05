@@ -1,7 +1,8 @@
 package de.legoshi.taskmodeller.gui.windows;
 
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
-import de.legoshi.taskmodeller.gui.symbol.connection.ModelConnectionNode;
+import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
+import de.legoshi.taskmodeller.gui.symbol.connection.GeneraliseConnection;
 import de.legoshi.taskmodeller.gui.symbol.item.SelectionRectangle;
 import de.legoshi.taskmodeller.util.ModelType;
 import de.legoshi.taskmodeller.util.StatusType;
@@ -18,20 +19,25 @@ public class PaintWindow extends AnchorPane {
 
     private final Workplace workplace;
 
+    private final int xPosition;
+    private final int yPosition;
+
     private String name;
 
     private ArrayList<ModelNode> drawnNodes;
     private ArrayList<ModelNode> selectedNodes;
 
-    private ArrayList<ModelConnectionNode> connections;
+    private ArrayList<Connection> connections;
 
     private final StatusType statusType;
     private final ModelType modelType;
 
     private SelectionRectangle selectionRectangle;
 
-    public PaintWindow(Workplace workplace, StatusType statusType, ModelType modelType) {
+    public PaintWindow(Workplace workplace, int xPosition, int yPosition, StatusType statusType, ModelType modelType) {
         this.workplace = workplace;
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
         this.modelType = modelType;
         this.statusType = statusType;
 
@@ -67,6 +73,8 @@ public class PaintWindow extends AnchorPane {
             this.selectionRectangle.updateRect(mouseEvent.getX(), mouseEvent.getY());
         });
         this.setOnMouseReleased(mouseEvent -> {
+            // problem occurs when generalised node gets added without a pW being selected
+            if (selectionRectangle == null) return;
             Point2D pStart = new Point2D(selectionRectangle.getStartX(), selectionRectangle.getStartY());
             Point2D pEnd = new Point2D(selectionRectangle.getNewXPos(), selectionRectangle.getNewYPos());
             if (Math.abs(pStart.getX() - pEnd.getX()) > 10) putSelectedNodes(pStart, pEnd);
@@ -86,8 +94,8 @@ public class PaintWindow extends AnchorPane {
 
     public void removeNode(ModelNode node) {
         String nodeId = node.getId();
-        ArrayList<ModelConnectionNode> nCToRemove = new ArrayList<>();
-        for (ModelConnectionNode nC : connections) {
+        ArrayList<Connection> nCToRemove = new ArrayList<>();
+        for (Connection nC : connections) {
             String nodeCId1 = nC.getNode1().getId();
             String nodeCId2 = nC.getNode2().getId();
             if (nodeCId1.equals(nodeId) || nodeCId2.equals(nodeId)) nCToRemove.add(nC);
@@ -98,33 +106,37 @@ public class PaintWindow extends AnchorPane {
         drawnNodes.remove(node);
     }
 
-    public void addConnection(ModelConnectionNode connection) {
-        if (!isNodeSameWindow(connection)) return;
-
-        if (!isConnected(connection)) {
-            connections.add(connection);
-            this.getChildren().add(0, connection);
+    public void addConnection(Connection connection) {
+        if(isConnected(connection)) return;
+        if (connection instanceof GeneraliseConnection) {
+            // workplace.getGeneralisedList().add(connection);
+            this.workplace.getChildren().add(connection);
+            System.out.println("in");
+            return;
         }
+        if (!isNodeSameWindow(connection)) return;
+        connections.add(connection);
+        this.getChildren().add(0, connection);
     }
 
-    public void removeConnection(ModelConnectionNode connection) {
+    public void removeConnection(Connection connection) {
         this.getChildren().remove(connection);
         connections.remove(connection);
     }
 
-    private boolean isConnected(ModelConnectionNode connection) {
+    private boolean isConnected(Connection connection) {
         String checkNode1 = connection.getNode1().getId();
         String checkNode2 = connection.getNode2().getId();
-        for (ModelConnectionNode modelConnectionNode : connections) {
-            String nodeID1 = modelConnectionNode.getNode1().getId();
-            String nodeID2 = modelConnectionNode.getNode2().getId();
+        for (Connection modelConnection : connections) {
+            String nodeID1 = modelConnection.getNode1().getId();
+            String nodeID2 = modelConnection.getNode2().getId();
             if (!(nodeID1.equals(checkNode1) || nodeID2.equals(checkNode1))) return false;
             if (!(nodeID1.equals(checkNode2) || nodeID2.equals(checkNode2))) return false;
         }
         return connections.size() != 0;
     }
 
-    private boolean isNodeSameWindow(ModelConnectionNode connection) {
+    private boolean isNodeSameWindow(Connection connection) {
         return (drawnNodes.contains(connection.getNode1()) && drawnNodes.contains(connection.getNode2()));
     }
 
@@ -168,9 +180,9 @@ public class PaintWindow extends AnchorPane {
         removeSelectedNodes();
     }
 
-    public ArrayList<ModelConnectionNode> getSelectedConnections() {
-        ArrayList<ModelConnectionNode> connectionNodeArrayList = new ArrayList<>();
-        for (ModelConnectionNode normalConnection : this.connections) {
+    public ArrayList<Connection> getSelectedConnections() {
+        ArrayList<Connection> connectionNodeArrayList = new ArrayList<>();
+        for (Connection normalConnection : this.connections) {
             if (this.selectedNodes.contains(normalConnection.getNode1()) && this.selectedNodes.contains(normalConnection.getNode2())) {
                 connectionNodeArrayList.add(normalConnection);
             }

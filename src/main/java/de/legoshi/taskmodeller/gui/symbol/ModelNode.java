@@ -1,8 +1,11 @@
 package de.legoshi.taskmodeller.gui.symbol;
 
+import de.legoshi.taskmodeller.gui.symbol.connection.GeneraliseConnection;
 import de.legoshi.taskmodeller.gui.symbol.connection.NormalConnection;
+import de.legoshi.taskmodeller.gui.symbol.item.misc.GeneralisedNode;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
+import de.legoshi.taskmodeller.gui.windows.editwindow.GeneralisedEditWindow;
 import de.legoshi.taskmodeller.gui.windows.editwindow.ItemEditWindow;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -92,7 +95,9 @@ public class ModelNode extends Drawable {
                     performSingleSelection(newlyActiveWindow);
                 }
             }
+        }
 
+        if (paintWindow != null) {
             for (ModelNode dS : paintWindow.getDrawnNodes()) {
                 if (dS.isAttemptsConnect()) {
                     if (dS.equals(this)) return;
@@ -101,9 +106,23 @@ public class ModelNode extends Drawable {
                     dS.setAttemptsConnect(false);
                 }
             }
+            // shouldn't be in here because it only effects generalisedNodes
+            for (ModelNode dS : workplace.getGeneralisedList()) {
+                if (dS.isAttemptsConnect()) {
+                    if (dS.equals(this)) return;
+                    GeneraliseConnection modelConnectionNode = GeneraliseConnection.generateShape(workplace, dS, this);
+                    paintWindow.addConnection(modelConnectionNode);
+                    dS.setAttemptsConnect(false);
+                }
+            }
         }
 
         if (event.isSecondaryButtonDown()) {
+            // shouldn't be in here because only effects generalised Nodes
+            if (this instanceof GeneralisedNode) {
+                new GeneralisedEditWindow(workplace, this).show();
+                return;
+            }
             new ItemEditWindow(workplace, this).show();
         } else {
             this.lastX = event.getSceneX();
@@ -130,7 +149,7 @@ public class ModelNode extends Drawable {
         return !(currentActiveWindow.getChildren().contains(this));
     }
 
-    private PaintWindow getPaintWindowOfNode(Workplace workplace) {
+    public PaintWindow getPaintWindowOfNode(Workplace workplace) {
         for (PaintWindow paintWindow : workplace.getAllWindows()) {
             if (paintWindow.getChildren().contains(this)) return paintWindow;
         }

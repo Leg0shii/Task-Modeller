@@ -22,14 +22,18 @@ public class ProjectWindow extends GridPane {
     private int compositeCount = 1;
     private int envisionedCount = 1;
 
+    public static final int HGAP = 100;
+    public static final int VGAP = 100;
+    public static final int SIZE = 750;
+
     private ArrayList<PaintWindow> existentWindows;
     private ArrayList<PaintWindow> compositeWindows;
     private ArrayList<PaintWindow> envisionedWindows;
 
     public ProjectWindow(Workplace workplace) {
         this.workplace = workplace;
-        this.setHgap(100);
-        this.setVgap(100);
+        this.setHgap(HGAP);
+        this.setVgap(VGAP);
 
         existentWindows = new ArrayList<>();
         compositeWindows = new ArrayList<>();
@@ -46,8 +50,8 @@ public class ProjectWindow extends GridPane {
     }
 
     public void generatePaintWindows(ArrayList<HBox> exHBox, ArrayList<HBox> coHBox, ArrayList<HBox> evHBox) {
-        this.minHeight(Math.max(Math.max(existentCount, compositeCount), envisionedCount) * 750);
-        this.maxHeight(750*3);
+        this.minHeight(Math.max(Math.max(existentCount, compositeCount), envisionedCount) * SIZE);
+        this.maxHeight(SIZE*3);
 
         initPaintWindows(existentWindows, exHBox, 0);
         initPaintWindows(compositeWindows, coHBox, 1);
@@ -63,7 +67,7 @@ public class ProjectWindow extends GridPane {
             StatusType statusType = StatusType.values()[xShift];
             ModelType modelType = ModelType.valueOf(cB.getValue());
 
-            PaintWindow paintWindow = new PaintWindow(this.workplace, statusType, modelType);
+            PaintWindow paintWindow = new PaintWindow(this.workplace, xShift, i, statusType, modelType);
             paintWindow.setName(tf.getText());
             paintWindow.getChildren().add(new Label(tf.getText() + " (" + modelType.name() + ", " + statusType.name() + ")"));
             windows.add(paintWindow);

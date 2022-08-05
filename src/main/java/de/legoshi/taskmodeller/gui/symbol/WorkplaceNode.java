@@ -1,10 +1,8 @@
 package de.legoshi.taskmodeller.gui.symbol;
 
-import de.legoshi.taskmodeller.gui.symbol.item.misc.GeneralisedNode;
 import de.legoshi.taskmodeller.gui.symbol.item.misc.TextSymbol;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import de.legoshi.taskmodeller.gui.windows.editwindow.CommentEditWindow;
-import de.legoshi.taskmodeller.gui.windows.editwindow.GeneralisedEditWindow;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -65,8 +63,6 @@ public class WorkplaceNode extends Drawable {
         if (event.isSecondaryButtonDown()) {
             if (this instanceof TextSymbol) {
                 new CommentEditWindow(workplace, this).show();
-            } else if (this instanceof GeneralisedNode) {
-                new GeneralisedEditWindow(workplace, this).show();
             }
         } else {
             this.lastX = event.getSceneX();
