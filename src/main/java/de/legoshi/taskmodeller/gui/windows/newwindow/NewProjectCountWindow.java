@@ -9,17 +9,17 @@ public class NewProjectCountWindow extends NewProject {
 
     public NewProjectCountWindow(ProjectWindow project) {
         Label existingL = new Label("Existing Model Count:");
-        TextField existingTF = new TextField();
+        TextField existingTF = new TextField("1");
         this.gridPane.add(existingL, 0, 0);
         this.gridPane.add(existingTF, 1, 0);
 
         Label compositeL = new Label("Composite Model Count:");
-        TextField compositeTF = new TextField();
+        TextField compositeTF = new TextField("1");
         this.gridPane.add(compositeL, 0, 1);
         this.gridPane.add(compositeTF, 1, 1);
 
         Label envisionedL = new Label("Envisioned Model Count:");
-        TextField envisionedTF = new TextField();
+        TextField envisionedTF = new TextField("1");
         this.gridPane.add(envisionedL, 0, 2);
         this.gridPane.add(envisionedTF, 1, 2);
 
