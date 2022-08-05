@@ -1,14 +1,13 @@
 package de.legoshi.taskmodeller;
 
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
-import de.legoshi.taskmodeller.gui.symbol.connection.ModelConnectionNode;
+import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
 import de.legoshi.taskmodeller.gui.symbol.connection.NormalConnection;
 import de.legoshi.taskmodeller.gui.windows.newwindow.NewProjectCountWindow;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import de.legoshi.taskmodeller.util.ModelType;
 import de.legoshi.taskmodeller.util.NodesHelper;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -118,7 +117,7 @@ public class MainController implements Initializable {
             NodesHelper.applyAttributes(modelNode, mN);
         }
 
-        for (ModelConnectionNode currMCN : workplace.getCopiedConnections()) {
+        for (Connection currMCN : workplace.getCopiedConnections()) {
             ModelNode firstNode = null;
             ModelNode secondNode = null;
             for (ModelNode copiedNode : newSymbols) {
@@ -130,7 +129,7 @@ public class MainController implements Initializable {
                     else secondNode = copiedNode;
                 }
             }
-            ModelConnectionNode mNC = NormalConnection.generateShape(workplace, firstNode, secondNode);
+            Connection mNC = NormalConnection.generateShape(workplace, firstNode, secondNode);
             paintWindow.addConnection(mNC);
         }
     }
