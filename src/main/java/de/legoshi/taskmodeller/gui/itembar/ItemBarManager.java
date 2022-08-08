@@ -5,7 +5,7 @@ import de.legoshi.taskmodeller.gui.symbol.ModelNode;
 import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
 import de.legoshi.taskmodeller.gui.symbol.WorkplaceNode;
 import de.legoshi.taskmodeller.gui.symbol.connection.NormalConnection;
-import de.legoshi.taskmodeller.gui.symbol.item.misc.GeneralisedNode;
+import de.legoshi.taskmodeller.gui.symbol.item.misc.GroupingNode;
 import de.legoshi.taskmodeller.gui.symbol.item.misc.TextSymbol;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
@@ -98,7 +98,7 @@ public class ItemBarManager {
         for (Drawable drawable : this.miscItemBar.itemBar) {
             drawable.setOnMouseClicked(event -> {
                 Drawable modelNode = NodesHelper.getDuplicate(workplace, drawable);
-                if (modelNode instanceof GeneralisedNode) {
+                if (modelNode instanceof GroupingNode) {
                     workplace.getSelectedPaintWindow().addGenNodeToCanvas((ModelNode) modelNode, 0);
                 }
                 else if (modelNode instanceof TextSymbol) {

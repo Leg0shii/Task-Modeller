@@ -1,8 +1,8 @@
 package de.legoshi.taskmodeller.gui.symbol;
 
-import de.legoshi.taskmodeller.gui.symbol.connection.GeneraliseConnection;
+import de.legoshi.taskmodeller.gui.symbol.connection.GroupingConnection;
 import de.legoshi.taskmodeller.gui.symbol.connection.NormalConnection;
-import de.legoshi.taskmodeller.gui.symbol.item.misc.GeneralisedNode;
+import de.legoshi.taskmodeller.gui.symbol.item.misc.GroupingNode;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import de.legoshi.taskmodeller.gui.windows.editwindow.GeneralisedEditWindow;
@@ -101,13 +101,13 @@ public class ModelNode extends Drawable {
             for (ModelNode dS : paintWindow.getDrawnNodes()) {
                 if (dS.isAttemptsConnect()) {
                     if (dS.equals(this)) return;
-                    if (this instanceof GeneralisedNode) {
-                        GeneraliseConnection modelConnectionNode = GeneraliseConnection.generateShape(workplace, dS, this);
+                    if (this instanceof GroupingNode) {
+                        GroupingConnection modelConnectionNode = GroupingConnection.generateShape(workplace, dS, this);
                         paintWindow.addConnection(modelConnectionNode);
                         dS.setAttemptsConnect(false);
                         return;
                     }
-                    if (dS instanceof GeneralisedNode) break;
+                    if (dS instanceof GroupingNode) break;
                     NormalConnection modelConnectionNode = NormalConnection.generateShape(workplace, dS, this);
                     paintWindow.addConnection(modelConnectionNode);
                     dS.setAttemptsConnect(false);
@@ -117,7 +117,7 @@ public class ModelNode extends Drawable {
             for (ModelNode dS : workplace.getGeneralisedList()) {
                 if (dS.isAttemptsConnect()) {
                     if (dS.equals(this)) return;
-                    GeneraliseConnection modelConnectionNode = GeneraliseConnection.generateShape(workplace, dS, this);
+                    GroupingConnection modelConnectionNode = GroupingConnection.generateShape(workplace, dS, this);
                     paintWindow.addConnection(modelConnectionNode);
                     dS.setAttemptsConnect(false);
                 }
@@ -126,7 +126,7 @@ public class ModelNode extends Drawable {
 
         if (event.isSecondaryButtonDown()) {
             // shouldn't be in here because only effects generalised Nodes
-            if (this instanceof GeneralisedNode) {
+            if (this instanceof GroupingNode) {
                 new GeneralisedEditWindow(workplace, this).show();
                 return;
             }

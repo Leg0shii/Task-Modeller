@@ -2,9 +2,9 @@ package de.legoshi.taskmodeller.gui.windows;
 
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
 import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
-import de.legoshi.taskmodeller.gui.symbol.connection.GeneraliseConnection;
+import de.legoshi.taskmodeller.gui.symbol.connection.GroupingConnection;
 import de.legoshi.taskmodeller.gui.symbol.item.SelectionRectangle;
-import de.legoshi.taskmodeller.gui.symbol.item.misc.GeneralisedNode;
+import de.legoshi.taskmodeller.gui.symbol.item.misc.GroupingNode;
 import de.legoshi.taskmodeller.util.ModelType;
 import de.legoshi.taskmodeller.util.StatusType;
 import javafx.geometry.Point2D;
@@ -86,7 +86,7 @@ public class PaintWindow extends AnchorPane {
     }
 
     public void addNodeToCanvas(ModelNode node) {
-        if (!(node instanceof GeneralisedNode)) {
+        if (!(node instanceof GroupingNode)) {
             this.getChildren().add(node);
         }
         drawnNodes.add(node);
@@ -104,12 +104,12 @@ public class PaintWindow extends AnchorPane {
     public void removeGenNodeFromCanvas(ModelNode node) {
         String nodeId = node.getId();
         ArrayList<Connection> nCToRemove = new ArrayList<>();
-        for (Connection nC : workplace.getGeneraliseConnections()) {
+        for (Connection nC : workplace.getGroupingConnections()) {
             String nodeCId1 = nC.getNode1().getId();
             String nodeCId2 = nC.getNode2().getId();
             if (nodeCId1.equals(nodeId) || nodeCId2.equals(nodeId)) nCToRemove.add(nC);
         }
-        workplace.getGeneraliseConnections().removeAll(nCToRemove);
+        workplace.getGroupingConnections().removeAll(nCToRemove);
         workplace.getChildren().removeAll(nCToRemove);
         this.getChildren().remove(node);
         drawnNodes.remove(node);
@@ -128,19 +128,19 @@ public class PaintWindow extends AnchorPane {
         this.getChildren().remove(node);
         drawnNodes.remove(node);
 
-        for (Connection nC : workplace.getGeneraliseConnections()) {
+        for (Connection nC : workplace.getGroupingConnections()) {
             String nodeCId1 = nC.getNode1().getId();
             String nodeCId2 = nC.getNode2().getId();
             if (nodeCId1.equals(nodeId) || nodeCId2.equals(nodeId)) nCToRemove.add(nC);
         }
-        workplace.getGeneraliseConnections().removeAll(nCToRemove);
+        workplace.getGroupingConnections().removeAll(nCToRemove);
         workplace.getChildren().removeAll(nCToRemove);
     }
 
     public void addConnection(Connection connection) {
         if(isConnected(connection)) return;
-        if (connection instanceof GeneraliseConnection) {
-            workplace.getGeneraliseConnections().add((GeneraliseConnection) connection);
+        if (connection instanceof GroupingConnection) {
+            workplace.getGroupingConnections().add((GroupingConnection) connection);
             this.workplace.getChildren().add(connection);
             return;
         }
@@ -148,7 +148,7 @@ public class PaintWindow extends AnchorPane {
         connections.add(connection);
         int count = 0;
         for (ModelNode modelNode : this.drawnNodes) {
-            if (modelNode instanceof GeneralisedNode) count++;
+            if (modelNode instanceof GroupingNode) count++;
         }
         this.getChildren().add(count, connection);
     }

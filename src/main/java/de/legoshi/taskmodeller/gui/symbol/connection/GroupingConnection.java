@@ -1,7 +1,7 @@
 package de.legoshi.taskmodeller.gui.symbol.connection;
 
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
-import de.legoshi.taskmodeller.gui.symbol.item.misc.GeneralisedNode;
+import de.legoshi.taskmodeller.gui.symbol.item.misc.GroupingNode;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.ProjectWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
@@ -13,20 +13,20 @@ import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 
-public class GeneraliseConnection extends Connection {
+public class GroupingConnection extends Connection {
 
     private Bounds node1Bounds;
     private Bounds node2Bounds;
 
     // assumed node1 is the generalisedNode
-    public GeneraliseConnection(Workplace workplace, ModelNode node1, ModelNode node2) {
+    public GroupingConnection(Workplace workplace, ModelNode node1, ModelNode node2) {
         super(workplace, node1, node2);
 
         this.node1Bounds = node1.getBoundsInParent();
         this.node2Bounds = node2.getBoundsInParent();
 
         // to switch nodes
-        if (!(node1 instanceof GeneralisedNode)) {
+        if (!(node1 instanceof GroupingNode)) {
             ModelNode temp = node1;
             node1 = node2;
             node2 = temp;
@@ -110,8 +110,8 @@ public class GeneraliseConnection extends Connection {
         return nodePoint;
     }
 
-    public static GeneraliseConnection generateShape(Workplace workplace, ModelNode node1, ModelNode node2) {
-        return new GeneraliseConnection(workplace, node1, node2);
+    public static GroupingConnection generateShape(Workplace workplace, ModelNode node1, ModelNode node2) {
+        return new GroupingConnection(workplace, node1, node2);
     }
 
 }

@@ -4,7 +4,7 @@ import de.legoshi.taskmodeller.gui.symbol.Drawable;
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
 import de.legoshi.taskmodeller.gui.symbol.item.ctt.AbstractTask;
 import de.legoshi.taskmodeller.gui.symbol.item.ctt.SimpleTask;
-import de.legoshi.taskmodeller.gui.symbol.item.misc.GeneralisedNode;
+import de.legoshi.taskmodeller.gui.symbol.item.misc.GroupingNode;
 import de.legoshi.taskmodeller.gui.symbol.item.misc.TextSymbol;
 import de.legoshi.taskmodeller.gui.symbol.item.standard.CTriangle;
 import de.legoshi.taskmodeller.gui.symbol.item.standard.Square;
@@ -18,7 +18,7 @@ public class NodesHelper {
         else if (drawable instanceof TextSymbol) return prepareDrawable(workplace, TextSymbol.generateShape());
         else if (drawable instanceof SimpleTask) return prepareDrawable(workplace, SimpleTask.generateShape());
         else if (drawable instanceof AbstractTask) return prepareDrawable(workplace, AbstractTask.generateShape());
-        else if (drawable instanceof GeneralisedNode) return prepareDrawable(workplace, GeneralisedNode.generateShape());
+        else if (drawable instanceof GroupingNode) return prepareDrawable(workplace, GroupingNode.generateShape());
         return null;
     }
 
