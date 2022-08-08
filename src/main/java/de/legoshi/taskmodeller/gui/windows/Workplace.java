@@ -4,6 +4,7 @@ import de.legoshi.taskmodeller.gui.itembar.ItemBarManager;
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
 import de.legoshi.taskmodeller.gui.symbol.WorkplaceNode;
 import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
+import de.legoshi.taskmodeller.gui.symbol.connection.GeneraliseConnection;
 import de.legoshi.taskmodeller.util.ModelType;
 import javafx.scene.Group;
 import javafx.scene.layout.HBox;
@@ -24,6 +25,7 @@ public class Workplace extends Group {
 
     private ArrayList<WorkplaceNode> commentList;
     private ArrayList<ModelNode> generalisedList;
+    private ArrayList<GeneraliseConnection> generaliseConnections;
 
     private ItemBarManager itemBarManager;
 
@@ -37,6 +39,7 @@ public class Workplace extends Group {
         this.copiedConnections = new ArrayList<>();
         this.commentList = new ArrayList<>();
         this.generalisedList = new ArrayList<>();
+        this.generaliseConnections = new ArrayList<>();
 
         this.getChildren().add(projectWindow);
     }

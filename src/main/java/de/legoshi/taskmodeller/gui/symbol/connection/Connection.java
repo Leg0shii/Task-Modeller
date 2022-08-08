@@ -47,6 +47,10 @@ public class Connection extends Line {
     }
 
     public void setBindings() {
+        this.startXProperty().unbind();
+        this.startYProperty().unbind();
+        this.endXProperty().unbind();
+        this.endYProperty().unbind();
         this.startXProperty().bind(this.xStartProperty);
         this.startYProperty().bind(this.yStartProperty);
         this.endXProperty().bind(this.xEndProperty);

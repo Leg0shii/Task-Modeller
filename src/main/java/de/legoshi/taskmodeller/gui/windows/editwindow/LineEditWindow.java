@@ -15,7 +15,6 @@ public class LineEditWindow extends EditWindow<Connection> {
 
         Label checkBoxLabel = new Label("Auto-Positionierung");
         this.gridPane.add(checkBoxLabel, 0, 0);
-        this.deleteBtn.setOnMouseClicked(mouseEvent -> onDelete());
     }
 
     @Override

@@ -21,7 +21,7 @@ public class GeneralisedEditWindow extends EditWindow<ModelNode> {
         this.gridPane.add(sliderX, 1, 0);
         sliderX.valueProperty().addListener((observableValue, number, t1) -> onScaleX(item, number.doubleValue(), t1.doubleValue()));
 
-        Slider sliderY = new Slider(0.4, 5, item.getScaleX());
+        Slider sliderY = new Slider(0.4, 5, item.getScaleY());
         this.gridPane.add(new Text("Scale-Y:"), 0, 1);
         this.gridPane.add(sliderY, 1, 1);
         sliderY.valueProperty().addListener((observableValue, number, t1) -> onScaleY(item, number.doubleValue(), t1.doubleValue()));
@@ -55,7 +55,9 @@ public class GeneralisedEditWindow extends EditWindow<ModelNode> {
 
     @Override
     public void onDelete() {
-        workplace.getChildren().remove(this.item);
+        for (PaintWindow paintWindow : workplace.getAllWindows()) {
+            paintWindow.removeGenNodeFromCanvas(this.item);
+        }
         this.close();
     }
 

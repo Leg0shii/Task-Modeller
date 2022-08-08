@@ -19,11 +19,7 @@ public class CommentEditWindow extends EditWindow<WorkplaceNode> {
         TextArea textArea = new TextArea(label.getText());
         this.gridPane.add(new Text("Comment: "), 0, 0);
         this.gridPane.add(textArea, 1, 0);
-        textArea.textProperty().addListener((observableValue, s, t1) -> {
-            label.setText(t1);
-        });
-
-        this.deleteBtn.setOnMouseClicked(mouseEvent -> onDelete());
+        textArea.textProperty().addListener((observableValue, s, t1) -> label.setText(t1));
     }
 
     @Override

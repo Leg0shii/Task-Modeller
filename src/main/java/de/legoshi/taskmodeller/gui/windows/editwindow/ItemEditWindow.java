@@ -44,8 +44,6 @@ public class ItemEditWindow extends EditWindow<ModelNode> {
         ColorPicker colorPicker = new ColorPicker((Color) shape.getFill());
         this.gridPane.add(colorPicker, 1, 3);
         colorPicker.valueProperty().addListener((observableValue, color, t1) -> shape.setFill(t1));
-
-        this.deleteBtn.setOnMouseClicked(mouseEvent -> onDelete());
     }
 
     private void onConnect() {

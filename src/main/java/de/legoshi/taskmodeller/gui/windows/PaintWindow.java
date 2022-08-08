@@ -4,6 +4,7 @@ import de.legoshi.taskmodeller.gui.symbol.ModelNode;
 import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
 import de.legoshi.taskmodeller.gui.symbol.connection.GeneraliseConnection;
 import de.legoshi.taskmodeller.gui.symbol.item.SelectionRectangle;
+import de.legoshi.taskmodeller.gui.symbol.item.misc.GeneralisedNode;
 import de.legoshi.taskmodeller.util.ModelType;
 import de.legoshi.taskmodeller.util.StatusType;
 import javafx.geometry.Point2D;
@@ -85,11 +86,33 @@ public class PaintWindow extends AnchorPane {
     }
 
     public void addNodeToCanvas(ModelNode node) {
-        this.getChildren().add(node);
+        if (!(node instanceof GeneralisedNode)) {
+            this.getChildren().add(node);
+        }
         drawnNodes.add(node);
         selectedNodes.add(node);
         node.colorSelected();
         workplace.setSelectedSymbol(node);
+    }
+
+    public void addGenNodeToCanvas(ModelNode node, int pos) {
+        workplace.getGeneralisedList().add(node);
+        this.getChildren().add(pos, node);
+        workplace.getSelectedPaintWindow().addNodeToCanvas(node);
+    }
+
+    public void removeGenNodeFromCanvas(ModelNode node) {
+        String nodeId = node.getId();
+        ArrayList<Connection> nCToRemove = new ArrayList<>();
+        for (Connection nC : workplace.getGeneraliseConnections()) {
+            String nodeCId1 = nC.getNode1().getId();
+            String nodeCId2 = nC.getNode2().getId();
+            if (nodeCId1.equals(nodeId) || nodeCId2.equals(nodeId)) nCToRemove.add(nC);
+        }
+        workplace.getGeneraliseConnections().removeAll(nCToRemove);
+        workplace.getChildren().removeAll(nCToRemove);
+        this.getChildren().remove(node);
+        drawnNodes.remove(node);
     }
 
     public void removeNode(ModelNode node) {
@@ -104,19 +127,30 @@ public class PaintWindow extends AnchorPane {
         this.getChildren().removeAll(nCToRemove);
         this.getChildren().remove(node);
         drawnNodes.remove(node);
+
+        for (Connection nC : workplace.getGeneraliseConnections()) {
+            String nodeCId1 = nC.getNode1().getId();
+            String nodeCId2 = nC.getNode2().getId();
+            if (nodeCId1.equals(nodeId) || nodeCId2.equals(nodeId)) nCToRemove.add(nC);
+        }
+        workplace.getGeneraliseConnections().removeAll(nCToRemove);
+        workplace.getChildren().removeAll(nCToRemove);
     }
 
     public void addConnection(Connection connection) {
         if(isConnected(connection)) return;
         if (connection instanceof GeneraliseConnection) {
-            // workplace.getGeneralisedList().add(connection);
+            workplace.getGeneraliseConnections().add((GeneraliseConnection) connection);
             this.workplace.getChildren().add(connection);
-            System.out.println("in");
             return;
         }
         if (!isNodeSameWindow(connection)) return;
         connections.add(connection);
-        this.getChildren().add(0, connection);
+        int count = 0;
+        for (ModelNode modelNode : this.drawnNodes) {
+            if (modelNode instanceof GeneralisedNode) count++;
+        }
+        this.getChildren().add(count, connection);
     }
 
     public void removeConnection(Connection connection) {

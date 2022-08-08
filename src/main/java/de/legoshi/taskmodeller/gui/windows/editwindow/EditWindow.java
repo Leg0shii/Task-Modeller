@@ -31,6 +31,7 @@ public abstract class EditWindow<T> extends Stage {
 
         this.deleteBtn = new Button("Löschen");
         this.gridPane.add(deleteBtn, 1, 10);
+        deleteBtn.setOnMouseClicked(mouseEvent -> onDelete());
 
         Scene dialogScene = new Scene(this.gridPane, 400, 200);
         this.setScene(dialogScene);

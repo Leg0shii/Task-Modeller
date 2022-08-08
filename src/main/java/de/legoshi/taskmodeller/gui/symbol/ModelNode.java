@@ -101,6 +101,13 @@ public class ModelNode extends Drawable {
             for (ModelNode dS : paintWindow.getDrawnNodes()) {
                 if (dS.isAttemptsConnect()) {
                     if (dS.equals(this)) return;
+                    if (this instanceof GeneralisedNode) {
+                        GeneraliseConnection modelConnectionNode = GeneraliseConnection.generateShape(workplace, dS, this);
+                        paintWindow.addConnection(modelConnectionNode);
+                        dS.setAttemptsConnect(false);
+                        return;
+                    }
+                    if (dS instanceof GeneralisedNode) break;
                     NormalConnection modelConnectionNode = NormalConnection.generateShape(workplace, dS, this);
                     paintWindow.addConnection(modelConnectionNode);
                     dS.setAttemptsConnect(false);

@@ -14,7 +14,7 @@ public class GeneralisedNode extends ModelNode {
 
     public static Drawable generateShape() {
         Rectangle rectangle = new Rectangle(50, 50);
-        rectangle.setFill(Color.TRANSPARENT);
+        rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
         rectangle.setStrokeWidth(3);
         return new GeneralisedNode(rectangle);

@@ -2,9 +2,11 @@ package de.legoshi.taskmodeller.gui.windows;
 
 import de.legoshi.taskmodeller.util.ModelType;
 import de.legoshi.taskmodeller.util.StatusType;
+import javafx.event.EventType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import lombok.Getter;
@@ -39,6 +41,10 @@ public class ProjectWindow extends GridPane {
         compositeWindows = new ArrayList<>();
         envisionedWindows = new ArrayList<>();
 
+        this.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            System.out.println("X: " + mouseEvent.getX());
+            System.out.println("Y: " + mouseEvent.getY());
+        });
     }
 
     public ArrayList<PaintWindow> getAllWindows() {

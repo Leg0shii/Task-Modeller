@@ -98,9 +98,13 @@ public class ItemBarManager {
         for (Drawable drawable : this.miscItemBar.itemBar) {
             drawable.setOnMouseClicked(event -> {
                 Drawable modelNode = NodesHelper.getDuplicate(workplace, drawable);
-                if (modelNode instanceof GeneralisedNode) workplace.getGeneralisedList().add((ModelNode) modelNode);
-                else if (modelNode instanceof TextSymbol) workplace.getCommentList().add((WorkplaceNode) modelNode);
-                workplace.getChildren().add(modelNode);
+                if (modelNode instanceof GeneralisedNode) {
+                    workplace.getSelectedPaintWindow().addGenNodeToCanvas((ModelNode) modelNode, 0);
+                }
+                else if (modelNode instanceof TextSymbol) {
+                    workplace.getCommentList().add((WorkplaceNode) modelNode);
+                    workplace.getChildren().add(modelNode);
+                }
             });
         }
     }
