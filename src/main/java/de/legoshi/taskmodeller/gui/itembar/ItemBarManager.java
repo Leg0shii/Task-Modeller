@@ -99,7 +99,7 @@ public class ItemBarManager {
             drawable.setOnMouseClicked(event -> {
                 Drawable modelNode = NodesHelper.getDuplicate(workplace, drawable);
                 if (modelNode instanceof GroupingNode) {
-                    workplace.getSelectedPaintWindow().addGenNodeToCanvas((ModelNode) modelNode, 0);
+                    workplace.getSelectedPaintWindow().addGenNodeToCanvas((ModelNode) modelNode);
                 }
                 else if (modelNode instanceof TextSymbol) {
                     workplace.getCommentList().add((WorkplaceNode) modelNode);

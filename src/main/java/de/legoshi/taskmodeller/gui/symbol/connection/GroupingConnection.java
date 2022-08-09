@@ -25,13 +25,6 @@ public class GroupingConnection extends Connection {
         this.node1Bounds = node1.getBoundsInParent();
         this.node2Bounds = node2.getBoundsInParent();
 
-        // to switch nodes
-        if (!(node1 instanceof GroupingNode)) {
-            ModelNode temp = node1;
-            node1 = node2;
-            node2 = temp;
-        }
-
         this.setOnMousePressed(mouseEvent -> {
             if (mouseEvent.isSecondaryButtonDown()) {
                 // add edit window
@@ -47,29 +40,33 @@ public class GroupingConnection extends Connection {
         this.node1Bounds = node1.getBoundsInParent();
         this.node2Bounds = node2.getBoundsInParent();
 
-        PaintWindow genPW = node1.getPaintWindowOfNode(getWorkplace());
         PaintWindow currentPW = node2.getPaintWindowOfNode(getWorkplace());
 
         // stops updating when connection is deleted... (bad)
-        if (genPW == null || currentPW == null) return;
+        double xCurrentPWOffset;
+        double yCurrentPWOffset;
 
-        double xCurrentPWOffset = currentPW.getXPosition() * ProjectWindow.SIZE - 1.5 * currentPW.getXPosition() * ProjectWindow.HGAP;
-        double yCurrentPWOffset = currentPW.getYPosition() * ProjectWindow.SIZE - 1.5 * currentPW.getYPosition() * ProjectWindow.VGAP;
-        double xGenPWOffset = genPW.getXPosition() * ProjectWindow.SIZE - 1.5 * genPW.getXPosition() * ProjectWindow.HGAP;
-        double yGenPWOffset = genPW.getYPosition() * ProjectWindow.SIZE - 1.5 * genPW.getYPosition() * ProjectWindow.VGAP;
+        if (!(node2 instanceof GroupingNode)) {
+            if (currentPW == null) return;
+            xCurrentPWOffset = currentPW.getXPosition() * ProjectWindow.SIZE - 1.5 * currentPW.getXPosition() * ProjectWindow.HGAP;
+            yCurrentPWOffset = currentPW.getYPosition() * ProjectWindow.SIZE - 1.5 * currentPW.getYPosition() * ProjectWindow.VGAP;
+        } else {
+            xCurrentPWOffset = 0;
+            yCurrentPWOffset = 0;
+        }
 
-        Point2D centerNode1 = new Point2D(node1Bounds.getCenterX() + xGenPWOffset, node1Bounds.getCenterY() + yGenPWOffset);
+        Point2D centerNode1 = new Point2D(node1Bounds.getCenterX(), node1Bounds.getCenterY());
         Point2D centerNode2 = new Point2D(node2Bounds.getCenterX() + xCurrentPWOffset, node2Bounds.getCenterY() + yCurrentPWOffset);
         CalculationLine connection = new CalculationLine(centerNode1.getX(), centerNode1.getY(), centerNode2.getX(), centerNode2.getY());
 
-        Point2D node1Point = getIntersectionPoint(node1Bounds, centerNode2, connection, xGenPWOffset, yGenPWOffset);
+        Point2D node1Point = getIntersectionPoint(node1Bounds, centerNode2, connection,0, 0);
         Point2D node2Point = getIntersectionPoint(node2Bounds, centerNode1, connection, xCurrentPWOffset, yCurrentPWOffset);
 
         if (node1Point != null) {
             double node1XScaleShift = (node1.getWidth() / 2 * (node1.getScaleX() - 1));
             double node1YScaleShift = (node1.getHeight() / 2 * (node1.getScaleY() - 1));
-            this.xStartProperty = node1.translateXProperty().add(Math.abs(node1Bounds.getMinX() + xGenPWOffset - node1Point.getX()) + xGenPWOffset - node1XScaleShift);
-            this.yStartProperty = node1.translateYProperty().add(Math.abs(node1Bounds.getMinY() + yGenPWOffset - node1Point.getY()) + yGenPWOffset - node1YScaleShift);
+            this.xStartProperty = node1.translateXProperty().add(Math.abs(node1Bounds.getMinX() - node1Point.getX()) - node1XScaleShift);
+            this.yStartProperty = node1.translateYProperty().add(Math.abs(node1Bounds.getMinY() - node1Point.getY()) - node1YScaleShift);
         }
         if (node2Point != null) {
             double node2XScaleShift = (node2.getWidth() / 2 * (node2.getScaleX() - 1));

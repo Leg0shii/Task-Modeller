@@ -14,7 +14,7 @@ public class GroupingNode extends ModelNode {
 
     public static Drawable generateShape() {
         Rectangle rectangle = new Rectangle(50, 50);
-        rectangle.setFill(Color.WHITE);
+        rectangle.setFill(Color.TRANSPARENT);
         rectangle.setStroke(Color.BLACK);
         rectangle.setStrokeWidth(3);
         return new GroupingNode(rectangle);

@@ -1,7 +1,6 @@
 package de.legoshi.taskmodeller.gui.symbol;
 
 import de.legoshi.taskmodeller.gui.windows.Workplace;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Shape;
@@ -32,10 +31,8 @@ public abstract class Drawable extends StackPane {
 
     public void registerEvents(Workplace workplace) {
         if (representative) return;
-        for (Node n : this.getChildren()) {
-            n.setOnMousePressed(event -> onMouseClick(workplace, event));
-            n.setOnMouseDragged(event -> onMouseDrag(workplace, event));
-        }
+        this.setOnMousePressed(event -> onMouseClick(workplace, event));
+        this.setOnMouseDragged(event -> onMouseDrag(workplace, event));
     }
 
 }

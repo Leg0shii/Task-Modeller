@@ -8,20 +8,20 @@ import javafx.scene.control.Slider;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 
-public class GeneralisedEditWindow extends EditWindow<ModelNode> {
+public class GroupingEditWindow extends EditWindow<ModelNode> {
 
     private final Workplace workplace;
 
-    public GeneralisedEditWindow(Workplace workplace, ModelNode item) {
+    public GroupingEditWindow(Workplace workplace, ModelNode item) {
         super(item, "Edit generalize");
         this.workplace = workplace;
 
-        Slider sliderX = new Slider(0.4, 5, item.getScaleX());
+        Slider sliderX = new Slider(0.4, 15, item.getScaleX());
         this.gridPane.add(new Text("Scale-X:"), 0, 0);
         this.gridPane.add(sliderX, 1, 0);
         sliderX.valueProperty().addListener((observableValue, number, t1) -> onScaleX(item, number.doubleValue(), t1.doubleValue()));
 
-        Slider sliderY = new Slider(0.4, 5, item.getScaleY());
+        Slider sliderY = new Slider(0.4, 15, item.getScaleY());
         this.gridPane.add(new Text("Scale-Y:"), 0, 1);
         this.gridPane.add(sliderY, 1, 1);
         sliderY.valueProperty().addListener((observableValue, number, t1) -> onScaleY(item, number.doubleValue(), t1.doubleValue()));

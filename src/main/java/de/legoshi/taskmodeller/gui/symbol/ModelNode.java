@@ -1,13 +1,18 @@
 package de.legoshi.taskmodeller.gui.symbol;
 
+import de.legoshi.taskmodeller.MainController;
+import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
 import de.legoshi.taskmodeller.gui.symbol.connection.GroupingConnection;
 import de.legoshi.taskmodeller.gui.symbol.connection.NormalConnection;
 import de.legoshi.taskmodeller.gui.symbol.item.misc.GroupingNode;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
+import de.legoshi.taskmodeller.gui.windows.ProjectWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
-import de.legoshi.taskmodeller.gui.windows.editwindow.GeneralisedEditWindow;
+import de.legoshi.taskmodeller.gui.windows.editwindow.GroupingEditWindow;
 import de.legoshi.taskmodeller.gui.windows.editwindow.ItemEditWindow;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -50,6 +55,8 @@ public class ModelNode extends Drawable {
             return;
         }
 
+        if (calcUnderlyingElement(workplace, event, false)) return;
+
         double scaleX = workplace.getScaleX();
         double polyTranslateX = this.getTranslateX();
         double objectScaleFactorWidth = this.getScaleX() * this.getLayoutBounds().getWidth() - this.getLayoutBounds().getWidth();
@@ -84,6 +91,8 @@ public class ModelNode extends Drawable {
     @Override
     public void onMouseClick(Workplace workplace, MouseEvent event) {
         PaintWindow paintWindow = workplace.getSelectedPaintWindow();
+
+        if (calcUnderlyingElement(workplace, event, true)) return;
 
         // to prevent manipulation in item bar area
         if (this.getParent() != null) performSingleSelection(paintWindow);
@@ -127,7 +136,7 @@ public class ModelNode extends Drawable {
         if (event.isSecondaryButtonDown()) {
             // shouldn't be in here because only effects generalised Nodes
             if (this instanceof GroupingNode) {
-                new GeneralisedEditWindow(workplace, this).show();
+                new GroupingEditWindow(workplace, this).show();
                 return;
             }
             new ItemEditWindow(workplace, this).show();
@@ -161,6 +170,44 @@ public class ModelNode extends Drawable {
             if (paintWindow.getChildren().contains(this)) return paintWindow;
         }
         return null;
+    }
+
+    private boolean calcUnderlyingElement(Workplace workplace, MouseEvent event, boolean type) {
+        Point2D mouseClick = new Point2D(event.getSceneX(), event.getSceneY() - 25);
+        if (this instanceof GroupingNode) {
+            for (PaintWindow pW : workplace.getAllWindows()) {
+                double xCurrentPWOffset = pW.getXPosition() * ProjectWindow.SIZE - 1.5 * pW.getXPosition() * ProjectWindow.HGAP;
+                double yCurrentPWOffset = pW.getYPosition() * ProjectWindow.SIZE - 1.5 * pW.getYPosition() * ProjectWindow.VGAP;
+                for (ModelNode modelNode : pW.getDrawnNodes()) {
+                    Bounds bounds = modelNode.getBoundsInParent();
+                    double nX = bounds.getMinX() + xCurrentPWOffset;
+                    double nXFar = bounds.getMaxX() + xCurrentPWOffset;
+                    double nY = bounds.getMinY() + yCurrentPWOffset;
+                    double nYFar = bounds.getMaxY() + yCurrentPWOffset;
+                    if (mouseClick.getX() >= nX && mouseClick.getX() <= nXFar && mouseClick.getY() >= nY && mouseClick.getY() <= nYFar) {
+                        if (modelNode == this) continue;
+                        if (type) modelNode.onMouseClick(workplace, event);
+                        else {
+                            if (!pW.getSelectedNodes().contains(modelNode)) continue;
+                            modelNode.onMouseDrag(workplace, event);
+                        }
+                        return true;
+                    }
+                }
+                for (Connection connection : pW.getConnections()) {
+                    Bounds bounds = connection.getBoundsInParent();
+                    double nX = bounds.getMinX() + xCurrentPWOffset;
+                    double nXFar = bounds.getMaxX() + xCurrentPWOffset;
+                    double nY = bounds.getMinY() + yCurrentPWOffset;
+                    double nYFar = bounds.getMaxY() + yCurrentPWOffset;
+                    if (mouseClick.getX() >= nX && mouseClick.getX() <= nXFar && mouseClick.getY() >= nY && mouseClick.getY() <= nYFar) {
+                        connection.onMousePressed(event);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 }

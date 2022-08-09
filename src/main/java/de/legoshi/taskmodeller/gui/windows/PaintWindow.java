@@ -95,9 +95,9 @@ public class PaintWindow extends AnchorPane {
         workplace.setSelectedSymbol(node);
     }
 
-    public void addGenNodeToCanvas(ModelNode node, int pos) {
+    public void addGenNodeToCanvas(ModelNode node) {
         workplace.getGeneralisedList().add(node);
-        this.getChildren().add(pos, node);
+        workplace.getChildren().add(node);
         workplace.getSelectedPaintWindow().addNodeToCanvas(node);
     }
 
@@ -111,7 +111,7 @@ public class PaintWindow extends AnchorPane {
         }
         workplace.getGroupingConnections().removeAll(nCToRemove);
         workplace.getChildren().removeAll(nCToRemove);
-        this.getChildren().remove(node);
+        workplace.getChildren().remove(node);
         drawnNodes.remove(node);
     }
 

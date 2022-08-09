@@ -1,9 +1,11 @@
 package de.legoshi.taskmodeller.gui.symbol.connection;
 
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
+import de.legoshi.taskmodeller.gui.symbol.item.misc.GroupingNode;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import de.legoshi.taskmodeller.gui.windows.editwindow.LineEditWindow;
 import javafx.beans.binding.DoubleBinding;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
 import lombok.Getter;
 
@@ -13,13 +15,13 @@ public class Connection extends Line {
     // HIGHLIGHT when connection is ready
     private final Workplace workplace;
 
-    final ModelNode node1;
-    final ModelNode node2;
+    public ModelNode node1;
+    public ModelNode node2;
 
-    DoubleBinding xStartProperty;
-    DoubleBinding yStartProperty;
-    DoubleBinding xEndProperty;
-    DoubleBinding yEndProperty;
+    public DoubleBinding xStartProperty;
+    public DoubleBinding yStartProperty;
+    public DoubleBinding xEndProperty;
+    public DoubleBinding yEndProperty;
 
     public Connection(Workplace workplace, ModelNode node1, ModelNode node2) {
         this.setStrokeWidth(3);
@@ -29,13 +31,19 @@ public class Connection extends Line {
         this.node1 = node1;
         this.node2 = node2;
 
-        recalculateBindings();
+        if (!(node1 instanceof GroupingNode)) {
+            this.node1 = node2;
+            this.node2 = node1;
+        }
 
-        this.setOnMousePressed(mouseEvent -> {
-            if (mouseEvent.isSecondaryButtonDown()) {
-                new LineEditWindow(workplace, this).show();
-            }
-        });
+        recalculateBindings();
+        this.setOnMousePressed(this::onMousePressed);
+    }
+
+    public void onMousePressed(MouseEvent mouseEvent) {
+        if (mouseEvent.isSecondaryButtonDown()) {
+            new LineEditWindow(workplace, this).show();
+        }
     }
 
     public void recalculateBindings() {
