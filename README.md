@@ -15,12 +15,14 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] add annotation/text over the canvas
 - [x] allow connections be made between two drawing areas
 - [x] grouping local models as described in paper
-- [ ] making grouping borderless
+- [x] making grouping borderless
+- [ ] add labels and types to connections (make list about what to add first)
 - [ ] add a todo/guidelines you can tick (toggle in menu)
 - [ ] other color for displaying state
+
 - [ ] other sizes for modelling
 - [ ] right click model to open editor window
-- [ ] save and load data and ctte trees (into squares)
+- [ ] save and load data
 
 #### Enhancements
 - [x] drawing area positioning in the middle
@@ -29,8 +31,9 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] fix screen resize
 - [ ] centering the screens
 - [ ] center on one model
-- [ ] indicate connection process
 - [ ] add padding around the models
+
+- [ ] indicate connection process
 
 - [ ] change position of multiple elements at once when selected
 - [ ] refactor
@@ -40,6 +43,7 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] remove selection when adding new item to field
 - [x] uncolor nodes after switching window
 - [x] select window when item is selected
+
 - [ ] init project only when init steps are done
 - [ ] don't switch toolbar when on misc/conn and selecting window
 - [ ] check entered values on creation
