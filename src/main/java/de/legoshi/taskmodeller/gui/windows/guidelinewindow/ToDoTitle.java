@@ -3,6 +3,8 @@ package de.legoshi.taskmodeller.gui.windows.guidelinewindow;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class ToDoTitle extends Label {
@@ -16,7 +18,7 @@ public class ToDoTitle extends Label {
         this.setText(title);
         this.setHeight(50);
         this.setMaxWidth(Double.MAX_VALUE);
-        this.setStyle("-fx-border-color: black;");
+        this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1, 0, 0, 0))));
         this.setPadding(new Insets(10, 10, 10, 10));
     }
 

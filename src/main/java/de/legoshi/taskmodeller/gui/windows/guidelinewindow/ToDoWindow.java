@@ -14,6 +14,12 @@ public class ToDoWindow extends VBox {
 
     public ToDoWindow(String title) {
         this.toDoTitle = new ToDoTitle(title);
+        this.toDoTitle.setOnMouseEntered((event) -> {
+            toDoTitle.setStyle("-fx-background-color: rgb(243, 243, 231);");
+        });
+        this.toDoTitle.setOnMouseExited((event) -> {
+            toDoTitle.setStyle("-fx-background-color: rgb(245, 235, 224);");
+        });
         this.toDoElements = new ArrayList<>();
         VBox.setVgrow(this, Priority.ALWAYS);
         this.getChildren().add(this.toDoTitle);

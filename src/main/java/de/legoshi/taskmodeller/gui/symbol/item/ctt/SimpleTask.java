@@ -9,11 +9,13 @@ public class SimpleTask extends ModelNode {
 
     public SimpleTask(Shape shape) {
         super(shape);
+
+        this.getLabel().setText("Task");
     }
 
     public static SimpleTask generateShape() {
         Rectangle rectangle = new Rectangle(50, 50);
-        rectangle.setFill(Color.WHITE);
+        rectangle.setFill(Color.LIGHTGRAY);
         rectangle.setStroke(Color.BLACK);
         rectangle.setStrokeWidth(3);
         return new SimpleTask(rectangle);

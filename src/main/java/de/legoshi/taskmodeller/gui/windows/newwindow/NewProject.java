@@ -3,7 +3,11 @@ package de.legoshi.taskmodeller.gui.windows.newwindow;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class NewProject extends Stage {
@@ -16,13 +20,9 @@ public class NewProject extends Stage {
         gridPane.setHgap(20);
         gridPane.setVgap(20);
 
-        Button cancelBtn = new Button("Cancel");
-        cancelBtn.setOnMouseClicked(mouseEvent -> this.close());
-
-        gridPane.add(cancelBtn, 0, 3, 2, 1);
-
-        gridPane.autosize();
-        Scene scene = new Scene(gridPane, 400, 200);
+        Scene scene = new Scene(gridPane);
+        scene.getStylesheets().add("styles.css");
+        this.gridPane.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255), CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
         this.setScene(scene);
     }
 

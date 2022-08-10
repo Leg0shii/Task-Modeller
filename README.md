@@ -18,7 +18,7 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] making grouping borderless
 - [x] add labels and types to connections (make list about what to add first)
 - [x] add a todo/guidelines you can tick (toggle in menu)
-- [ ] other color for displaying state
+- [x] other color for displaying state
 
 - [ ] other sizes for modelling
 - [ ] right click model to open editor window
@@ -29,10 +29,10 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] fix resizing of zoom
 - [x] zoom in/out with hotkeys
 - [x] fix screen resize
+- [x] add padding around the models
 - [ ] centering the screens
-- [ ] center on one model
-- [ ] add padding around the models
 
+- [ ] center on one model
 - [ ] indicate connection process
 
 - [ ] change position of multiple elements at once when selected

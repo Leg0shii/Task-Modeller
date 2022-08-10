@@ -1,6 +1,8 @@
 package de.legoshi.taskmodeller.gui.windows.editwindow;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -26,14 +28,19 @@ public abstract class EditWindow<T> extends Stage {
         this.gridPane.setVgap(5);
 
         Button closeBtn = new Button("Done");
-        this.gridPane.add(closeBtn, 0, 10);
+        this.gridPane.add(closeBtn, 1, 10);
+        GridPane.setHalignment(closeBtn, HPos.RIGHT);
+        GridPane.setValignment(closeBtn, VPos.CENTER);
         closeBtn.setOnMouseClicked(mouseEvent -> this.close());
 
         this.deleteBtn = new Button("Delete");
-        this.gridPane.add(deleteBtn, 1, 10);
+        this.gridPane.add(deleteBtn, 0, 10);
+        GridPane.setHalignment(deleteBtn, HPos.LEFT);
+        GridPane.setValignment(deleteBtn, VPos.CENTER);
         deleteBtn.setOnMouseClicked(mouseEvent -> onDelete());
 
-        Scene dialogScene = new Scene(this.gridPane, 400, 200);
+        Scene dialogScene = new Scene(this.gridPane);
+        dialogScene.getStylesheets().add("styles.css");
         this.setScene(dialogScene);
     }
 

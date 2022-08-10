@@ -15,7 +15,7 @@ public class TextSymbol extends WorkplaceNode {
 
     public static Drawable generateShape() {
         Rectangle rectangle = new Rectangle(50, 50);
-        rectangle.setFill(Color.ORANGE);
+        rectangle.setFill(Color.ORANGE.brighter().brighter());
         rectangle.setStroke(Color.BLACK);
         rectangle.setStrokeWidth(3);
         return new TextSymbol(rectangle);

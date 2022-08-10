@@ -1,13 +1,17 @@
 package de.legoshi.taskmodeller.gui.windows.newwindow;
 
 import de.legoshi.taskmodeller.gui.windows.ProjectWindow;
+import javafx.geometry.HPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 public class NewProjectCountWindow extends NewProject {
 
     public NewProjectCountWindow(ProjectWindow project) {
+        this.setTitle("Set Paintwindow Count");
+
         Label existingL = new Label("Existing Model Count:");
         TextField existingTF = new TextField("1");
         this.gridPane.add(existingL, 0, 0);
@@ -24,6 +28,7 @@ public class NewProjectCountWindow extends NewProject {
         this.gridPane.add(envisionedTF, 1, 2);
 
         Button continueBtn = new Button("Continue");
+        GridPane.setHalignment(continueBtn, HPos.RIGHT);
         continueBtn.setOnMouseClicked(mouseEvent -> {
             try {
                 project.setExistentCount(Integer.parseInt(existingTF.getText()));
@@ -37,8 +42,11 @@ public class NewProjectCountWindow extends NewProject {
                 this.close();
             }
         });
-
         this.gridPane.add(continueBtn, 1, 3, 2, 1);
+
+        Button cancelBtn = new Button("Cancel");
+        cancelBtn.setOnMouseClicked(mouseEvent -> this.close());
+        gridPane.add(cancelBtn, 0, 3, 2, 1);
     }
 
 }

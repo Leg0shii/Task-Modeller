@@ -3,10 +3,12 @@ package de.legoshi.taskmodeller.gui.windows.newwindow;
 import de.legoshi.taskmodeller.gui.windows.ProjectWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.HPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 public class NewProjectSettingsWindow extends NewProject {
 
     public NewProjectSettingsWindow(ProjectWindow project) {
+        this.setTitle("Paintwindow Settings");
+
         Label existingModelL = new Label("Existing Model");
         Label compositeModelL = new Label("Composite Model");
         Label envisionedModelL = new Label("Envisioned Model");
@@ -39,13 +43,17 @@ public class NewProjectSettingsWindow extends NewProject {
         this.gridPane.add(evModel, 2, 0);
 
         Button continueBtn = new Button("Continue");
+        GridPane.setHalignment(continueBtn, HPos.RIGHT);
         continueBtn.setOnMouseClicked(mouseEvent -> {
             NewProjectSaveWindow newProjectSaveWindow = new NewProjectSaveWindow(project, exHBoxes, coHBoxes, evHBoxes);
             newProjectSaveWindow.show();
             this.close();
         });
+        this.gridPane.add(continueBtn, 2, 1);
 
-        this.gridPane.add(continueBtn, 1, 3);
+        Button cancelBtn = new Button("Cancel");
+        cancelBtn.setOnMouseClicked(mouseEvent -> this.close());
+        gridPane.add(cancelBtn, 0, 1, 2, 1);
     }
 
     private ArrayList<HBox> generateDisplayThing(int count) {

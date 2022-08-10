@@ -48,8 +48,8 @@ public class GroupingConnection extends Connection {
 
         if (!(node2 instanceof GroupingNode)) {
             if (currentPW == null) return;
-            xCurrentPWOffset = currentPW.getXPosition() * ProjectWindow.SIZE - 1.5 * currentPW.getXPosition() * ProjectWindow.HGAP;
-            yCurrentPWOffset = currentPW.getYPosition() * ProjectWindow.SIZE - 1.5 * currentPW.getYPosition() * ProjectWindow.VGAP;
+            xCurrentPWOffset = currentPW.getXPosition() * ProjectWindow.SIZE - 1.5 * currentPW.getXPosition() * ProjectWindow.HGAP + 100;
+            yCurrentPWOffset = currentPW.getYPosition() * ProjectWindow.SIZE - 1.5 * currentPW.getYPosition() * ProjectWindow.VGAP + 100;
         } else {
             xCurrentPWOffset = 0;
             yCurrentPWOffset = 0;

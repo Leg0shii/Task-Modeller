@@ -1,6 +1,8 @@
 package de.legoshi.taskmodeller.gui.windows.guidelinewindow;
 
-import javafx.scene.layout.VBox;
+import javafx.geometry.Insets;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +17,9 @@ public class ToDoManager {
     private ToDoWindow activeWindow;
     private final VBox todoBar;
 
+    private Color color3 = Color.rgb(245, 235, 224);
+    private Color color4 = Color.rgb(227, 213, 202);
+
     public ToDoManager(VBox todoBar) {
         this.toDoWindows = new HashMap<>();
         registerToDoWindow();
@@ -24,6 +29,7 @@ public class ToDoManager {
         this.activeWindow = firstValue.getValue();
         this.todoBar = todoBar;
         todoBar.getChildren().add(this.getActiveWindow().getToDoTitle());
+        this.getActiveWindow().getToDoTitle().setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1, 0, 2, 0))));
         todoBar.getChildren().add(this.getActiveWindow());
 
         for (ToDoTitle title : toDoWindows.keySet()) {
@@ -52,11 +58,13 @@ public class ToDoManager {
 
                 this.activeWindow = toDoWindow;
 
-                todoBar.getChildren().add(this.getActiveWindow().getToDoTitle());
-                todoBar.getChildren().add(this.getActiveWindow());
+                todoBar.getChildren().add(this.activeWindow.getToDoTitle());
+                this.activeWindow.getToDoTitle().setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1, 0, 2, 0))));
+                todoBar.getChildren().add(this.activeWindow);
 
                 for (ToDoTitle title : toDoWindows.keySet()) {
-                    if (this.getActiveWindow().getToDoTitle() == title) continue;
+                    if (this.activeWindow.getToDoTitle() == title) continue;
+                    title.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1, 0, 0, 0))));
                     todoBar.getChildren().add(todoBar.getChildren().size(), title);
                 }
             });
@@ -65,6 +73,7 @@ public class ToDoManager {
 
     private ToDoWindow generateStandardToDo() {
         ToDoWindow toDoWindow = new ToDoWindow("Standard Guide");
+        toDoWindow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
         toDoWindow.addToDoElement("Task 1");
         toDoWindow.addToDoElement("Task 2");
         toDoWindow.addToDoElement("Task 3");
@@ -73,6 +82,7 @@ public class ToDoManager {
 
     private ToDoWindow generateCTTToDo() {
         ToDoWindow toDoWindow = new ToDoWindow("CTT Guide");
+        toDoWindow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
         toDoWindow.addToDoElement("CTT-Task 1");
         toDoWindow.addToDoElement("CTT-Task 2");
         toDoWindow.addToDoElement("CTT-Task 3");
@@ -81,6 +91,7 @@ public class ToDoManager {
 
     private ToDoWindow generateMISCoDo() {
         ToDoWindow toDoWindow = new ToDoWindow("MISC Guide");
+        toDoWindow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
         toDoWindow.addToDoElement("MISC-Task 1");
         toDoWindow.addToDoElement("MISC-Task 2");
         toDoWindow.addToDoElement("MISC-Task 3");

@@ -14,19 +14,21 @@ import de.legoshi.taskmodeller.util.ModelType;
 import de.legoshi.taskmodeller.util.NodesHelper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.stage.StageStyle;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 @Getter
@@ -40,8 +42,13 @@ public class MainController implements Initializable {
     public ScrollPane contentPane;
 
     public VBox todoBar;
+    public HBox toolBarHolder;
+    public VBox itemBarSelector;
+    public HBox middleHolder;
+    public AnchorPane scrollPaneContent;
     private Workplace workplace;
     public HBox toolBar;
+    private Group wGroup;
 
     private ToDoManager toDoManager;
 
@@ -54,7 +61,8 @@ public class MainController implements Initializable {
 
         this.workplace = new Workplace(this.toolBar);
         this.toDoManager = new ToDoManager(todoBar);
-        this.contentPane.setContent(new Group(workplace));
+        this.wGroup = new Group(workplace);
+        this.contentPane.setContent(wGroup);
 
         contentPane.addEventFilter(ScrollEvent.ANY, (scrollEvent -> {
             if (!scrollEvent.isShiftDown()) return;
@@ -74,6 +82,8 @@ public class MainController implements Initializable {
                 if (keyEvent.getCode().equals(KeyCode.V)) onPasteNodes();
             }
         }));
+
+        colorNodes();
     }
 
     public void zoomIn() {
@@ -148,6 +158,33 @@ public class MainController implements Initializable {
             mNC.setStrokeWidth(currMCN.getStrokeWidth());
             paintWindow.addConnection(mNC);
         }
+    }
+
+    private void colorNodes() {
+        Color color1 = Color.rgb(237, 237, 233);
+        Color color2 = Color.rgb(214, 204, 194);
+        Color color3 = Color.rgb(245, 235, 224);
+        Color color4 = Color.rgb(227, 213, 202);
+        Color color5 = Color.rgb(213, 189, 175);
+
+        this.menuBar.setBackground(new Background(new BackgroundFill(color5, CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
+        this.menuBar.getMenus().get(1).setStyle("-");
+
+        this.toolBar.setBackground(new Background(new BackgroundFill(color5, CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
+        this.toolBarHolder.setBackground(new Background(new BackgroundFill(color5, CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
+
+        this.itemBarSelector.setBackground(new Background(new BackgroundFill(color5, CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
+        this.itemBarSelector.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0, 0, 0, 1))));
+
+        this.middleHolder.setBackground(new Background(new BackgroundFill(color3, CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
+        this.contentPane.setStyle("-fx-focus-color: transparent;");
+        this.contentPane.setStyle("-fx-border-color: black;");
+
+        this.toolBarHolder.setStyle("-fx-border-width: 1px");
+        this.toolBarHolder.setStyle("-fx-border-color: black");
+
+        this.todoBar.setStyle("-fx-border-width: 1px");
+        this.todoBar.setStyle("-fx-border-color: black");
     }
 
 }

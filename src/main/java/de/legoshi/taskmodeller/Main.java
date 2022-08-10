@@ -15,7 +15,9 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/de/legoshi/taskmodeller/main-view.fxml"));
         Parent page = fxmlLoader.load();
         Scene pageScene = new Scene(page);
+        stage.setTitle("Task Modeller");
         pageScene.getStylesheets().add("styles.css");
+        // stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(pageScene);
         stage.show();
     }

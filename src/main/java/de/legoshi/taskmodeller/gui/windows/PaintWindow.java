@@ -8,7 +8,8 @@ import de.legoshi.taskmodeller.gui.symbol.item.misc.GroupingNode;
 import de.legoshi.taskmodeller.util.ModelType;
 import de.legoshi.taskmodeller.util.StatusType;
 import javafx.geometry.Point2D;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,7 +53,8 @@ public class PaintWindow extends AnchorPane {
         this.setPrefHeight(500);
         this.maxWidth(500);
         this.maxHeight(500);
-        this.getStyleClass().add("draw-pane-bg");
+        // this.getStyleClass().add("draw-pane-bg");
+        this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1, 1, 1, 1))));
 
         drawnNodes = new ArrayList<>();
         selectedNodes = new ArrayList<>();

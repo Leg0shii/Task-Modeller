@@ -24,24 +24,27 @@
                <MenuItem mnemonicParsing="false" text="Help" />
            </Menu>
        </MenuBar>
-      <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <HBox fx:id="middleHolder" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
             <VBox fx:id="todoBar" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" />
             <ScrollPane fx:id="contentPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
               <content>
-                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                <AnchorPane fx:id="scrollPaneContent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
               </content>
             </ScrollPane>
          </children>
       </HBox>
-       <HBox prefHeight="100.0" prefWidth="880.0" styleClass="tool-bar">
+       <HBox fx:id="toolBarHolder" prefHeight="100.0" prefWidth="880.0">
          <children>
-            <HBox fx:id="toolBar" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+            <HBox fx:id="toolBar" prefHeight="100.0" prefWidth="200.0" spacing="25.0" HBox.hgrow="ALWAYS">
                <padding>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </HBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+            <VBox fx:id="itemBarSelector" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
                <children>
                   <RadioButton fx:id="standardRBTN" mnemonicParsing="false" onAction="#onRadioButtonChange" text="Standard">
                      <toggleGroup>

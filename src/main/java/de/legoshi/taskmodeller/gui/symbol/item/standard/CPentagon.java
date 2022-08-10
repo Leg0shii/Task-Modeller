@@ -7,23 +7,24 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 
-public class CTriangle extends ModelNode {
-
-    public CTriangle(Shape shape) {
+public class CPentagon extends ModelNode {
+    public CPentagon(Shape shape) {
         super(shape);
 
         this.getLabel().setText("Task");
     }
 
-    public static CTriangle generateShape() {
-        Point2D p1 = new Point2D(0,0);
-        Point2D p2 = new Point2D(25,50);
-        Point2D p3 = new Point2D(50,0);
-        Polygon polygon = PolygonHelper.createPolygon(p1, p2, p3);
+    public static CPentagon generateShape() {
+        Point2D p1 = new Point2D(26.23576,50);
+        Point2D p2 = new Point2D(52.47152,30.906);
+        Point2D p3 = new Point2D(52.47152,0);
+        Point2D p4 = new Point2D(2.60984,0);
+        Point2D p5 = new Point2D(0,30.906); // 28.09
+        Polygon polygon = PolygonHelper.createPolygon(p1, p2, p3, p4, p5);
         polygon.setFill(Color.WHITE);
         polygon.setStroke(Color.BLACK);
         polygon.setStrokeWidth(3);
-        return new CTriangle(polygon);
+        return new CPentagon(polygon);
     }
 
 }

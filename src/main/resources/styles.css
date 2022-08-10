@@ -1,24 +1,45 @@
+.root {
+    -fx-focus-color: black;
+    -fx-faint-focus-color: transparent;
+}
+
 .button {
-    -fx-text-fill: green;
+    -fx-background-color: rgb(245, 235, 224);
+    -fx-border-color: rgb(0, 0, 0);
+    -fx-border-width: 1px;
 }
 
-.tool-bar {
-
-}
-.draw-pane {
-    -fx-background-color: #dddddd;
-    -fx-background-radius: 0px;
+.button:hover {
+    -fx-background-color: rgb(243, 243, 231);
 }
 
-.active-pane {
-    -fx-border-color: red;
+.text-field {
+    -fx-border-color: rgb(0, 0, 0);
+    -fx-border-width: 1px;
     -fx-border-radius: 0px;
 }
 
-.draw-pane-bg {
-    -fx-background-color: #ff9090;
+.text-area {
+    -fx-border-color: rgb(0, 0, 0);
+    -fx-border-width: 1px;
+    -fx-border-radius: 0px;
 }
 
-.grid-pane {
-    -fx-background-color: #b6afaf;
+.color-picker {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-color: rgb(0, 0, 0);
+    -fx-border-width: 1px;
+    -fx-border-radius: 0px;
+}
+
+.combo-box {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-color: rgb(0, 0, 0);
+    -fx-border-width: 1px;
+    -fx-border-radius: 0px;
+}
+
+.active-pane {
+    -fx-border-color: black;
+    -fx-border-width: 3px;
 }

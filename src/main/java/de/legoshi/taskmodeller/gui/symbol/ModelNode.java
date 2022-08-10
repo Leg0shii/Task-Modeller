@@ -40,7 +40,7 @@ public class ModelNode extends Drawable {
         this.setId(UUID.randomUUID().toString());
 
         label = new Label("Task");
-        label.setPadding(new Insets(10, 10, 10, 10));
+        label.setPadding(new Insets(5, 5, 5, 5));
         label.setAlignment(Pos.CENTER);
         label.setFont(new Font("Arial", 12));
         label.setMaxWidth(50);
@@ -159,11 +159,11 @@ public class ModelNode extends Drawable {
     }
 
     public void colorSelected() {
-        this.getPolyShape().setStroke(Color.RED);
+        this.getPolyShape().setStrokeWidth(this.getPolyShape().getStrokeWidth()*1.2);
     }
 
     public void colorUnselected() {
-        this.getPolyShape().setStroke(Color.BLACK);
+        this.getPolyShape().setStrokeWidth(this.getPolyShape().getStrokeWidth()/1.2);
     }
 
     private void performSingleSelection(PaintWindow paintWindow) {
@@ -184,17 +184,17 @@ public class ModelNode extends Drawable {
     }
 
     private boolean calcUnderlyingElement(Workplace workplace, MouseEvent event, boolean type) {
-        Point2D mouseClick = new Point2D((event.getSceneX() - 200) / workplace.getScaleX(), (event.getSceneY() - 25) / workplace.getScaleY());
+        Point2D mouseClick = new Point2D((event.getSceneX() - 200) / workplace.getScaleX(), (event.getSceneY() -25) / workplace.getScaleY());
         if (this instanceof GroupingNode) {
             for (PaintWindow pW : workplace.getAllWindows()) {
                 double xCurrentPWOffset = pW.getXPosition() * ProjectWindow.SIZE - 1.5 * pW.getXPosition() * ProjectWindow.HGAP;
                 double yCurrentPWOffset = pW.getYPosition() * ProjectWindow.SIZE - 1.5 * pW.getYPosition() * ProjectWindow.VGAP;
                 for (ModelNode modelNode : pW.getDrawnNodes()) {
                     Bounds bounds = modelNode.getBoundsInParent();
-                    double nX = bounds.getMinX() + xCurrentPWOffset;
-                    double nXFar = bounds.getMaxX() + xCurrentPWOffset;
-                    double nY = bounds.getMinY() + yCurrentPWOffset;
-                    double nYFar = bounds.getMaxY() + yCurrentPWOffset;
+                    double nX = bounds.getMinX() + xCurrentPWOffset + 100;
+                    double nXFar = bounds.getMaxX() + xCurrentPWOffset + 100;
+                    double nY = bounds.getMinY() + yCurrentPWOffset + 100;
+                    double nYFar = bounds.getMaxY() + yCurrentPWOffset + 100;
                     if (mouseClick.getX() >= nX && mouseClick.getX() <= nXFar && mouseClick.getY() >= nY && mouseClick.getY() <= nYFar) {
                         if (modelNode == this) continue;
                         if (modelNode instanceof GroupingNode) continue;
