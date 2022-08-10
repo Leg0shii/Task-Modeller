@@ -25,11 +25,11 @@ public abstract class EditWindow<T> extends Stage {
         this.gridPane.setHgap(5);
         this.gridPane.setVgap(5);
 
-        Button closeBtn = new Button("Fertig");
+        Button closeBtn = new Button("Done");
         this.gridPane.add(closeBtn, 0, 10);
         closeBtn.setOnMouseClicked(mouseEvent -> this.close());
 
-        this.deleteBtn = new Button("Löschen");
+        this.deleteBtn = new Button("Delete");
         this.gridPane.add(deleteBtn, 1, 10);
         deleteBtn.setOnMouseClicked(mouseEvent -> onDelete());
 

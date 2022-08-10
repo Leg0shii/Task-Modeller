@@ -11,7 +11,7 @@ public class CommentEditWindow extends EditWindow<WorkplaceNode> {
     private final Workplace workplace;
 
     public CommentEditWindow(Workplace workplace, WorkplaceNode item) {
-        super(item, "Bearbeite Kommentar");
+        super(item, "Edit Comment");
         this.workplace = workplace;
 
         Label label = item.getLabel();

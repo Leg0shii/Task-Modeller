@@ -40,11 +40,6 @@ public class ProjectWindow extends GridPane {
         existentWindows = new ArrayList<>();
         compositeWindows = new ArrayList<>();
         envisionedWindows = new ArrayList<>();
-
-        this.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            System.out.println("X: " + mouseEvent.getX());
-            System.out.println("Y: " + mouseEvent.getY());
-        });
     }
 
     public ArrayList<PaintWindow> getAllWindows() {

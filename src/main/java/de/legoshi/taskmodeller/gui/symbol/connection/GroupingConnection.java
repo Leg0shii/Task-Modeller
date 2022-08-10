@@ -5,10 +5,10 @@ import de.legoshi.taskmodeller.gui.symbol.item.misc.GroupingNode;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.ProjectWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
+import de.legoshi.taskmodeller.gui.windows.editwindow.LineEditWindow;
 import de.legoshi.taskmodeller.util.CalculationLine;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
@@ -27,12 +27,12 @@ public class GroupingConnection extends Connection {
 
         this.setOnMousePressed(mouseEvent -> {
             if (mouseEvent.isSecondaryButtonDown()) {
-                // add edit window
+                new LineEditWindow(workplace, this).show();
             }
         });
 
-        for (Node n : node1.getChildren()) n.addEventHandler(MouseEvent.MOUSE_DRAGGED, mouseEvent -> recalculateBindings());
-        for (Node n : node2.getChildren()) n.addEventHandler(MouseEvent.MOUSE_DRAGGED, mouseEvent -> recalculateBindings());
+        node1.addEventHandler(MouseEvent.MOUSE_DRAGGED, mouseEvent -> recalculateBindings());
+        node2.addEventHandler(MouseEvent.MOUSE_DRAGGED, mouseEvent -> recalculateBindings());
     }
 
     @Override
@@ -74,14 +74,29 @@ public class GroupingConnection extends Connection {
             this.xEndProperty = node2.translateXProperty().add(Math.abs(node2Bounds.getMinX() + xCurrentPWOffset - node2Point.getX()) + xCurrentPWOffset - node2XScaleShift);
             this.yEndProperty = node2.translateYProperty().add(Math.abs(node2Bounds.getMinY() + yCurrentPWOffset - node2Point.getY()) + yCurrentPWOffset - node2YScaleShift);
         }
+
+        if (node2Point != null && node1Point != null) {
+            if (node2Point.getX() - node1Point.getX() >= 0) {
+                this.getLabel().setTranslateX(node1Point.getX() + (node2Point.getX() - node1Point.getX())/2);
+            } else {
+                this.getLabel().setTranslateX(node2Point.getX() + (node1Point.getX() - node2Point.getX())/2);
+            }
+            if (node2Point.getY() - node1Point.getY() >= 0) {
+                this.getLabel().setTranslateY(node1Point.getY() + (node2Point.getY() - node1Point.getY())/2);
+            } else {
+                this.getLabel().setTranslateY(node2Point.getY() + (node1Point.getY() - node2Point.getY())/2);
+            }
+        }
+        this.getLabel().setTranslateX(this.getLabel().getTranslateX() - this.getLabel().getWidth()/2);
+        this.getLabel().setTranslateY(this.getLabel().getTranslateY() - 20);
         setBindings();
     }
 
     private Point2D getIntersectionPoint(Bounds nodeBounds, Point2D centerNode, CalculationLine connection, double xOffset, double yOffset) {
-        double nX = nodeBounds.getMinX() + xOffset;
-        double nXFar = nodeBounds.getMaxX() + xOffset;
-        double nY = nodeBounds.getMinY() + yOffset;
-        double nYFar = nodeBounds.getMaxY() + yOffset;
+        double nX = nodeBounds.getMinX() + xOffset - 1;
+        double nXFar = nodeBounds.getMaxX() + xOffset + 1;
+        double nY = nodeBounds.getMinY() + yOffset - 1;
+        double nYFar = nodeBounds.getMaxY() + yOffset + 1;
 
         CalculationLine calculationLineTop = new CalculationLine(nX, nY, nXFar, nY);
         CalculationLine calculationLineRight = new CalculationLine(nXFar, nY, nXFar, nYFar);

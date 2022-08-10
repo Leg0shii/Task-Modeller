@@ -14,7 +14,7 @@ public class ItemEditWindow extends EditWindow<ModelNode> {
     private final Workplace workplace;
 
     public ItemEditWindow(Workplace workplace, ModelNode item) {
-        super(item, "Bearbeite Objekt");
+        super(item, "Edit Object");
 
         this.workplace = workplace;
 
@@ -33,11 +33,11 @@ public class ItemEditWindow extends EditWindow<ModelNode> {
 
 
         Slider slider = new Slider(0.4, 5, item.getScaleX());
-        this.gridPane.add(new Text("Skalieren:"), 0, 2);
+        this.gridPane.add(new Text("Scaling:"), 0, 2);
         this.gridPane.add(slider, 1, 2);
         slider.valueProperty().addListener((observableValue, number, t1) -> onScale(item, number.doubleValue(), t1.doubleValue()));
 
-        Button connectBtn = new Button("Verbindung");
+        Button connectBtn = new Button("Connection");
         this.gridPane.add(connectBtn, 0, 3);
         connectBtn.setOnMouseClicked(mouseEvent -> onConnect());
 

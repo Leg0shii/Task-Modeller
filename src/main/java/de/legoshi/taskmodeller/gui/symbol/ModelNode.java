@@ -1,9 +1,12 @@
 package de.legoshi.taskmodeller.gui.symbol;
 
 import de.legoshi.taskmodeller.MainController;
+import de.legoshi.taskmodeller.gui.symbol.connection.CTTConnection;
 import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
 import de.legoshi.taskmodeller.gui.symbol.connection.GroupingConnection;
 import de.legoshi.taskmodeller.gui.symbol.connection.NormalConnection;
+import de.legoshi.taskmodeller.gui.symbol.item.ctt.AbstractTask;
+import de.legoshi.taskmodeller.gui.symbol.item.ctt.SimpleTask;
 import de.legoshi.taskmodeller.gui.symbol.item.misc.GroupingNode;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.ProjectWindow;
@@ -117,9 +120,17 @@ public class ModelNode extends Drawable {
                         return;
                     }
                     if (dS instanceof GroupingNode) break;
-                    NormalConnection modelConnectionNode = NormalConnection.generateShape(workplace, dS, this);
-                    paintWindow.addConnection(modelConnectionNode);
-                    dS.setAttemptsConnect(false);
+
+                    if (dS instanceof AbstractTask || dS instanceof SimpleTask) {
+                        CTTConnection connection = CTTConnection.generateShape(workplace, dS, this);
+                        paintWindow.addConnection(connection);
+                        dS.setAttemptsConnect(false);
+                        return;
+                    } else {
+                        NormalConnection modelConnectionNode = NormalConnection.generateShape(workplace, dS, this);
+                        paintWindow.addConnection(modelConnectionNode);
+                        dS.setAttemptsConnect(false);
+                    }
                 }
             }
             // shouldn't be in here because it only effects generalisedNodes
@@ -173,7 +184,7 @@ public class ModelNode extends Drawable {
     }
 
     private boolean calcUnderlyingElement(Workplace workplace, MouseEvent event, boolean type) {
-        Point2D mouseClick = new Point2D(event.getSceneX(), event.getSceneY() - 25);
+        Point2D mouseClick = new Point2D(event.getSceneX() / workplace.getScaleX(), (event.getSceneY() - 25) / workplace.getScaleY());
         if (this instanceof GroupingNode) {
             for (PaintWindow pW : workplace.getAllWindows()) {
                 double xCurrentPWOffset = pW.getXPosition() * ProjectWindow.SIZE - 1.5 * pW.getXPosition() * ProjectWindow.HGAP;
@@ -186,6 +197,7 @@ public class ModelNode extends Drawable {
                     double nYFar = bounds.getMaxY() + yCurrentPWOffset;
                     if (mouseClick.getX() >= nX && mouseClick.getX() <= nXFar && mouseClick.getY() >= nY && mouseClick.getY() <= nYFar) {
                         if (modelNode == this) continue;
+                        if (modelNode instanceof GroupingNode) continue;
                         if (type) modelNode.onMouseClick(workplace, event);
                         else {
                             if (!pW.getSelectedNodes().contains(modelNode)) continue;

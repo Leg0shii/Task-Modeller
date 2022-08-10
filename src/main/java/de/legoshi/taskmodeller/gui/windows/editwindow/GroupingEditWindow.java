@@ -26,7 +26,7 @@ public class GroupingEditWindow extends EditWindow<ModelNode> {
         this.gridPane.add(sliderY, 1, 1);
         sliderY.valueProperty().addListener((observableValue, number, t1) -> onScaleY(item, number.doubleValue(), t1.doubleValue()));
 
-        Button connectBtn = new Button("Verbindung");
+        Button connectBtn = new Button("Connection");
         this.gridPane.add(connectBtn, 0, 3);
         connectBtn.setOnMouseClicked(mouseEvent -> onConnect());
     }

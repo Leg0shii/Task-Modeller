@@ -107,7 +107,10 @@ public class PaintWindow extends AnchorPane {
         for (Connection nC : workplace.getGroupingConnections()) {
             String nodeCId1 = nC.getNode1().getId();
             String nodeCId2 = nC.getNode2().getId();
-            if (nodeCId1.equals(nodeId) || nodeCId2.equals(nodeId)) nCToRemove.add(nC);
+            if (nodeCId1.equals(nodeId) || nodeCId2.equals(nodeId)) {
+                nCToRemove.add(nC);
+                this.workplace.getChildren().remove(nC.getLabel());
+            }
         }
         workplace.getGroupingConnections().removeAll(nCToRemove);
         workplace.getChildren().removeAll(nCToRemove);
@@ -121,7 +124,10 @@ public class PaintWindow extends AnchorPane {
         for (Connection nC : connections) {
             String nodeCId1 = nC.getNode1().getId();
             String nodeCId2 = nC.getNode2().getId();
-            if (nodeCId1.equals(nodeId) || nodeCId2.equals(nodeId)) nCToRemove.add(nC);
+            if (nodeCId1.equals(nodeId) || nodeCId2.equals(nodeId)) {
+                nCToRemove.add(nC);
+                this.getChildren().remove(nC.getLabel());
+            }
         }
         connections.removeAll(nCToRemove);
         this.getChildren().removeAll(nCToRemove);
@@ -131,7 +137,10 @@ public class PaintWindow extends AnchorPane {
         for (Connection nC : workplace.getGroupingConnections()) {
             String nodeCId1 = nC.getNode1().getId();
             String nodeCId2 = nC.getNode2().getId();
-            if (nodeCId1.equals(nodeId) || nodeCId2.equals(nodeId)) nCToRemove.add(nC);
+            if (nodeCId1.equals(nodeId) || nodeCId2.equals(nodeId)) {
+                nCToRemove.add(nC);
+                this.workplace.getChildren().remove(nC.getLabel());
+            }
         }
         workplace.getGroupingConnections().removeAll(nCToRemove);
         workplace.getChildren().removeAll(nCToRemove);
@@ -142,6 +151,7 @@ public class PaintWindow extends AnchorPane {
         if (connection instanceof GroupingConnection) {
             workplace.getGroupingConnections().add((GroupingConnection) connection);
             this.workplace.getChildren().add(connection);
+            this.workplace.getChildren().add(connection.getLabel());
             return;
         }
         if (!isNodeSameWindow(connection)) return;
@@ -151,10 +161,14 @@ public class PaintWindow extends AnchorPane {
             if (modelNode instanceof GroupingNode) count++;
         }
         this.getChildren().add(count, connection);
+        this.getChildren().add(count+1, connection.getLabel());
     }
 
     public void removeConnection(Connection connection) {
+        this.getChildren().remove(connection.getLabel());
         this.getChildren().remove(connection);
+        this.workplace.getChildren().remove(connection.getLabel());
+        this.workplace.getChildren().remove(connection);
         connections.remove(connection);
     }
 

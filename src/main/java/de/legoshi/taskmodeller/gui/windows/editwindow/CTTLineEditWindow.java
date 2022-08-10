@@ -1,28 +1,33 @@
 package de.legoshi.taskmodeller.gui.windows.editwindow;
 
+import de.legoshi.taskmodeller.gui.symbol.connection.CTTConnection;
+import de.legoshi.taskmodeller.gui.symbol.connection.CTTOperation;
 import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
-public class LineEditWindow extends EditWindow<Connection> {
+public class CTTLineEditWindow extends EditWindow<Connection> {
 
     private final Workplace workplace;
 
-    public LineEditWindow(Workplace workplace, Connection item) {
-        super(item, "Edit Line");
+    public CTTLineEditWindow(Workplace workplace, Connection item) {
+        super(item, "Edit CTT-Line");
 
-        Label label = item.getLabel();
+        Label selectName = new Label("Connection Type");
+        gridPane.add(selectName, 0, 0);
 
-        Label tFName = new Label("Set Connection Name");
-        gridPane.add(tFName, 0, 0);
-
-        TextField textField = new TextField(label.getText());
-        gridPane.add(textField, 1, 0);
-        textField.textProperty().addListener((observableValue, s, t1) -> label.setText(t1));
+        ComboBox<CTTOperation> comboBox = new ComboBox<>();
+        comboBox.setValue(CTTOperation.StringToOperation(item.getLabel().getText()));
+        comboBox.getItems().addAll(CTTOperation.values());
+        comboBox.valueProperty().addListener((observableValue, cttOperation, t1) -> item.getLabel().setText(t1.OperationToString()));
+        gridPane.add(comboBox, 1,0);
 
         Label colorName = new Label("Change Color");
         gridPane.add(colorName, 0, 1);
@@ -55,5 +60,4 @@ public class LineEditWindow extends EditWindow<Connection> {
         paintWindow.removeConnection(this.item);
         this.close();
     }
-
 }

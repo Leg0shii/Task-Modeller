@@ -1,7 +1,9 @@
 package de.legoshi.taskmodeller;
 
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
+import de.legoshi.taskmodeller.gui.symbol.connection.CTTConnection;
 import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
+import de.legoshi.taskmodeller.gui.symbol.connection.GroupingConnection;
 import de.legoshi.taskmodeller.gui.symbol.connection.NormalConnection;
 import de.legoshi.taskmodeller.gui.windows.newwindow.NewProjectCountWindow;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
@@ -129,7 +131,14 @@ public class MainController implements Initializable {
                     else secondNode = copiedNode;
                 }
             }
-            Connection mNC = NormalConnection.generateShape(workplace, firstNode, secondNode);
+            Connection mNC;
+            if (currMCN instanceof NormalConnection) mNC = NormalConnection.generateShape(workplace, firstNode, secondNode);
+            else if (currMCN instanceof CTTConnection) mNC = CTTConnection.generateShape(workplace, firstNode, secondNode);
+            else mNC = GroupingConnection.generateShape(workplace, firstNode, secondNode);
+
+            mNC.getLabel().setText(currMCN.getLabel().getText());
+            mNC.setStroke(currMCN.getStroke());
+            mNC.setStrokeWidth(currMCN.getStrokeWidth());
             paintWindow.addConnection(mNC);
         }
     }

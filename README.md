@@ -16,7 +16,7 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] allow connections be made between two drawing areas
 - [x] grouping local models as described in paper
 - [x] making grouping borderless
-- [ ] add labels and types to connections (make list about what to add first)
+- [x] add labels and types to connections (make list about what to add first)
 - [ ] add a todo/guidelines you can tick (toggle in menu)
 - [ ] other color for displaying state
 

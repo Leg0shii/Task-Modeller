@@ -2,6 +2,7 @@ package de.legoshi.taskmodeller.gui.itembar;
 
 import de.legoshi.taskmodeller.gui.symbol.Drawable;
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
+import de.legoshi.taskmodeller.gui.symbol.connection.CTTConnection;
 import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
 import de.legoshi.taskmodeller.gui.symbol.WorkplaceNode;
 import de.legoshi.taskmodeller.gui.symbol.connection.NormalConnection;
@@ -84,7 +85,7 @@ public class ItemBarManager {
                 selectedWindow.addNodeToCanvas(child);
                 if (parent == null) return;
 
-                Connection connection = NormalConnection.generateShape(workplace, parent, child);
+                Connection connection = CTTConnection.generateShape(workplace, parent, child);
                 selectedWindow.addConnection(connection);
             });
         }
