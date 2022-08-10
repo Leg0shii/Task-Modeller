@@ -184,7 +184,7 @@ public class ModelNode extends Drawable {
     }
 
     private boolean calcUnderlyingElement(Workplace workplace, MouseEvent event, boolean type) {
-        Point2D mouseClick = new Point2D(event.getSceneX() / workplace.getScaleX(), (event.getSceneY() - 25) / workplace.getScaleY());
+        Point2D mouseClick = new Point2D((event.getSceneX() - 200) / workplace.getScaleX(), (event.getSceneY() - 25) / workplace.getScaleY());
         if (this instanceof GroupingNode) {
             for (PaintWindow pW : workplace.getAllWindows()) {
                 double xCurrentPWOffset = pW.getXPosition() * ProjectWindow.SIZE - 1.5 * pW.getXPosition() * ProjectWindow.HGAP;
