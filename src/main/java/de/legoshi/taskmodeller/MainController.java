@@ -5,6 +5,8 @@ import de.legoshi.taskmodeller.gui.symbol.connection.CTTConnection;
 import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
 import de.legoshi.taskmodeller.gui.symbol.connection.GroupingConnection;
 import de.legoshi.taskmodeller.gui.symbol.connection.NormalConnection;
+import de.legoshi.taskmodeller.gui.windows.guidelinewindow.ToDoManager;
+import de.legoshi.taskmodeller.gui.windows.guidelinewindow.ToDoWindow;
 import de.legoshi.taskmodeller.gui.windows.newwindow.NewProjectCountWindow;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
@@ -24,6 +26,7 @@ import lombok.Setter;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 @Getter
@@ -35,9 +38,12 @@ public class MainController implements Initializable {
     public MenuBar menuBar;
 
     public ScrollPane contentPane;
-    private Workplace workplace;
 
+    public VBox todoBar;
+    private Workplace workplace;
     public HBox toolBar;
+
+    private ToDoManager toDoManager;
 
     public RadioButton standardRBTN;
     public RadioButton connectionRBTN;
@@ -47,6 +53,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         this.workplace = new Workplace(this.toolBar);
+        this.toDoManager = new ToDoManager(todoBar);
         this.contentPane.setContent(new Group(workplace));
 
         contentPane.addEventFilter(ScrollEvent.ANY, (scrollEvent -> {

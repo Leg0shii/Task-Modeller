@@ -15,4 +15,5 @@ module de.legoshi.taskmodeller {
     exports de.legoshi.taskmodeller.gui.windows.editwindow;
     exports de.legoshi.taskmodeller.gui.symbol.connection;
     exports de.legoshi.taskmodeller.gui.windows.newwindow;
+    exports de.legoshi.taskmodeller.gui.windows.guidelinewindow;
 }
