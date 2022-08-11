@@ -4,7 +4,10 @@ import de.legoshi.taskmodeller.gui.symbol.ModelNode;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 
@@ -27,8 +30,19 @@ public class GroupingEditWindow extends EditWindow<ModelNode> {
         sliderY.valueProperty().addListener((observableValue, number, t1) -> onScaleY(item, number.doubleValue(), t1.doubleValue()));
 
         Button connectBtn = new Button("Connection");
-        this.gridPane.add(connectBtn, 0, 3);
+        this.gridPane.add(connectBtn, 0, 2);
         connectBtn.setOnMouseClicked(mouseEvent -> onConnect());
+
+        ColorPicker colorPicker = new ColorPicker();
+        colorPicker.setValue((Color) item.getBorder().getStrokes().get(0).getTopStroke());
+        gridPane.add(colorPicker, 1, 2);
+        colorPicker.valueProperty().addListener((observableValue, color, t1) -> {
+            item.setBorder(new Border(
+                    new BorderStroke(t1, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+                            new BorderWidths(3/item.getScaleY(), 3/item.getScaleX(), 3/item.getScaleY(), 3/item.getScaleX())
+                    )
+            ));
+        });
     }
 
     private void onConnect() {
@@ -44,13 +58,25 @@ public class GroupingEditWindow extends EditWindow<ModelNode> {
     private void onScaleX(ModelNode item, double doubleValue, double doubleValue1) {
         Shape shape = item.getPolyShape();
         item.setScaleX(item.getScaleX() + (doubleValue1 - doubleValue));
-        shape.setStrokeWidth(6/(item.getScaleX()+item.getScaleY()));
+        item.setBorder(
+                new Border(
+                        new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+                                new BorderWidths(3/item.getScaleY(), 3/item.getScaleX(), 3/item.getScaleY(), 3/item.getScaleX())
+                        )
+                )
+        );
     }
 
     private void onScaleY(ModelNode item, double doubleValue, double doubleValue1) {
         Shape shape = item.getPolyShape();
         item.setScaleY(item.getScaleY() + (doubleValue1 - doubleValue));
-        shape.setStrokeWidth(6/(item.getScaleX()+item.getScaleY()));
+        item.setBorder(
+                new Border(
+                        new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+                                new BorderWidths(3 / item.getScaleY(), 3 / item.getScaleX(), 3 / item.getScaleY(), 3 / item.getScaleX())
+                        )
+                )
+        );
     }
 
     @Override

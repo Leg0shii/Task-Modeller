@@ -39,14 +39,17 @@ public class ToDoManager {
     }
 
     public void registerToDoWindow() {
-        ToDoWindow toDoWindow = generateStandardToDo();
-        this.toDoWindows.put(toDoWindow.getToDoTitle(), toDoWindow);
-
-        toDoWindow = generateCTTToDo();
+        ToDoWindow toDoWindow = generateCTTToDo();
         this.toDoWindows.put(toDoWindow.getToDoTitle(), toDoWindow);
 
         toDoWindow = generateMISCoDo();
         this.toDoWindows.put(toDoWindow.getToDoTitle(), toDoWindow);
+
+        toDoWindow = generateStandardToDo();
+        this.toDoWindows.put(toDoWindow.getToDoTitle(), toDoWindow);
+
+        // toDoWindow = generateNEWoDo();
+        // this.toDoWindows.put(toDoWindow.getToDoTitle(), toDoWindow);
     }
 
     private void registerTitleClick() {
@@ -95,6 +98,18 @@ public class ToDoManager {
         toDoWindow.addToDoElement("MISC-Task 1");
         toDoWindow.addToDoElement("MISC-Task 2");
         toDoWindow.addToDoElement("MISC-Task 3");
+        return toDoWindow;
+    }
+
+    private ToDoWindow generateNEWoDo() {
+        ToDoWindow toDoWindow = new ToDoWindow("NEW Guide");
+        toDoWindow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
+        toDoWindow.addToDoElement("NEW-Task 1");
+        toDoWindow.addToDoElement("NEW-Task 2");
+        toDoWindow.addToDoElement("NEW-Task 3");
+        toDoWindow.addToDoElement("NEW-Task 4");
+        toDoWindow.addToDoElement("NEW-Task 5");
+        toDoWindow.addToDoElement("NEW-Task 6");
         return toDoWindow;
     }
 

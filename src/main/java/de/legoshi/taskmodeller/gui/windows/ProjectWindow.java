@@ -58,6 +58,7 @@ public class ProjectWindow extends GridPane {
         initPaintWindows(existentWindows, Color.color(227.0/255.0, 251.0/255.0, 227.0/255.0), exHBox, 0);
         initPaintWindows(compositeWindows, Color.color(1.0, 250.0/255.0, 205.0/255.0), coHBox, 1);
         initPaintWindows(envisionedWindows, Color.color(1.0, 220.0/255.0, 223.0/255.0), evHBox, 2);
+        applyShiftOffset();
     }
 
     private void initPaintWindows(ArrayList<PaintWindow> windows, Color color, ArrayList<HBox> hBoxes, int xShift) {
@@ -80,6 +81,26 @@ public class ProjectWindow extends GridPane {
             windows.add(paintWindow);
             this.add(paintWindow, xShift, i);
             i++;
+        }
+    }
+
+    private void applyShiftOffset() {
+        int existCount = existentWindows.size();
+        int compCount = compositeWindows.size();
+        int envCount = envisionedWindows.size();
+
+        int max = Math.max(compCount, Math.max(existCount, envCount));
+        setYOffsetShift(existentWindows, max, existCount);
+        setYOffsetShift(compositeWindows, max, compCount);
+        setYOffsetShift(envisionedWindows, max, envCount);
+    }
+
+    private void setYOffsetShift(ArrayList<PaintWindow> windows, int max, int count) {
+        int offset = max - count;
+        for (PaintWindow pW : windows) {
+            double yOffsetShift = offset * 600.0/2.0;
+            pW.setTranslateY(pW.getTranslateY() + yOffsetShift);
+            pW.setYOffsetShift(yOffsetShift);
         }
     }
 

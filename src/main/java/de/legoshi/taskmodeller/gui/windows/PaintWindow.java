@@ -24,6 +24,8 @@ public class PaintWindow extends AnchorPane {
     private final int xPosition;
     private final int yPosition;
 
+    private double yOffsetShift;
+
     private String name;
 
     private ArrayList<ModelNode> drawnNodes;
