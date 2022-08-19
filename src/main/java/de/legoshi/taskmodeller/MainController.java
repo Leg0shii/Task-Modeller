@@ -66,6 +66,7 @@ public class MainController implements Initializable {
 
         contentPane.addEventFilter(ScrollEvent.ANY, (scrollEvent -> {
             if (!scrollEvent.isShiftDown()) return;
+            if (!workplace.isExistent()) return;
 
             double zoomFactor = 1.05;
             double deltaX = scrollEvent.getDeltaX();
@@ -105,6 +106,8 @@ public class MainController implements Initializable {
 
     @FXML
     private void onRadioButtonChange() {
+        if (!workplace.isExistent()) return;
+
         PaintWindow selectedWindow = workplace.getSelectedPaintWindow();
         ModelType modelType = ModelType.MISC;
         if (standardRBTN.isSelected()) {

@@ -32,6 +32,8 @@ public class Workplace extends Group {
     private PaintWindow selectedPaintWindow;
     private ModelNode selectedSymbol;
 
+    private boolean existent;
+
     public Workplace(HBox toolBar) {
         this.projectWindow = new ProjectWindow(this);
         this.itemBarManager = new ItemBarManager(this, toolBar);
@@ -42,6 +44,7 @@ public class Workplace extends Group {
         this.groupingConnections = new ArrayList<>();
 
         this.getChildren().add(projectWindow);
+        this.existent = false;
     }
 
     public ArrayList<PaintWindow> getAllWindows() {

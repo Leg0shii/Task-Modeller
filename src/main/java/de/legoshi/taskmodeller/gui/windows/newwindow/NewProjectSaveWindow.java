@@ -35,6 +35,7 @@ public class NewProjectSaveWindow extends NewProject {
         continueBtn.setOnMouseClicked(mouseEvent -> {
             project.generatePaintWindows(exHBoxes, coHBoxes, evHBoxes);
             // create save file
+            project.getWorkplace().setExistent(true);
             this.close();
         });
         this.gridPane.add(continueBtn, 1, 2, 2, 1);
