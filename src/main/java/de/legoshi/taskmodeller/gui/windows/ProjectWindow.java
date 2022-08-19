@@ -59,6 +59,11 @@ public class ProjectWindow extends GridPane {
         initPaintWindows(compositeWindows, Color.color(1.0, 250.0/255.0, 205.0/255.0), coHBox, 1);
         initPaintWindows(envisionedWindows, Color.color(1.0, 220.0/255.0, 223.0/255.0), evHBox, 2);
         applyShiftOffset();
+
+        // sets active window on first project creation to first window
+        workplace.setSelectedPaintWindow(existentWindows.get(0));
+        existentWindows.get(0).setActiveWindow();
+        workplace.getItemBarManager().reloadItemBarWithModel(existentWindows.get(0), null);
     }
 
     private void initPaintWindows(ArrayList<PaintWindow> windows, Color color, ArrayList<HBox> hBoxes, int xShift) {

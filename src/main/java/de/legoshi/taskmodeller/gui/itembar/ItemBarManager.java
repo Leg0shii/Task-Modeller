@@ -37,7 +37,8 @@ public class ItemBarManager {
         this.toolBar = toolBar;
     }
 
-    public void reloadItemBarWithModel(PaintWindow selectedWindow, ModelType modelType) {
+    public void reloadItemBarWithModel(PaintWindow selectedWindow, ModelType modelType1) {
+        ModelType modelType = selectedWindow.getModelType();
         ArrayList<Drawable> itemBar = this.getModelItemBar(modelType);
         this.reloadItemBar(selectedWindow, modelType);
         toolBar.getChildren().clear();

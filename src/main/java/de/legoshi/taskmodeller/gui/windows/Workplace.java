@@ -33,6 +33,7 @@ public class Workplace extends Group {
     private ModelNode selectedSymbol;
 
     private boolean existent;
+    private boolean pWSelected;
 
     public Workplace(HBox toolBar) {
         this.projectWindow = new ProjectWindow(this);
@@ -45,6 +46,7 @@ public class Workplace extends Group {
 
         this.getChildren().add(projectWindow);
         this.existent = false;
+        this.pWSelected = true;
     }
 
     public ArrayList<PaintWindow> getAllWindows() {
