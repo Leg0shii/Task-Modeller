@@ -45,6 +45,7 @@ public class ModelNode extends Drawable {
         label.setFont(new Font("Arial", 12));
         label.setMaxWidth(50);
         label.setMaxHeight(50);
+        this.label.setWrapText(true);
 
         this.getChildren().add(shape);
         this.getChildren().add(label);
@@ -214,8 +215,10 @@ public class ModelNode extends Drawable {
                     double nY = bounds.getMinY() + yCurrentPWOffset + 100 + pW.getYOffsetShift();
                     double nYFar = bounds.getMaxY() + yCurrentPWOffset + 100 + pW.getYOffsetShift();
                     if (mouseClick.getX() >= nX && mouseClick.getX() <= nXFar && mouseClick.getY() >= nY && mouseClick.getY() <= nYFar) {
-                        connection.onMousePressed(event);
-                        return true;
+                        if (event.isSecondaryButtonDown()) {
+                            connection.onMousePressed(event);
+                            return true;
+                        }
                     }
                 }
             }
