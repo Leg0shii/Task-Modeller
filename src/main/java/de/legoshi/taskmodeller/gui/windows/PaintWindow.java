@@ -225,7 +225,7 @@ public class PaintWindow extends AnchorPane {
         workplace.setSelectedPaintWindow(this);
         for (PaintWindow paintWindow : workplace.getAllWindows()) {
             paintWindow.getStyleClass().remove("active-pane");
-            workplace.getItemBarManager().reloadItemBarWithModel(this, modelType);
+            if (workplace.isPWSelected()) workplace.getItemBarManager().reloadItemBarWithModel(this, modelType);
             paintWindow.removeSelectedNodes();
         }
         this.getStyleClass().add("active-pane");

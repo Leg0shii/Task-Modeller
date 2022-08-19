@@ -63,7 +63,7 @@ public class ProjectWindow extends GridPane {
         // sets active window on first project creation to first window
         workplace.setSelectedPaintWindow(existentWindows.get(0));
         existentWindows.get(0).setActiveWindow();
-        workplace.getItemBarManager().reloadItemBarWithModel(existentWindows.get(0), null);
+        workplace.getItemBarManager().reloadItemBarWithModel(existentWindows.get(0), existentWindows.get(0).getModelType());
     }
 
     private void initPaintWindows(ArrayList<PaintWindow> windows, Color color, ArrayList<HBox> hBoxes, int xShift) {

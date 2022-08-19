@@ -50,8 +50,7 @@
                      <toggleGroup>
                         <ToggleGroup fx:id="group" />
                      </toggleGroup></RadioButton>
-                  <RadioButton fx:id="connectionRBTN" mnemonicParsing="false" onAction="#onRadioButtonChange" text="Connections" toggleGroup="$group" />
-                  <RadioButton fx:id="miscRBTN" mnemonicParsing="false" onAction="#onRadioButtonChange" text="Misc." toggleGroup="$group" />
+                    <RadioButton fx:id="miscRBTN" mnemonicParsing="false" onAction="#onRadioButtonChange" text="Misc." toggleGroup="$group" />
                </children>
                <HBox.margin>
                   <Insets />

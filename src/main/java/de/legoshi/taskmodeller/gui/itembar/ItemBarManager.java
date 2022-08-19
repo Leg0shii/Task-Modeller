@@ -25,20 +25,17 @@ public class ItemBarManager {
 
     private final StandardItemBar standardItemBar;
     private final CTTItemBar cttItemBar;
-    private final ConnectionItemBar connectionItemBar;
     private final MiscItemBar miscItemBar;
 
     public ItemBarManager(Workplace workplace, HBox toolBar) {
         this.standardItemBar = new StandardItemBar();
         this.cttItemBar = new CTTItemBar();
-        this.connectionItemBar = new ConnectionItemBar();
         this.miscItemBar = new MiscItemBar();
         this.workplace = workplace;
         this.toolBar = toolBar;
     }
 
-    public void reloadItemBarWithModel(PaintWindow selectedWindow, ModelType modelType1) {
-        ModelType modelType = selectedWindow.getModelType();
+    public void reloadItemBarWithModel(PaintWindow selectedWindow, ModelType modelType) {
         ArrayList<Drawable> itemBar = this.getModelItemBar(modelType);
         this.reloadItemBar(selectedWindow, modelType);
         toolBar.getChildren().clear();
@@ -51,7 +48,6 @@ public class ItemBarManager {
     public ArrayList<Drawable> getModelItemBar(ModelType modelType) {
         ArrayList<Drawable> itemBar;
         if (modelType.equals(ModelType.CTT)) itemBar = cttItemBar.itemBar;
-        else if (modelType.equals(ModelType.CONN)) itemBar = connectionItemBar.itemBar;
         else if (modelType.equals(ModelType.MISC)) itemBar = miscItemBar.itemBar;
         else itemBar = standardItemBar.itemBar;
         return itemBar;
@@ -59,7 +55,6 @@ public class ItemBarManager {
     
     public void reloadItemBar(PaintWindow selectedWindow, ModelType modelType) {
         if (modelType.equals(ModelType.CTT)) onCTTAction(selectedWindow);
-        else if (modelType.equals(ModelType.CONN)) onConnAction();
         else if (modelType.equals(ModelType.MISC)) onMiscAction();
         else onFreeAction(selectedWindow);
     }
@@ -90,10 +85,6 @@ public class ItemBarManager {
                 selectedWindow.addConnection(connection);
             });
         }
-    }
-
-    private void onConnAction() {
-
     }
 
     private void onMiscAction() {

@@ -113,7 +113,8 @@ public class MainController implements Initializable {
         if (standardRBTN.isSelected()) {
             if (selectedWindow == null) return;
             modelType = selectedWindow.getModelType();
-        } else if (connectionRBTN.isSelected()) modelType = ModelType.CONN;
+            workplace.setPWSelected(true);
+        } else workplace.setPWSelected(false);
         workplace.getItemBarManager().reloadItemBarWithModel(selectedWindow, modelType);
     }
 
