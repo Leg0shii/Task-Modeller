@@ -30,18 +30,22 @@ public class NewProjectSaveWindow extends NewProject {
         this.gridPane.add(savingName, 0, 0);
         this.gridPane.add(savingLocation, 0, 1);
 
+        Label errLabel = new Label("");
+        this.gridPane.add(errLabel, 0, 2);
+
         Button continueBtn = new Button("Finish");
         GridPane.setHalignment(continueBtn, HPos.RIGHT);
         continueBtn.setOnMouseClicked(mouseEvent -> {
             project.generatePaintWindows(exHBoxes, coHBoxes, evHBoxes);
             // create save file
+            errLabel.setText("SAVING");
             project.getWorkplace().setExistent(true);
             this.close();
         });
-        this.gridPane.add(continueBtn, 1, 2, 2, 1);
+        this.gridPane.add(continueBtn, 1, 3, 2, 1);
 
         Button cancelBtn = new Button("Cancel");
         cancelBtn.setOnMouseClicked(mouseEvent -> this.close());
-        gridPane.add(cancelBtn, 0, 2, 2, 1);
+        gridPane.add(cancelBtn, 0, 3, 2, 1);
     }
 }

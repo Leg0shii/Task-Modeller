@@ -27,6 +27,10 @@ public class NewProjectCountWindow extends NewProject {
         this.gridPane.add(envisionedL, 0, 2);
         this.gridPane.add(envisionedTF, 1, 2);
 
+        Label errLabel = new Label("");
+        errLabel.setMinWidth(200);
+        this.gridPane.add(errLabel, 0, 3);
+
         Button continueBtn = new Button("Continue");
         GridPane.setHalignment(continueBtn, HPos.RIGHT);
         continueBtn.setOnMouseClicked(mouseEvent -> {
@@ -35,18 +39,19 @@ public class NewProjectCountWindow extends NewProject {
                 project.setCompositeCount(Integer.parseInt(compositeTF.getText()));
                 project.setEnvisionedCount(Integer.parseInt(envisionedTF.getText()));
                 new NewProjectSettingsWindow(project).show();
-            } catch (NumberFormatException exception) {
-                exception.printStackTrace();
-                System.out.println("New Project ERROR");
-            } finally {
                 this.close();
+            } catch (NumberFormatException exception) {
+                errLabel.setText("!!!Please use integer values!!!");
+                existingTF.setText("");
+                compositeTF.setText("");
+                envisionedTF.setText("");
             }
         });
-        this.gridPane.add(continueBtn, 1, 3, 2, 1);
+        this.gridPane.add(continueBtn, 1, 4, 2, 1);
 
         Button cancelBtn = new Button("Cancel");
         cancelBtn.setOnMouseClicked(mouseEvent -> this.close());
-        gridPane.add(cancelBtn, 0, 3, 2, 1);
+        gridPane.add(cancelBtn, 0, 4, 2, 1);
     }
 
 }
