@@ -30,13 +30,13 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] zoom in/out with hotkeys
 - [x] fix screen resize
 - [x] add padding around the models
-- [ ] centering the screens
 
-- [ ] center on one model
+- [ ] centering the screens (fit everything onto it)
+- [ ] center on one model (put on model in the middle)
 - [ ] indicate connection process
-
-- [ ] change position of multiple elements at once when selected
-- [ ] refactor
+- [ ] enable hover over item to show description
+- [ ] hover over label to show full text
+- [ ] make line around task when selected bigger
 
 #### Bugs
 - [x] make nodes be selected for each drawing field
@@ -49,7 +49,3 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [ ] check entered values on creation
 - [ ] only comments when project is created
 - [ ] new symbol added is not connected with the selected one but the last
-
-#### Thesis
-- [x] Prototypisches Werkzeug Einleitung anpassen
-- [ ] Verbindungen fertig schreiben, sobald implementiert
