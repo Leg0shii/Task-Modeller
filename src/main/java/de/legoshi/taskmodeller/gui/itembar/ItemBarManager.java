@@ -74,9 +74,9 @@ public class ItemBarManager {
     private void onCTTAction(PaintWindow selectedWindow) {
         for (Drawable drawable : this.cttItemBar.itemBar) {
             drawable.setOnMouseClicked(event -> {
+                ModelNode parent = workplace.getSelectedSymbol();
                 selectedWindow.removeSelectedNodes();
 
-                ModelNode parent = workplace.getSelectedSymbol();
                 ModelNode child = (ModelNode) NodesHelper.getDuplicate(workplace, drawable);
                 selectedWindow.addNodeToCanvas(child);
                 if (parent == null) return;

@@ -171,6 +171,7 @@ public class ModelNode extends Drawable {
         paintWindow.removeSelectedNodes();
         this.colorSelected();
         paintWindow.getSelectedNodes().add(this);
+        paintWindow.getWorkplace().setSelectedSymbol(this);
     }
 
     private boolean windowSwitch(PaintWindow currentActiveWindow) {
