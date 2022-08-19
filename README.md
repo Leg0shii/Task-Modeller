@@ -37,15 +37,17 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [ ] enable hover over item to show description
 - [ ] hover over label to show full text
 - [ ] make line around task when selected bigger
+- [ ] fill help
+- [ ] fill shortcut
 
 #### Bugs
 - [x] make nodes be selected for each drawing field
 - [x] remove selection when adding new item to field
 - [x] uncolor nodes after switching window
 - [x] select window when item is selected
-
-- [ ] init project only when init steps are done
-- [ ] don't switch toolbar when on misc/conn and selecting window
-- [ ] check entered values on creation
-- [ ] only comments when project is created
-- [ ] new symbol added is not connected with the selected one but the last
+- [x] init project only when init steps are done
+- [x] don't switch toolbar when on misc/conn and selecting window
+- [x] check entered values on creation
+- [x] only comments when project is created
+- [x] new symbol added is not connected with the selected one but the last
+- [x] select paintwindow on init (first one)
