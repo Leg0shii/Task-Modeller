@@ -160,11 +160,11 @@ public class ModelNode extends Drawable {
     }
 
     public void colorSelected() {
-        this.getPolyShape().setStrokeWidth(this.getPolyShape().getStrokeWidth()*1.2);
+        this.getPolyShape().setStrokeWidth(this.getPolyShape().getStrokeWidth()*1.5);
     }
 
     public void colorUnselected() {
-        this.getPolyShape().setStrokeWidth(this.getPolyShape().getStrokeWidth()/1.2);
+        this.getPolyShape().setStrokeWidth(this.getPolyShape().getStrokeWidth()/1.5);
     }
 
     private void performSingleSelection(PaintWindow paintWindow) {
