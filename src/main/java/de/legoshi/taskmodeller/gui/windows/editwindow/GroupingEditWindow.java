@@ -1,11 +1,13 @@
 package de.legoshi.taskmodeller.gui.windows.editwindow;
 
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
+import de.legoshi.taskmodeller.gui.symbol.connection.ProgressConnection;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -31,7 +33,7 @@ public class GroupingEditWindow extends EditWindow<ModelNode> {
 
         Button connectBtn = new Button("Connection");
         this.gridPane.add(connectBtn, 0, 2);
-        connectBtn.setOnMouseClicked(mouseEvent -> onConnect());
+        connectBtn.setOnMouseClicked(this::onConnect);
 
         ColorPicker colorPicker = new ColorPicker();
         colorPicker.setValue((Color) item.getBorder().getStrokes().get(0).getTopStroke());
@@ -45,12 +47,14 @@ public class GroupingEditWindow extends EditWindow<ModelNode> {
         });
     }
 
-    private void onConnect() {
+    private void onConnect(MouseEvent mouseEvent) {
         for (PaintWindow pW : workplace.getAllWindows()) {
             for (ModelNode dS : pW.getDrawnNodes()) {
                 dS.setAttemptsConnect(false);
             }
         }
+        ProgressConnection progressConnection = new ProgressConnection(workplace, this.item, mouseEvent);
+        this.item.setProgressConnection(progressConnection);
         this.item.setAttemptsConnect(true);
         this.close();
     }

@@ -30,13 +30,13 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] zoom in/out with hotkeys
 - [x] fix screen resize
 - [x] add padding around the models
+- [x] make line around task when selected bigger
 
 - [ ] centering the screens (fit everything onto it)
 - [ ] center on one model (put on model in the middle)
 - [ ] indicate connection process
 - [ ] enable hover over item to show description
 - [ ] hover over label to show full text
-- [ ] make line around task when selected bigger
 - [ ] fill help
 - [ ] fill shortcut
 
@@ -51,3 +51,5 @@ Werkzeug kann sich auf einen bekannten Spezifikationsformalismus für Aufgaben (
 - [x] only comments when project is created
 - [x] new symbol added is not connected with the selected one but the last
 - [x] select paintwindow on init (first one)
+
+- [ ] remove every connection attempt if not clicked on another node

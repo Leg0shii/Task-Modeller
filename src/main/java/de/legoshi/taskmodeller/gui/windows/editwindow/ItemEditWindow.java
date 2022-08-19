@@ -1,9 +1,11 @@
 package de.legoshi.taskmodeller.gui.windows.editwindow;
 
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
+import de.legoshi.taskmodeller.gui.symbol.connection.ProgressConnection;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
@@ -39,18 +41,20 @@ public class ItemEditWindow extends EditWindow<ModelNode> {
 
         Button connectBtn = new Button("Connection");
         this.gridPane.add(connectBtn, 0, 3);
-        connectBtn.setOnMouseClicked(mouseEvent -> onConnect());
+        connectBtn.setOnMouseClicked(mouseEvent -> onConnect(mouseEvent));
 
         ColorPicker colorPicker = new ColorPicker((Color) shape.getFill());
         this.gridPane.add(colorPicker, 1, 3);
         colorPicker.valueProperty().addListener((observableValue, color, t1) -> shape.setFill(t1));
     }
 
-    private void onConnect() {
+    private void onConnect(MouseEvent mouseEvent) {
         for (ModelNode dS : workplace.getSelectedPaintWindow().getDrawnNodes()) {
             dS.setAttemptsConnect(false);
         }
         this.item.setAttemptsConnect(true);
+        ProgressConnection progressConnection = new ProgressConnection(workplace, this.item, mouseEvent);
+        this.item.setProgressConnection(progressConnection);
         this.close();
     }
 

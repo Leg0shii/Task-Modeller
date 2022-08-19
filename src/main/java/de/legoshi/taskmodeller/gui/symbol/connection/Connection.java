@@ -44,6 +44,21 @@ public class Connection extends Line {
         this.label.setOnMousePressed(this::onMousePressed);
     }
 
+    public Connection(Workplace workplace, ModelNode node1, MouseEvent mouseEvent) {
+        this.workplace = workplace;
+        this.label = new Label("");
+        this.node1 = node1;
+
+        recalculateMouseBindings(mouseEvent);
+    }
+
+    private void recalculateMouseBindings(MouseEvent mouseEvent) {
+        this.setStartX(mouseEvent.getX());
+        this.setStartY(mouseEvent.getY());
+        this.setEndX(node1.getTranslateX() + node1.getWidth()/2);
+        this.setEndY(node1.getTranslateY() + node1.getHeight()/2);
+    }
+
     public void onMousePressed(MouseEvent mouseEvent) {
         if (mouseEvent.isSecondaryButtonDown()) {
             new LineEditWindow(workplace, this).show();

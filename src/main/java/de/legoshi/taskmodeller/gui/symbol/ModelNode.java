@@ -1,10 +1,7 @@
 package de.legoshi.taskmodeller.gui.symbol;
 
 import de.legoshi.taskmodeller.MainController;
-import de.legoshi.taskmodeller.gui.symbol.connection.CTTConnection;
-import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
-import de.legoshi.taskmodeller.gui.symbol.connection.GroupingConnection;
-import de.legoshi.taskmodeller.gui.symbol.connection.NormalConnection;
+import de.legoshi.taskmodeller.gui.symbol.connection.*;
 import de.legoshi.taskmodeller.gui.symbol.item.ctt.AbstractTask;
 import de.legoshi.taskmodeller.gui.symbol.item.ctt.SimpleTask;
 import de.legoshi.taskmodeller.gui.symbol.item.misc.GroupingNode;
@@ -31,6 +28,7 @@ import java.util.UUID;
 @Setter
 public class ModelNode extends Drawable {
 
+    private ProgressConnection progressConnection;
     private boolean attemptsConnect = false;
     private String description;
     private Label label;
