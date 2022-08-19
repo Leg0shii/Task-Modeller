@@ -39,16 +39,14 @@ public class ToDoManager {
     }
 
     public void registerToDoWindow() {
-        ToDoWindow toDoWindow = generateCTTToDo();
-        this.toDoWindows.put(toDoWindow.getToDoTitle(), toDoWindow);
+        ToDoWindow toDoWindowEnv = generateEnvisionedToDo();
+        ToDoWindow toDoWindowCom = generateCompositeToDo();
+        ToDoWindow toDoWindowEx = generateExistingToDo();
+        // ToDoWindow toDoWindow = generateNEWToDo();
 
-        toDoWindow = generateMISCoDo();
-        this.toDoWindows.put(toDoWindow.getToDoTitle(), toDoWindow);
-
-        toDoWindow = generateStandardToDo();
-        this.toDoWindows.put(toDoWindow.getToDoTitle(), toDoWindow);
-
-        // toDoWindow = generateNEWoDo();
+        this.toDoWindows.put(toDoWindowEnv.getToDoTitle(), toDoWindowEnv);
+        this.toDoWindows.put(toDoWindowCom.getToDoTitle(), toDoWindowCom);
+        this.toDoWindows.put(toDoWindowEx.getToDoTitle(), toDoWindowEx);
         // this.toDoWindows.put(toDoWindow.getToDoTitle(), toDoWindow);
     }
 
@@ -74,34 +72,46 @@ public class ToDoManager {
         }
     }
 
-    private ToDoWindow generateStandardToDo() {
-        ToDoWindow toDoWindow = new ToDoWindow("Standard Guide");
+    private ToDoWindow generateExistingToDo() {
+        ToDoWindow toDoWindow = new ToDoWindow("Existing Model");
         toDoWindow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
-        toDoWindow.addToDoElement("Task 1");
-        toDoWindow.addToDoElement("Task 2");
-        toDoWindow.addToDoElement("Task 3");
+        toDoWindow.addToDoElement("Identify characteristics of specific tasks");
+        toDoWindow.addToDoElement("Analyse many different users performing each task");
+        toDoWindow.addToDoElement("Produce a task description for each user on each task");
         return toDoWindow;
     }
 
-    private ToDoWindow generateCTTToDo() {
-        ToDoWindow toDoWindow = new ToDoWindow("CTT Guide");
+    private ToDoWindow generateCompositeToDo() {
+        ToDoWindow toDoWindow = new ToDoWindow("Composite Model");
         toDoWindow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
-        toDoWindow.addToDoElement("CTT-Task 1");
-        toDoWindow.addToDoElement("CTT-Task 2");
-        toDoWindow.addToDoElement("CTT-Task 3");
+        toDoWindow.addToDoElement("From each task description for the same goal, produce a composite task model \n" +
+                "which includes all the different ways of achieving the goal ");
+        toDoWindow.addToDoElement("Identify all the different ways of achieving the same goal");
+        toDoWindow.addToDoElement("Resolve conflicting descriptions");
+        toDoWindow.addToDoElement("Identify optional aspects of a task");
+        toDoWindow.addToDoElement("Identify compulsory aspects of a task");
+        toDoWindow.addToDoElement("Identify commonalities of behaviour, patterns of behaviour and common \n" +
+                "objects across the different tasks");
+        toDoWindow.addToDoElement("Identify constraints and dependencies across tasks");
+        toDoWindow.addToDoElement("Identify the different objects and typical instances of objects where there are a \n" +
+                "number of different examples of the same object across the different tasks");
         return toDoWindow;
     }
 
-    private ToDoWindow generateMISCoDo() {
-        ToDoWindow toDoWindow = new ToDoWindow("MISC Guide");
+    private ToDoWindow generateEnvisionedToDo() {
+        ToDoWindow toDoWindow = new ToDoWindow("Envisioned Model");
         toDoWindow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
-        toDoWindow.addToDoElement("MISC-Task 1");
-        toDoWindow.addToDoElement("MISC-Task 2");
-        toDoWindow.addToDoElement("MISC-Task 3");
+        toDoWindow.addToDoElement("Identify any tasks that can be avoided or that are unnecessary");
+        toDoWindow.addToDoElement("Identify any tasks that can be carried out completely by the computer");
+        toDoWindow.addToDoElement("Identify any tasks that can only be carried out by the user");
+
+        toDoWindow.addToDoElement("Identify where users and the computer will need to interact to carry out a \n" +
+                "task");
+        toDoWindow.addToDoElement("Identify where sequences of activity can be made easier to perform");
         return toDoWindow;
     }
 
-    private ToDoWindow generateNEWoDo() {
+    private ToDoWindow generateNEWToDo() {
         ToDoWindow toDoWindow = new ToDoWindow("NEW Guide");
         toDoWindow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
         toDoWindow.addToDoElement("NEW-Task 1");
