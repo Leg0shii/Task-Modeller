@@ -1,17 +1,18 @@
 package de.legoshi.taskmodeller;
 
+import de.legoshi.taskmodeller.gui.itembar.ItemBarManager;
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
 import de.legoshi.taskmodeller.gui.symbol.connection.CTTConnection;
 import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
 import de.legoshi.taskmodeller.gui.symbol.connection.GroupingConnection;
 import de.legoshi.taskmodeller.gui.symbol.connection.NormalConnection;
+import de.legoshi.taskmodeller.gui.windows.dialogwindow.*;
 import de.legoshi.taskmodeller.gui.windows.guidelinewindow.ToDoManager;
-import de.legoshi.taskmodeller.gui.windows.guidelinewindow.ToDoWindow;
-import de.legoshi.taskmodeller.gui.windows.newwindow.NewProjectCountWindow;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import de.legoshi.taskmodeller.util.ModelType;
 import de.legoshi.taskmodeller.util.NodesHelper;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -22,8 +23,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.stage.StageStyle;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -59,10 +58,12 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        this.workplace = new Workplace(this.toolBar);
-        this.toDoManager = new ToDoManager(todoBar);
+        ItemBarManager itemBarManager = new ItemBarManager(toolBar);
+        this.workplace = new Workplace(itemBarManager);
+        this.workplace.initWorkplace();
         this.wGroup = new Group(workplace);
         this.contentPane.setContent(wGroup);
+        this.toDoManager = new ToDoManager(todoBar);
 
         contentPane.addEventFilter(ScrollEvent.ANY, (scrollEvent -> {
             if (!scrollEvent.isShiftDown()) return;
@@ -101,7 +102,7 @@ public class MainController implements Initializable {
     }
 
     public void createProject() {
-        new NewProjectCountWindow(workplace.getProjectWindow()).show();
+        new NewCountWindow(workplace.getProjectWindow()).show();
     }
 
     @FXML
@@ -191,4 +192,30 @@ public class MainController implements Initializable {
         this.todoBar.setStyle("-fx-border-color: black");
     }
 
+    public void openProject() {
+        new OpenWindow(workplace);
+    }
+
+    public void saveProject() {
+        if (!workplace.isExistent()) return;
+        new SaveWindow(workplace.getProjectWindow());
+    }
+
+    public void help() {
+        new HelpWindow().show();
+    }
+
+    public void shortcut() {
+        new ShortCutWindow().show();
+    }
+
+    public void about() {
+        new AboutWindow().show();
+    }
+
+    public void centerWindow() {
+    }
+
+    public void centerModel() {
+    }
 }

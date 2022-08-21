@@ -1,7 +1,10 @@
 package de.legoshi.taskmodeller.gui.windows;
 
 import de.legoshi.taskmodeller.util.ModelType;
+import de.legoshi.taskmodeller.util.PWInitObject;
 import de.legoshi.taskmodeller.util.StatusType;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
@@ -51,13 +54,18 @@ public class ProjectWindow extends GridPane {
         return allWindows;
     }
 
-    public void generatePaintWindows(ArrayList<HBox> exHBox, ArrayList<HBox> coHBox, ArrayList<HBox> evHBox) {
+    public void generatePaintWindows(ArrayList<PWInitObject> exO, ArrayList<PWInitObject> coO, ArrayList<PWInitObject> evO) {
         this.minHeight(Math.max(Math.max(existentCount, compositeCount), envisionedCount) * SIZE);
         this.maxHeight(SIZE*3);
 
-        initPaintWindows(existentWindows, Color.color(227.0/255.0, 251.0/255.0, 227.0/255.0), exHBox, 0);
-        initPaintWindows(compositeWindows, Color.color(1.0, 250.0/255.0, 205.0/255.0), coHBox, 1);
-        initPaintWindows(envisionedWindows, Color.color(1.0, 220.0/255.0, 223.0/255.0), evHBox, 2);
+        this.existentCount = exO.size();
+        this.compositeCount = coO.size();
+        this.envisionedCount = evO.size();
+
+        clearAll();
+        initPaintWindows(existentWindows, Color.color(227.0/255.0, 251.0/255.0, 227.0/255.0), exO, 0);
+        initPaintWindows(compositeWindows, Color.color(1.0, 250.0/255.0, 205.0/255.0), coO, 1);
+        initPaintWindows(envisionedWindows, Color.color(1.0, 220.0/255.0, 223.0/255.0), evO, 2);
         applyShiftOffset();
 
         // sets active window on first project creation to first window
@@ -66,21 +74,19 @@ public class ProjectWindow extends GridPane {
         workplace.getItemBarManager().reloadItemBarWithModel(existentWindows.get(0), existentWindows.get(0).getModelType());
     }
 
-    private void initPaintWindows(ArrayList<PaintWindow> windows, Color color, ArrayList<HBox> hBoxes, int xShift) {
+    private void initPaintWindows(ArrayList<PaintWindow> windows, Color color, ArrayList<PWInitObject> pwInitObjects, int xShift) {
         int i = 0;
-        for (HBox hBox : hBoxes) {
-            TextField tf = (TextField) hBox.getChildren().get(0);
-            ComboBox<String> cB = (ComboBox<String>) hBox.getChildren().get(1);
+        for (PWInitObject initObject : pwInitObjects) {
 
             StatusType statusType = StatusType.values()[xShift];
-            ModelType modelType = ModelType.valueOf(cB.getValue());
+            ModelType modelType = ModelType.valueOf(initObject.getModelType());
 
             PaintWindow paintWindow = new PaintWindow(this.workplace, xShift, i, statusType, modelType);
             paintWindow.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, new Insets(0, 0, 0, 0))));
-            paintWindow.setName(tf.getText());
+            paintWindow.setName(initObject.getName());
             paintWindow.setTranslateX(100);
             paintWindow.setTranslateY(100);
-            Label label = new Label(tf.getText() + " (" + modelType.name() + ", " + statusType.name() + ")");
+            Label label = new Label(initObject.getName() + " (" + modelType.name() + ", " + statusType.name() + ")");
             label.setPadding(new Insets(10, 10, 10, 10));
             paintWindow.getChildren().add(label);
             windows.add(paintWindow);
@@ -107,6 +113,13 @@ public class ProjectWindow extends GridPane {
             pW.setTranslateY(pW.getTranslateY() + yOffsetShift);
             pW.setYOffsetShift(yOffsetShift);
         }
+    }
+
+    public void clearAll() {
+        this.compositeWindows.clear();
+        this.existentWindows.clear();
+        this.envisionedWindows.clear();
+        this.getChildren().clear();
     }
 
 }

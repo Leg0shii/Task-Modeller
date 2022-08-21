@@ -1,8 +1,7 @@
-package de.legoshi.taskmodeller.gui.windows.newwindow;
+package de.legoshi.taskmodeller.gui.windows.dialogwindow;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -10,11 +9,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class NewProject extends Stage {
+public abstract class DialogWindow extends Stage {
 
     public final GridPane gridPane;
 
-    public NewProject() {
+    public DialogWindow() {
         gridPane = new GridPane();
         gridPane.setPadding(new Insets(15, 15, 15, 15));
         gridPane.setHgap(20);

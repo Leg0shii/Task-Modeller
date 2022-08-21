@@ -9,19 +9,19 @@
        <MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="627.0">
            <Menu mnemonicParsing="false" text="File">
                <MenuItem mnemonicParsing="false" onAction="#createProject" text="New Project" />
-               <MenuItem mnemonicParsing="false" text="Open Project" />
-               <MenuItem mnemonicParsing="false" text="Save Project" />
+               <MenuItem mnemonicParsing="false" text="Open Project" onAction="#openProject"/>
+               <MenuItem mnemonicParsing="false" text="Save Project" onAction="#saveProject"/>
            </Menu>
            <Menu mnemonicParsing="false" text="View">
-               <MenuItem mnemonicParsing="false" onAction="#zoomIn" text="Zoom in" />
-               <MenuItem mnemonicParsing="false" onAction="#zoomOut" text="Zoom out" />
-               <MenuItem mnemonicParsing="false" text="Center" />
-               <MenuItem mnemonicParsing="false" text="Rearrange" />
+               <MenuItem mnemonicParsing="false" onAction="#zoomIn" text="Zoom in (CTRL + Mousewheel)" />
+               <MenuItem mnemonicParsing="false" onAction="#zoomOut" text="Zoom out (CTRL + Mousewheel)" />
+               <MenuItem mnemonicParsing="false" onAction="#centerWindow" text="Center Window (CTRL + G)" />
+               <MenuItem mnemonicParsing="false" onAction="#centerModel" text="Center Model (CTRL + F)" />
            </Menu>
            <Menu mnemonicParsing="false" text="Help">
-               <MenuItem mnemonicParsing="false" text="About" />
-               <MenuItem mnemonicParsing="false" text="Shortcuts" />
-               <MenuItem mnemonicParsing="false" text="Help" />
+               <MenuItem mnemonicParsing="false" text="About" onAction="#about"/>
+               <MenuItem mnemonicParsing="false" text="Shortcuts" onAction="#shortcut"/>
+               <MenuItem mnemonicParsing="false" text="Help" onAction="#help"/>
            </Menu>
        </MenuBar>
       <HBox fx:id="middleHolder" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">

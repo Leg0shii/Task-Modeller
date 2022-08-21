@@ -1,4 +1,4 @@
-package de.legoshi.taskmodeller.gui.windows.newwindow;
+package de.legoshi.taskmodeller.gui.windows.dialogwindow;
 
 import de.legoshi.taskmodeller.gui.windows.ProjectWindow;
 import javafx.geometry.HPos;
@@ -7,9 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class NewProjectCountWindow extends NewProject {
+public class NewCountWindow extends DialogWindow {
 
-    public NewProjectCountWindow(ProjectWindow project) {
+    public NewCountWindow(ProjectWindow project) {
         this.setTitle("Set Paintwindow Count");
 
         Label existingL = new Label("Existing Model Count:");
@@ -38,7 +38,7 @@ public class NewProjectCountWindow extends NewProject {
                 project.setExistentCount(Integer.parseInt(existingTF.getText()));
                 project.setCompositeCount(Integer.parseInt(compositeTF.getText()));
                 project.setEnvisionedCount(Integer.parseInt(envisionedTF.getText()));
-                new NewProjectSettingsWindow(project).show();
+                new NewSettingsWindow(project).show();
                 this.close();
             } catch (NumberFormatException exception) {
                 errLabel.setText("!!!Please use integer values!!!");

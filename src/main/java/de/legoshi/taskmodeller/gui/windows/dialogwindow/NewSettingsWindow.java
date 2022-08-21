@@ -1,6 +1,7 @@
-package de.legoshi.taskmodeller.gui.windows.newwindow;
+package de.legoshi.taskmodeller.gui.windows.dialogwindow;
 
 import de.legoshi.taskmodeller.gui.windows.ProjectWindow;
+import de.legoshi.taskmodeller.util.PWInitObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
@@ -14,10 +15,10 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
-public class NewProjectSettingsWindow extends NewProject {
+public class NewSettingsWindow extends DialogWindow {
 
-    public NewProjectSettingsWindow(ProjectWindow project) {
-        this.setTitle("Paintwindow Settings");
+    public NewSettingsWindow(ProjectWindow project) {
+        this.setTitle("PaintWindow Settings");
 
         Label existingModelL = new Label("Existing Model");
         Label compositeModelL = new Label("Composite Model");
@@ -45,7 +46,10 @@ public class NewProjectSettingsWindow extends NewProject {
         Button continueBtn = new Button("Continue");
         GridPane.setHalignment(continueBtn, HPos.RIGHT);
         continueBtn.setOnMouseClicked(mouseEvent -> {
-            NewProjectSaveWindow newProjectSaveWindow = new NewProjectSaveWindow(project, exHBoxes, coHBoxes, evHBoxes);
+            ArrayList<PWInitObject> exO = getPWObject(exHBoxes);
+            ArrayList<PWInitObject> coO = getPWObject(coHBoxes);
+            ArrayList<PWInitObject> evO = getPWObject(evHBoxes);
+            SaveWindow newProjectSaveWindow = new SaveWindow(project, exO, coO, evO);
             newProjectSaveWindow.show();
             this.close();
         });
@@ -71,6 +75,17 @@ public class NewProjectSettingsWindow extends NewProject {
             hBoxes.add(hBox);
         }
         return hBoxes;
+    }
+
+    private ArrayList<PWInitObject> getPWObject(ArrayList<HBox> hBoxes) {
+        ArrayList<PWInitObject> arrayList = new ArrayList<>();
+        for (HBox hBox : hBoxes) {
+            TextField textField = (TextField) hBox.getChildren().get(0);
+            ComboBox<String> comboBox = (ComboBox<String>) hBox.getChildren().get(1);
+            PWInitObject pwInitObject = new PWInitObject(textField.getText(), comboBox.getValue());
+            arrayList.add(pwInitObject);
+        }
+        return arrayList;
     }
 
 }
