@@ -1,6 +1,5 @@
 package de.legoshi.taskmodeller.gui.symbol;
 
-import de.legoshi.taskmodeller.MainController;
 import de.legoshi.taskmodeller.gui.symbol.connection.*;
 import de.legoshi.taskmodeller.gui.symbol.item.ctt.AbstractTask;
 import de.legoshi.taskmodeller.gui.symbol.item.ctt.SimpleTask;
@@ -16,7 +15,6 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.text.Font;
 import lombok.Getter;
@@ -184,7 +182,10 @@ public class ModelNode extends Drawable {
     }
 
     private boolean calcUnderlyingElement(Workplace workplace, MouseEvent event, boolean type) {
-        Point2D mouseClick = new Point2D((event.getSceneX() - 200) / workplace.getScaleX(), (event.getSceneY() - 25) / workplace.getScaleY());
+        double viewportShiftX = workplace.getScrollPane().getViewportBounds().getMinX() *-1;
+        double viewportShiftY = workplace.getScrollPane().getViewportBounds().getMinY() *-1;
+
+        Point2D mouseClick = new Point2D((event.getSceneX() - 200 + viewportShiftX) / workplace.getScaleX(), (event.getSceneY() - 25 + viewportShiftY) / workplace.getScaleY());
         if (this instanceof GroupingNode) {
             for (PaintWindow pW : workplace.getAllWindows()) {
                 double xCurrentPWOffset = pW.getXPosition() * ProjectWindow.SIZE - 1.5 * pW.getXPosition() * ProjectWindow.HGAP;

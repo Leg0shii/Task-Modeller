@@ -12,7 +12,6 @@ import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import de.legoshi.taskmodeller.util.ModelType;
 import de.legoshi.taskmodeller.util.NodesHelper;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -59,8 +58,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         ItemBarManager itemBarManager = new ItemBarManager(toolBar);
-        this.workplace = new Workplace(itemBarManager);
-        this.workplace.initWorkplace();
+        this.workplace = new Workplace(itemBarManager, contentPane);
         this.wGroup = new Group(workplace);
         this.contentPane.setContent(wGroup);
         this.toDoManager = new ToDoManager(todoBar);

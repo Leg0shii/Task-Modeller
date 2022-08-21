@@ -5,13 +5,19 @@ import de.legoshi.taskmodeller.gui.windows.Workplace;
 import javafx.scene.input.MouseEvent;
 
 public class ProgressConnection extends Connection {
-    public ProgressConnection(Workplace workplace, ModelNode node1, MouseEvent mouseEvent) {
-        super(workplace, node1, mouseEvent);
 
+    private final Workplace workplace;
+    public ProgressConnection(Workplace workplace, ModelNode node1) {
+        super(workplace, node1);
+
+        this.workplace = workplace;
+
+        workplace.getScrollPane().addEventFilter(MouseEvent.MOUSE_MOVED, super::recalculateMouseBindings);
         workplace.getChildren().add(this);
     }
 
     public void deleteConnection() {
+        workplace.getScrollPane().removeEventFilter(MouseEvent.MOUSE_MOVED, super::recalculateMouseBindings);
         getWorkplace().getChildren().remove(this);
     }
 

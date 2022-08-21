@@ -5,10 +5,7 @@ Insbesondere Aspekte des gleichzeitigen Modellierens werden in diesem Werkzeug u
 
 ### TODO
 - [ ] centering the screens (fit everything onto it)
-- [ ] center on one model (put on model in the middle)
+- [ ] center on one model (put one model in the middle)
 
 - [ ] indicate connection process
-
 - [ ] remove every connection attempt if not clicked on another node
-- [ ] grouping node needs fix on zoom/scroll
-- [ ] grouping node color changes when resized

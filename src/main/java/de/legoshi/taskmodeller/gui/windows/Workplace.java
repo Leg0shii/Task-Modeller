@@ -12,6 +12,7 @@ import de.legoshi.taskmodeller.save.DeserializeManager;
 import de.legoshi.taskmodeller.save.serialize.ProjectSerializer;
 import de.legoshi.taskmodeller.util.ModelType;
 import javafx.scene.Group;
+import javafx.scene.control.ScrollPane;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 @Getter
 @Setter
 public class Workplace extends Group {
+
+    private ScrollPane scrollPane;
 
     private ProjectWindow projectWindow;
     private String workplaceName;
@@ -43,8 +46,9 @@ public class Workplace extends Group {
     private boolean existent;
     private boolean pWSelected;
 
-    public Workplace(ItemBarManager itemBarManager) {
+    public Workplace(ItemBarManager itemBarManager, ScrollPane scrollPane) {
         initWorkplace();
+        this.scrollPane = scrollPane;
         this.projectWindow = new ProjectWindow(this);
         this.getChildren().add(projectWindow);
         this.itemBarManager = itemBarManager;

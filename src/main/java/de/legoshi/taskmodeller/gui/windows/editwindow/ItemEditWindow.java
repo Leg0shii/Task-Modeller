@@ -53,7 +53,7 @@ public class ItemEditWindow extends EditWindow<ModelNode> {
             dS.setAttemptsConnect(false);
         }
         this.item.setAttemptsConnect(true);
-        ProgressConnection progressConnection = new ProgressConnection(workplace, this.item, mouseEvent);
+        ProgressConnection progressConnection = new ProgressConnection(workplace, this.item);
         this.item.setProgressConnection(progressConnection);
         this.close();
     }

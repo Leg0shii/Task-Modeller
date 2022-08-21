@@ -66,6 +66,14 @@ public class PaintWindow extends AnchorPane {
         connections = new ArrayList<>();
 
         this.setOnMousePressed(mouseEvent -> {
+
+            for (PaintWindow pW : workplace.getAllWindows()) {
+                for (ModelNode mN : pW.getDrawnNodes()) {
+                    mN.setAttemptsConnect(false);
+                    if (mN.getProgressConnection() != null) mN.getProgressConnection().deleteConnection();
+                }
+            }
+
             if (!mouseEvent.isPrimaryButtonDown()) return;
             if (workplace.getSelectedPaintWindow() != this) {
                 this.setActiveWindow();

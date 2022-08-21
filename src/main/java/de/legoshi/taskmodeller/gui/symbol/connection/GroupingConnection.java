@@ -18,9 +18,13 @@ public class GroupingConnection extends Connection {
     private Bounds node1Bounds;
     private Bounds node2Bounds;
 
+    private final Workplace workplace;
+
     // assumed node1 is the generalisedNode
     public GroupingConnection(Workplace workplace, ModelNode node1, ModelNode node2) {
         super(workplace, node1, node2);
+
+        this.workplace = workplace;
 
         this.node1Bounds = node1.getBoundsInParent();
         this.node2Bounds = node2.getBoundsInParent();

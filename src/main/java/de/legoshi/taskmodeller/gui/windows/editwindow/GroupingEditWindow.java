@@ -53,7 +53,7 @@ public class GroupingEditWindow extends EditWindow<ModelNode> {
                 dS.setAttemptsConnect(false);
             }
         }
-        ProgressConnection progressConnection = new ProgressConnection(workplace, this.item, mouseEvent);
+        ProgressConnection progressConnection = new ProgressConnection(workplace, this.item);
         this.item.setProgressConnection(progressConnection);
         this.item.setAttemptsConnect(true);
         this.close();
@@ -64,7 +64,7 @@ public class GroupingEditWindow extends EditWindow<ModelNode> {
         item.setScaleX(item.getScaleX() + (doubleValue1 - doubleValue));
         item.setBorder(
                 new Border(
-                        new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+                        new BorderStroke(item.getBorder().getStrokes().get(0).getTopStroke(), BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
                                 new BorderWidths(3/item.getScaleY(), 3/item.getScaleX(), 3/item.getScaleY(), 3/item.getScaleX())
                         )
                 )
@@ -76,7 +76,7 @@ public class GroupingEditWindow extends EditWindow<ModelNode> {
         item.setScaleY(item.getScaleY() + (doubleValue1 - doubleValue));
         item.setBorder(
                 new Border(
-                        new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+                        new BorderStroke(item.getBorder().getStrokes().get(0).getTopStroke(), BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
                                 new BorderWidths(3 / item.getScaleY(), 3 / item.getScaleX(), 3 / item.getScaleY(), 3 / item.getScaleX())
                         )
                 )
