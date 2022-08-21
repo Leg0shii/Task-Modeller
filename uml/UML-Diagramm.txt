@@ -1,0 +1,616 @@
+classDiagram
+direction TB
+class AbstractTask {
+  + AbstractTask(Shape) 
+  + generateShape() AbstractTask
+}
+class CCircle {
+  + CCircle(Shape) 
+  + generateShape() CCircle
+}
+class CPentagon {
+  + CPentagon(Shape) 
+  + generateShape() CPentagon
+}
+class CTTConnection {
+  + CTTConnection(Workplace, ModelNode, ModelNode) 
+  + generateShape(Workplace, ModelNode, ModelNode) CTTConnection
+}
+class CTTItemBar {
+  + CTTItemBar() 
+  + prepareItemBar() void
+}
+class CTTLineEditWindow {
+  + CTTLineEditWindow(Workplace, Connection) 
+  + onDelete() void
+}
+class CTTOperation {
+<<enumeration>>
+  + CTTOperation() 
+  + OperationToString() String
+  + valueOf(String) CTTOperation
+  + values() CTTOperation[]
+  + StringToOperation(String) CTTOperation
+}
+class CTriangle {
+  + CTriangle(Shape) 
+  + generateShape() CTriangle
+}
+class CalculationLine {
+  + CalculationLine(double, double, double, double) 
+  + intersect(CalculationLine) Point2D
+}
+class CommentEditWindow {
+  + CommentEditWindow(Workplace, WorkplaceNode) 
+  + onDelete() void
+}
+class Connection {
+  + Connection(Workplace, ModelNode, ModelNode) 
+  + Connection(Workplace, ModelNode, MouseEvent) 
+  + Workplace workplace
+  + ModelNode node1
+  + Label label
+  + ModelNode node2
+  + recalculateMouseBindings(MouseEvent) void
+  + recalculateBindings() void
+  + setBindings() void
+  + onMousePressed(MouseEvent) void
+  + DoubleBinding XStartProperty
+  + DoubleBinding YStartProperty
+  + ModelNode node1
+  + DoubleBinding YEndProperty
+  + ModelNode node2
+  + Label label
+  + Workplace workplace
+  + DoubleBinding XEndProperty
+}
+class ConnectionDeserializer {
+  + ConnectionDeserializer() 
+  + deserialize(JsonParser, DeserializationContext) SimpleConnection
+}
+class ConnectionSerializer {
+  + ConnectionSerializer() 
+  + serialize(Connection, JsonGenerator, SerializerProvider) void
+}
+class DeserializeManager {
+  + DeserializeManager() 
+  + applyWorkplaceChanges(Workplace, String) void
+}
+class DialogWindow {
+  + DialogWindow() 
+}
+class Drawable {
+  + Drawable(Shape) 
+  + Shape polyShape
+  + boolean representative
+  + onMouseClick(Workplace, MouseEvent) void
+  + registerEvents(Workplace) void
+  + onMouseDrag(Workplace, MouseEvent) void
+  + boolean representative
+  + Shape polyShape
+}
+class EditWindow~T~ {
+  + EditWindow(T, String) 
+  + onDelete() void
+}
+class GroupingConnection {
+  + GroupingConnection(Workplace, ModelNode, ModelNode) 
+  + recalculateBindings() void
+  + getIntersectionPoint(Bounds, Point2D, CalculationLine, double, double) Point2D
+  + generateShape(Workplace, ModelNode, ModelNode) GroupingConnection
+}
+class GroupingEditWindow {
+  + GroupingEditWindow(Workplace, ModelNode) 
+  + onScaleY(ModelNode, double, double) void
+  + onConnect(MouseEvent) void
+  + onScaleX(ModelNode, double, double) void
+  + onDelete() void
+}
+class GroupingNode {
+  + GroupingNode(Rectangle) 
+  + generateShape() GroupingNode
+}
+class HelpWindow {
+  + HelpWindow() 
+}
+class ItemBar {
+  + ItemBar() 
+  + prepareItemBar() void
+}
+class ItemBarManager {
+  + ItemBarManager(HBox) 
+  + HBox toolBar
+  + StandardItemBar standardItemBar
+  + CTTItemBar cttItemBar
+  + MiscItemBar miscItemBar
+  + Workplace workplace
+  + onCTTAction(PaintWindow) void
+  + reloadItemBarWithModel(PaintWindow, ModelType) void
+  + onMiscAction() void
+  + getModelItemBar(ModelType) ArrayList~Drawable~
+  + reloadItemBar(PaintWindow, ModelType) void
+  + onFreeAction(PaintWindow) void
+  + HBox toolBar
+  + Workplace workplace
+  + MiscItemBar miscItemBar
+  + CTTItemBar cttItemBar
+  + StandardItemBar standardItemBar
+}
+class ItemEditWindow {
+  + ItemEditWindow(Workplace, ModelNode) 
+  + onConnect(MouseEvent) void
+  + onScale(ModelNode, double, double) void
+  + onDelete() void
+}
+class LineEditWindow {
+  + LineEditWindow(Workplace, Connection) 
+  + onDelete() void
+}
+class Main {
+  + Main() 
+  + main(String[]) void
+  + start(Stage) void
+}
+class MainController {
+  + MainController() 
+  + MenuBar menuBar
+  + HBox middleHolder
+  + ToDoManager toDoManager
+  + ScrollPane contentPane
+  + VBox todoBar
+  + VBox itemBarSelector
+  + HBox toolBar
+  + AnchorPane scrollPaneContent
+  + RadioButton miscRBTN
+  + RadioButton standardRBTN
+  + Workplace workplace
+  + HBox toolBarHolder
+  + RadioButton connectionRBTN
+  + VBox mainFrame
+  + createProject() void
+  + openProject() void
+  + scaleProjectView(double) void
+  + initialize(URL, ResourceBundle) void
+  + onRadioButtonChange() void
+  + onPasteNodes() void
+  + saveProject(ActionEvent) void
+  + onCopyNodes() void
+  + zoomIn() void
+  + zoomOut() void
+  + colorNodes() void
+  + ScrollPane contentPane
+  + Group WGroup
+  + VBox mainFrame
+  + VBox todoBar
+  + Workplace workplace
+  + HBox middleHolder
+  + HBox toolBar
+  + RadioButton connectionRBTN
+  + VBox itemBarSelector
+  + RadioButton miscRBTN
+  + RadioButton standardRBTN
+  + AnchorPane scrollPaneContent
+  + MenuBar menuBar
+  + HBox toolBarHolder
+  + ToDoManager toDoManager
+}
+class MiscItemBar {
+  + MiscItemBar() 
+  + prepareItemBar() void
+}
+class ModelNode {
+  + ModelNode(Shape) 
+  + Label label
+  + boolean attemptsConnect
+  + ProgressConnection progressConnection
+  + String description
+  + onMouseClick(Workplace, MouseEvent) void
+  + performSingleSelection(PaintWindow) void
+  + getPaintWindowOfNode(Workplace) PaintWindow
+  + colorUnselected() void
+  + calcUnderlyingElement(Workplace, MouseEvent, boolean) boolean
+  + windowSwitch(PaintWindow) boolean
+  + colorSelected() void
+  + onMouseDrag(Workplace, MouseEvent) void
+  + String description
+  + boolean attemptsConnect
+  + Label label
+  + ProgressConnection progressConnection
+}
+class ModelType {
+<<enumeration>>
+  + ModelType() 
+  + valueOf(String) ModelType
+  + values() ModelType[]
+}
+class NewProject {
+  + NewProject() 
+}
+class NewProjectCountWindow {
+  + NewProjectCountWindow(ProjectWindow) 
+}
+class NewProjectSaveWindow {
+  + NewProjectSaveWindow(ProjectWindow, ArrayList~PWInitObject~, ArrayList~PWInitObject~, ArrayList~PWInitObject~) 
+}
+class NewProjectSettingsWindow {
+  + NewProjectSettingsWindow(ProjectWindow) 
+  + getPWObject(ArrayList~HBox~) ArrayList~PWInitObject~
+  + generateDisplayThing(int) ArrayList~HBox~
+}
+class NodeDeserializer {
+  + NodeDeserializer() 
+  + deserialize(JsonParser, DeserializationContext) ModelNode
+}
+class NodeSerializer {
+  + NodeSerializer() 
+  + serialize(ModelNode, JsonGenerator, SerializerProvider) void
+}
+class NodesHelper {
+  + NodesHelper() 
+  + applyAttributes(ModelNode, ModelNode) void
+  + getDuplicate(Workplace, Drawable) Drawable
+  + prepareDrawable(Workplace, Drawable) Drawable
+}
+class NormalConnection {
+  + NormalConnection(Workplace, ModelNode, ModelNode) 
+  + generateShape(Workplace, ModelNode, ModelNode) NormalConnection
+}
+class OpenWindow {
+  + OpenWindow() 
+}
+class PWInitObject {
+  + PWInitObject(String, String) 
+  + String name
+  + String modelType
+  + String name
+  + String modelType
+}
+class PaintWindow {
+  + PaintWindow(Workplace, int, int, StatusType, ModelType) 
+  + String name
+  + ArrayList~Connection~ connections
+  + StatusType statusType
+  + ArrayList~ModelNode~ drawnNodes
+  + Workplace workplace
+  + ArrayList~ModelNode~ selectedNodes
+  + ModelType modelType
+  + SelectionRectangle selectionRectangle
+  + addConnection(Connection) void
+  + removeGenNodeFromCanvas(ModelNode) void
+  + removeNode(ModelNode) void
+  + addNodeToCanvas(ModelNode) void
+  + isConnected(Connection) boolean
+  + removeConnection(Connection) void
+  + addGenNodeToCanvas(ModelNode) void
+  + setActiveWindow() void
+  + isNodeSameWindow(Connection) boolean
+  + removeSelectedNodes() void
+  + initialize() void
+  + putSelectedNodes(Point2D, Point2D) void
+  + nodeInsideSelection(ModelNode, Point2D, Point2D) boolean
+  + String name
+  + ArrayList~ModelNode~ selectedNodes
+  + ArrayList~Connection~ connections
+  + StatusType statusType
+  + double YOffsetShift
+  + int YPosition
+  + ArrayList~ModelNode~ drawnNodes
+  + ArrayList~Connection~ selectedConnections
+  + int XPosition
+  + ModelType modelType
+  + Workplace workplace
+  + SelectionRectangle selectionRectangle
+}
+class PaintWindowDeserializer {
+  + PaintWindowDeserializer() 
+  + deserialize(JsonParser, DeserializationContext) SimplePaintWindow
+  + getObjectMapper(Class, JsonDeserializer) ObjectMapper
+}
+class PaintWindowSerializer {
+  + PaintWindowSerializer() 
+  + serialize(PaintWindow, JsonGenerator, SerializerProvider) void
+}
+class PolygonHelper {
+  + PolygonHelper() 
+  + createPolygon(Point2D[]) Polygon
+}
+class ProgressConnection {
+  + ProgressConnection(Workplace, ModelNode, MouseEvent) 
+  + deleteConnection() void
+}
+class ProjectDeserializer {
+  + ProjectDeserializer() 
+  + deserialize(JsonParser, DeserializationContext) SimpleWorkplace
+  + getObjectMapper(Class, JsonDeserializer) ObjectMapper
+}
+class ProjectSerializer {
+  + ProjectSerializer() 
+  + serialize(Workplace, JsonGenerator, SerializerProvider) void
+}
+class ProjectWindow {
+  + ProjectWindow(Workplace) 
+  + int envisionedCount
+  + ArrayList~PaintWindow~ compositeWindows
+  + ArrayList~PaintWindow~ existentWindows
+  + Workplace workplace
+  + int compositeCount
+  + int existentCount
+  + ArrayList~PaintWindow~ envisionedWindows
+  + clearAll() void
+  + applyShiftOffset() void
+  + setYOffsetShift(ArrayList~PaintWindow~, int, int) void
+  + initPaintWindows(ArrayList~PaintWindow~, Color, ArrayList~PWInitObject~, int) void
+  + generatePaintWindows(ArrayList~PWInitObject~, ArrayList~PWInitObject~, ArrayList~PWInitObject~) void
+  + ArrayList~PaintWindow~ envisionedWindows
+  + ArrayList~PaintWindow~ allWindows
+  + int envisionedCount
+  + int existentCount
+  + ArrayList~PaintWindow~ existentWindows
+  + Workplace workplace
+  + int compositeCount
+  + ArrayList~PaintWindow~ compositeWindows
+}
+class SaveWindow {
+  + SaveWindow() 
+}
+class SelectionRectangle {
+  + SelectionRectangle(MouseEvent) 
+  + Line firstLine
+  + double startX
+  + double newXPos
+  + Line thirdLine
+  + Line secondLine
+  + double newYPos
+  + Line fourthLine
+  + double startY
+  + updateRect(double, double) void
+  + invalidate() void
+  + updateLine(Line, double, double, double, double) void
+  + double newXPos
+  + double startX
+  + double newYPos
+  + Line fourthLine
+  + Line thirdLine
+  + double startY
+  + Line secondLine
+  + Line firstLine
+}
+class SerializeManager {
+  + SerializeManager() 
+  + serializeModelNodesOfPW(PaintWindow) String
+  + serializeCommentNodes(Workplace) String
+  + stripString(String) String
+  + serializeGroupingNodes(Workplace) String
+  + serializeProjectWindowConnections(Workplace) String
+  + serializeConnectionsOfPW(PaintWindow) String
+  + serializePW(Workplace) String
+}
+class ShortCutWindow {
+  + ShortCutWindow() 
+}
+class SimpleConnection {
+  + SimpleConnection() 
+  + String node1ID
+  + String node2ID
+  + String className
+  + double strokeWidth
+  + Color color
+  + String id
+  + String name
+  + String name
+  + Color color
+  + double strokeWidth
+  + String className
+  + String node2ID
+  + String id
+  + String node1ID
+}
+class SimplePaintWindow {
+  + SimplePaintWindow() 
+  + ArrayList~SimpleConnection~ connections
+  + String name
+  + ArrayList~ModelNode~ modelNodes
+  + ModelType modelType
+  + StatusType statusType
+  + String name
+  + ModelType modelType
+  + ArrayList~SimpleConnection~ connections
+  + StatusType statusType
+  + ArrayList~ModelNode~ modelNodes
+}
+class SimpleTask {
+  + SimpleTask(Shape) 
+  + generateShape() SimpleTask
+}
+class SimpleWorkplace {
+  + SimpleWorkplace() 
+  + ArrayList~ModelNode~ groupingNodes
+  + int compositeWindowCount
+  + String name
+  + ArrayList~SimplePaintWindow~ paintWindows
+  + String savePath
+  + int existingWindowCount
+  + int envisionedWindowCount
+  + ArrayList~WorkplaceNode~ comments
+  + ArrayList~SimpleConnection~ groupingConnections
+  + applySettingsToWorkplace(Workplace) void
+  + ArrayList~WorkplaceNode~ comments
+  + String name
+  + int envisionedWindowCount
+  + ArrayList~ModelNode~ groupingNodes
+  + String savePath
+  + int existingWindowCount
+  + ArrayList~SimpleConnection~ groupingConnections
+  + ArrayList~SimplePaintWindow~ paintWindows
+  + int compositeWindowCount
+}
+class Square {
+  + Square(Shape) 
+  + generateShape() Square
+}
+class StandardItemBar {
+  + StandardItemBar() 
+  + prepareItemBar() void
+}
+class StatusType {
+<<enumeration>>
+  + StatusType() 
+  + values() StatusType[]
+  + valueOf(String) StatusType
+}
+class TextSymbol {
+  + TextSymbol(Shape) 
+  + generateShape() TextSymbol
+}
+class ToDoElement {
+  + ToDoElement(String) 
+}
+class ToDoManager {
+  + ToDoManager(VBox) 
+  + VBox todoBar
+  + Color color3
+  + HashMap~ToDoTitle, ToDoWindow~ toDoWindows
+  + ToDoWindow activeWindow
+  + Color color4
+  + generateCompositeToDo() ToDoWindow
+  + generateNEWToDo() ToDoWindow
+  + registerToDoWindow() void
+  + generateExistingToDo() ToDoWindow
+  + generateEnvisionedToDo() ToDoWindow
+  + registerTitleClick() void
+  + HashMap~ToDoTitle, ToDoWindow~ toDoWindows
+  + ToDoWindow activeWindow
+  + VBox todoBar
+  + Color color3
+  + Color color4
+}
+class ToDoTitle {
+  + ToDoTitle(String) 
+}
+class ToDoWindow {
+  + ToDoWindow(String) 
+  + ToDoTitle toDoTitle
+  + ArrayList~ToDoElement~ toDoElements
+  + addToDoElement(String) void
+  + ArrayList~ToDoElement~ toDoElements
+  + ToDoTitle toDoTitle
+}
+class WorkPlaceNodeDeserializer {
+  + WorkPlaceNodeDeserializer() 
+  + deserialize(JsonParser, DeserializationContext) WorkplaceNode
+}
+class WorkPlaceNodeSerializer {
+  + WorkPlaceNodeSerializer() 
+  + serialize(WorkplaceNode, JsonGenerator, SerializerProvider) void
+}
+class Workplace {
+  + Workplace(ItemBarManager) 
+  + ArrayList~ModelNode~ generalisedList
+  + ProjectWindow projectWindow
+  + ModelNode selectedSymbol
+  + ArrayList~GroupingConnection~ groupingConnections
+  + String savePath
+  + String workplaceName
+  + boolean existent
+  + ArrayList~WorkplaceNode~ commentList
+  + ItemBarManager itemBarManager
+  + PaintWindow selectedPaintWindow
+  + ModelType copiedFromModelType
+  + ArrayList~Connection~ copiedConnections
+  + ArrayList~ModelNode~ copiedSymbols
+  + saveWorkspace() void
+  + reloadWorkspace(String, String) void
+  + reloadWorkspaceFromFile(String, String) void
+  + initWorkplace() void
+  + ArrayList~WorkplaceNode~ commentList
+  + ItemBarManager itemBarManager
+  + ModelType copiedFromModelType
+  + boolean PWSelected
+  + boolean existent
+  + String workplaceName
+  + ProjectWindow projectWindow
+  + ArrayList~PaintWindow~ allWindows
+  + String savePath
+  + ArrayList~ModelNode~ generalisedList
+  + ModelNode selectedSymbol
+  + ArrayList~GroupingConnection~ groupingConnections
+  + ArrayList~ModelNode~ copiedSymbols
+  + ArrayList~Connection~ copiedConnections
+  + PaintWindow selectedPaintWindow
+}
+class WorkplaceNode {
+  + WorkplaceNode(Shape) 
+  + Label label
+  + onMouseDrag(Workplace, MouseEvent) void
+  + onMouseClick(Workplace, MouseEvent) void
+  + Label label
+}
+
+AbstractTask  -->  ModelNode 
+CCircle  -->  ModelNode 
+CPentagon  -->  ModelNode 
+CTTConnection  -->  Connection 
+CTTItemBar  -->  ItemBar 
+CTTLineEditWindow  -->  EditWindow~T~ 
+CTTLineEditWindow "1" *--> "workplace 1" Workplace 
+CTriangle  -->  ModelNode 
+CommentEditWindow  -->  EditWindow~T~ 
+CommentEditWindow "1" *--> "workplace 1" Workplace 
+Connection "1" *--> "node1 1" ModelNode 
+Connection "1" *--> "workplace 1" Workplace 
+GroupingConnection  -->  Connection 
+GroupingEditWindow  -->  EditWindow~T~ 
+GroupingEditWindow "1" *--> "workplace 1" Workplace 
+GroupingNode  -->  ModelNode 
+ItemBar "1" *--> "itemBar *" Drawable 
+ItemBarManager "1" *--> "cttItemBar 1" CTTItemBar 
+ItemBarManager "1" *--> "miscItemBar 1" MiscItemBar 
+ItemBarManager "1" *--> "standardItemBar 1" StandardItemBar 
+ItemBarManager "1" *--> "workplace 1" Workplace 
+ItemEditWindow  -->  EditWindow~T~ 
+ItemEditWindow "1" *--> "workplace 1" Workplace 
+LineEditWindow  -->  EditWindow~T~ 
+LineEditWindow "1" *--> "workplace 1" Workplace 
+MainController "1" *--> "toDoManager 1" ToDoManager 
+MainController "1" *--> "workplace 1" Workplace 
+MiscItemBar  -->  ItemBar 
+ModelNode  -->  Drawable 
+ModelNode "1" *--> "progressConnection 1" ProgressConnection 
+NewProjectCountWindow  -->  NewProject 
+NewProjectSaveWindow  -->  NewProject 
+NewProjectSettingsWindow  -->  NewProject 
+NormalConnection  -->  Connection 
+PaintWindow "1" *--> "connections *" Connection 
+PaintWindow "1" *--> "drawnNodes *" ModelNode 
+PaintWindow "1" *--> "modelType 1" ModelType 
+PaintWindow "1" *--> "selectionRectangle 1" SelectionRectangle 
+PaintWindow "1" *--> "statusType 1" StatusType 
+PaintWindow "1" *--> "workplace 1" Workplace 
+ProgressConnection  -->  Connection 
+ProjectWindow "1" *--> "existentWindows *" PaintWindow 
+ProjectWindow "1" *--> "workplace 1" Workplace 
+SimplePaintWindow "1" *--> "modelNodes *" ModelNode 
+SimplePaintWindow "1" *--> "modelType 1" ModelType 
+SimplePaintWindow "1" *--> "connections *" SimpleConnection 
+SimplePaintWindow "1" *--> "statusType 1" StatusType 
+SimpleTask  -->  ModelNode 
+SimpleWorkplace "1" *--> "groupingNodes *" ModelNode 
+SimpleWorkplace "1" *--> "groupingConnections *" SimpleConnection 
+SimpleWorkplace "1" *--> "paintWindows *" SimplePaintWindow 
+SimpleWorkplace "1" *--> "comments *" WorkplaceNode 
+Square  -->  ModelNode 
+StandardItemBar  -->  ItemBar 
+TextSymbol  -->  WorkplaceNode 
+ToDoManager "1" *--> "toDoWindows *" ToDoTitle 
+ToDoManager "1" *--> "toDoWindows *" ToDoWindow 
+ToDoWindow "1" *--> "toDoElements *" ToDoElement 
+ToDoWindow "1" *--> "toDoTitle 1" ToDoTitle 
+Workplace "1" *--> "copiedConnections *" Connection 
+Workplace "1" *--> "groupingConnections *" GroupingConnection 
+Workplace "1" *--> "itemBarManager 1" ItemBarManager 
+Workplace "1" *--> "copiedSymbols *" ModelNode 
+Workplace "1" *--> "copiedFromModelType 1" ModelType 
+Workplace "1" *--> "selectedPaintWindow 1" PaintWindow 
+Workplace "1" *--> "projectWindow 1" ProjectWindow 
+Workplace "1" *--> "commentList *" WorkplaceNode 
+WorkplaceNode  -->  Drawable
