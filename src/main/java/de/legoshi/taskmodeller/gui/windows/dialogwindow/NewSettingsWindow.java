@@ -49,8 +49,7 @@ public class NewSettingsWindow extends DialogWindow {
             ArrayList<PWInitObject> exO = getPWObject(exHBoxes);
             ArrayList<PWInitObject> coO = getPWObject(coHBoxes);
             ArrayList<PWInitObject> evO = getPWObject(evHBoxes);
-            SaveWindow newProjectSaveWindow = new SaveWindow(project, exO, coO, evO);
-            newProjectSaveWindow.show();
+            new SaveWindow(project, exO, coO, evO);
             this.close();
         });
         this.gridPane.add(continueBtn, 2, 1);

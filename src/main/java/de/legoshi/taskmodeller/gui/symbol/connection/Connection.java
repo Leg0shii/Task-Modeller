@@ -2,6 +2,8 @@ package de.legoshi.taskmodeller.gui.symbol.connection;
 
 import de.legoshi.taskmodeller.gui.symbol.ModelNode;
 import de.legoshi.taskmodeller.gui.symbol.item.misc.GroupingNode;
+import de.legoshi.taskmodeller.gui.windows.PaintWindow;
+import de.legoshi.taskmodeller.gui.windows.ProjectWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import de.legoshi.taskmodeller.gui.windows.editwindow.LineEditWindow;
 import javafx.beans.binding.DoubleBinding;
@@ -49,13 +51,25 @@ public class Connection extends Line {
         this.label = new Label("");
         this.node1 = node1;
 
-        this.setStartX((node1.getTranslateX() + node1.getWidth()/2) - 200);
-        this.setStartY((node1.getTranslateY() + node1.getHeight()/2) - 25);
+        PaintWindow pW = workplace.getSelectedPaintWindow();
+        this.setStrokeWidth(3);
+
+        if (node1 instanceof GroupingNode) {
+            this.setStartX((node1.getTranslateX() + node1.getWidth() / 2));
+            this.setStartY((node1.getTranslateY() + node1.getHeight() / 2));
+        } else {
+            double xCurrentPWOffset = pW.getXPosition() * ProjectWindow.SIZE - 1.5 * pW.getXPosition() * ProjectWindow.HGAP;
+            double yCurrentPWOffset = pW.getYPosition() * ProjectWindow.SIZE - 1.5 * pW.getYPosition() * ProjectWindow.VGAP;
+            this.setStartX((node1.getTranslateX() + node1.getWidth() / 2) + xCurrentPWOffset + 100);
+            this.setStartY((node1.getTranslateY() + node1.getHeight() / 2) + yCurrentPWOffset + 100 + pW.getYOffsetShift());
+        }
     }
 
     void recalculateMouseBindings(MouseEvent mouseEvent) {
-        this.setEndX(mouseEvent.getSceneX() - 200);
-        this.setEndY(mouseEvent.getSceneY() - 25);
+        double viewportShiftX = workplace.getScrollPane().getViewportBounds().getMinX() * -1;
+        double viewportShiftY = workplace.getScrollPane().getViewportBounds().getMinY() * -1;
+        this.setEndX(((mouseEvent.getSceneX()) - 200 + viewportShiftX) / workplace.getScaleX());
+        this.setEndY(((mouseEvent.getSceneY()) - 25 + viewportShiftY) / workplace.getScaleY());
     }
 
     public void onMousePressed(MouseEvent mouseEvent) {

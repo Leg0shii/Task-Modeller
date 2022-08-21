@@ -92,6 +92,12 @@ public class ModelNode extends Drawable {
     public void onMouseClick(Workplace workplace, MouseEvent event) {
         PaintWindow paintWindow = workplace.getSelectedPaintWindow();
 
+        for (PaintWindow pW : workplace.getAllWindows()) {
+            for (ModelNode mN : pW.getDrawnNodes()) {
+                if (mN.getProgressConnection() != null) mN.getProgressConnection().deleteConnection();
+            }
+        }
+
         if (calcUnderlyingElement(workplace, event, true)) return;
 
         // to prevent manipulation in item bar area

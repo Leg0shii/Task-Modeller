@@ -12,6 +12,7 @@ import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import de.legoshi.taskmodeller.util.ModelType;
 import de.legoshi.taskmodeller.util.NodesHelper;
+import de.legoshi.taskmodeller.util.StatusType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -80,6 +81,8 @@ public class MainController implements Initializable {
             if (keyEvent.isControlDown()) {
                 if (keyEvent.getCode().equals(KeyCode.C)) onCopyNodes();
                 if (keyEvent.getCode().equals(KeyCode.V)) onPasteNodes();
+                if (keyEvent.getCode().equals(KeyCode.F)) centerModel();
+                if (keyEvent.getCode().equals(KeyCode.G)) centerWindow();
             }
         }));
 
@@ -212,8 +215,28 @@ public class MainController implements Initializable {
     }
 
     public void centerWindow() {
+        double screenSizeX = mainFrame.getWidth() / (3 * 600 + 400);
+        int maxCount = Math.max(workplace.getProjectWindow().getExistentCount(), Math.max(workplace.getProjectWindow().getCompositeCount(), workplace.getProjectWindow().getEnvisionedCount()));
+        double screenSizeY = mainFrame.getHeight() / (maxCount * 600 + (maxCount+1 )* 100);
+        scaleProjectView(Math.min(screenSizeX, screenSizeY)/workplace.getScaleX() * 0.9);
     }
 
     public void centerModel() {
+        PaintWindow pW = workplace.getSelectedPaintWindow();
+        double screenSize = mainFrame.getHeight()/600 * 0.8;
+        scaleProjectView(screenSize/workplace.getScaleX());
+
+        double x;
+
+        if (pW.getStatusType().equals(StatusType.EXISTENT)) x = 0;
+        else if (pW.getStatusType().equals(StatusType.COMPOSITE)) x = 0.625;
+        else x = 1;
+
+        double h = workplace.getProjectWindow().getHeight() + 150;
+        double y = pW.getBoundsInParent().getCenterY();
+        double v = contentPane.getViewportBounds().getHeight();
+
+        contentPane.setHvalue(x);
+        contentPane.setVvalue(contentPane.getVmax() * ((y - 0.5 * v) / (h - v)));
     }
 }

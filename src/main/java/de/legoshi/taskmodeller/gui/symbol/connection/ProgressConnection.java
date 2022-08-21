@@ -12,12 +12,12 @@ public class ProgressConnection extends Connection {
 
         this.workplace = workplace;
 
-        workplace.getScrollPane().addEventFilter(MouseEvent.MOUSE_MOVED, super::recalculateMouseBindings);
+        workplace.addEventFilter(MouseEvent.MOUSE_MOVED, super::recalculateMouseBindings);
         workplace.getChildren().add(this);
     }
 
     public void deleteConnection() {
-        workplace.getScrollPane().removeEventFilter(MouseEvent.MOUSE_MOVED, super::recalculateMouseBindings);
+        workplace.removeEventFilter(MouseEvent.MOUSE_MOVED, super::recalculateMouseBindings);
         getWorkplace().getChildren().remove(this);
     }
 
