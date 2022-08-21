@@ -26,7 +26,7 @@ public class NodesHelper {
         return null;
     }
 
-    private static Drawable prepareDrawable(Workplace workplace, Drawable drawable) {
+    public static Drawable prepareDrawable(Workplace workplace, Drawable drawable) {
         drawable.setRepresentative(false);
         drawable.registerEvents(workplace);
         return drawable;

@@ -41,7 +41,7 @@ public class ItemEditWindow extends EditWindow<ModelNode> {
 
         Button connectBtn = new Button("Connection");
         this.gridPane.add(connectBtn, 0, 3);
-        connectBtn.setOnMouseClicked(mouseEvent -> onConnect(mouseEvent));
+        connectBtn.setOnMouseClicked(this::onConnect);
 
         ColorPicker colorPicker = new ColorPicker((Color) shape.getFill());
         this.gridPane.add(colorPicker, 1, 3);

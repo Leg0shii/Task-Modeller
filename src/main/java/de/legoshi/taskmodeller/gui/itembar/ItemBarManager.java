@@ -14,24 +14,24 @@ import de.legoshi.taskmodeller.util.ModelType;
 import de.legoshi.taskmodeller.util.NodesHelper;
 import javafx.scene.layout.HBox;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 
 @Getter
 public class ItemBarManager {
 
-    private final Workplace workplace;
+    @Setter private Workplace workplace;
     private final HBox toolBar;
 
     private final StandardItemBar standardItemBar;
     private final CTTItemBar cttItemBar;
     private final MiscItemBar miscItemBar;
 
-    public ItemBarManager(Workplace workplace, HBox toolBar) {
+    public ItemBarManager(HBox toolBar) {
         this.standardItemBar = new StandardItemBar();
         this.cttItemBar = new CTTItemBar();
         this.miscItemBar = new MiscItemBar();
-        this.workplace = workplace;
         this.toolBar = toolBar;
     }
 

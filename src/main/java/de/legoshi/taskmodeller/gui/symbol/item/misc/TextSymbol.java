@@ -1,6 +1,5 @@
 package de.legoshi.taskmodeller.gui.symbol.item.misc;
 
-import de.legoshi.taskmodeller.gui.symbol.Drawable;
 import de.legoshi.taskmodeller.gui.symbol.WorkplaceNode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -13,7 +12,7 @@ public class TextSymbol extends WorkplaceNode {
         this.getLabel().setText("Comment");
     }
 
-    public static Drawable generateShape() {
+    public static TextSymbol generateShape() {
         Rectangle rectangle = new Rectangle(50, 50);
         rectangle.setFill(Color.ORANGE.brighter().brighter());
         rectangle.setStroke(Color.BLACK);

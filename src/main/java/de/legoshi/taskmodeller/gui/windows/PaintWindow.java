@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -46,6 +47,7 @@ public class PaintWindow extends AnchorPane {
         this.statusType = statusType;
 
         this.initialize();
+        this.setId(UUID.randomUUID().toString());
     }
 
     private void initialize() {
