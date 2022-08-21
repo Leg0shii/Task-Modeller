@@ -33,6 +33,9 @@ public class SaveWindow extends DialogWindow {
         project.getWorkplace().setSavePath(file.getAbsolutePath());
 
         try {
+            project.getWorkplace().initWorkplace();
+            project.getWorkplace().getChildren().clear();
+            project.getWorkplace().getChildren().add(project);
             project.generatePaintWindows(exO, coO, evO);
             project.getWorkplace().setExistent(true);
             project.getWorkplace().saveWorkspace();
