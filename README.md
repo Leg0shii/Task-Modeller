@@ -7,7 +7,7 @@ Insbesondere Aspekte des gleichzeitigen Modellierens werden in diesem Werkzeug u
 Beinhaltet den Source Code der Anwendung.
 
 ### uml
-Beinhaltet das UML Diagramm der Anwendung.
+Beinhaltet das UML Diagramm der Anwendung. 
 
 ### software
 Beinhaltet die ausführbare .jar der Anwendung. Kann mit Doppelklick gestartet werden.
