@@ -91,7 +91,7 @@
                                 <!-- add Main-Class to manifest file -->
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>de.legoshi.taskmodeller.Main</mainClass>
+                                    <mainClass>de.legoshi.taskmodeller.StartFile</mainClass>
                                 </transformer>
                             </transformers>
                             <filters>
