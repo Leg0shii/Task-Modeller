@@ -1,6 +1,7 @@
 package de.legoshi.taskmodeller.gui.windows.editwindow;
 
 import de.legoshi.taskmodeller.gui.symbol.WorkplaceNode;
+import de.legoshi.taskmodeller.gui.windows.PaintWindow;
 import de.legoshi.taskmodeller.gui.windows.Workplace;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -24,6 +25,7 @@ public class CommentEditWindow extends EditWindow<WorkplaceNode> {
 
     @Override
     public void onDelete() {
+        workplace.getCommentList().remove(this.item);
         workplace.getChildren().remove(this.item);
         this.close();
     }

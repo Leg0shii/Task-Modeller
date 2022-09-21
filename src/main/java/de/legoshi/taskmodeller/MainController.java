@@ -44,7 +44,6 @@ public class MainController implements Initializable {
     public HBox toolBarHolder;
     public VBox itemBarSelector;
     public HBox middleHolder;
-    public AnchorPane scrollPaneContent;
     private Workplace workplace;
     public HBox toolBar;
     private Group wGroup;

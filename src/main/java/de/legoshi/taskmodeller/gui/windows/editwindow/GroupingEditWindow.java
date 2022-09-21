@@ -88,6 +88,7 @@ public class GroupingEditWindow extends EditWindow<ModelNode> {
         for (PaintWindow paintWindow : workplace.getAllWindows()) {
             paintWindow.removeGenNodeFromCanvas(this.item);
         }
+        workplace.getGeneralisedList().remove(this.item);
         this.close();
     }
 
