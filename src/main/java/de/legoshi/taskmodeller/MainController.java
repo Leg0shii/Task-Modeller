@@ -6,6 +6,7 @@ import de.legoshi.taskmodeller.gui.symbol.connection.CTTConnection;
 import de.legoshi.taskmodeller.gui.symbol.connection.Connection;
 import de.legoshi.taskmodeller.gui.symbol.connection.GroupingConnection;
 import de.legoshi.taskmodeller.gui.symbol.connection.NormalConnection;
+import de.legoshi.taskmodeller.gui.symbol.item.misc.GroupingNode;
 import de.legoshi.taskmodeller.gui.windows.dialogwindow.*;
 import de.legoshi.taskmodeller.gui.windows.guidelinewindow.ToDoManager;
 import de.legoshi.taskmodeller.gui.windows.PaintWindow;
@@ -64,6 +65,19 @@ public class MainController implements Initializable {
         this.toDoManager = new ToDoManager(todoBar);
 
         contentPane.addEventFilter(ScrollEvent.ANY, (scrollEvent -> {
+            // update current click position in node after scroll
+            for (ModelNode groupingNode : workplace.getGeneralisedList()) {
+                groupingNode.lastX = Double.MAX_VALUE;
+                groupingNode.lastY = Double.MAX_VALUE;
+            }
+
+            for (PaintWindow paintWindow : workplace.getAllWindows()) {
+                for (ModelNode modelNode : paintWindow.getDrawnNodes()) {
+                    modelNode.lastX = Double.MAX_VALUE;
+                    modelNode.lastY = Double.MAX_VALUE;
+                }
+            }
+
             if (!scrollEvent.isShiftDown()) return;
             if (!workplace.isExistent()) return;
 

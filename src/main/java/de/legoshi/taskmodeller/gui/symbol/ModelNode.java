@@ -46,10 +46,18 @@ public class ModelNode extends Drawable {
         this.getChildren().add(shape);
         this.getChildren().add(label);
         this.setAlignment(Pos.CENTER);
+
+        this.lastX = Double.MAX_VALUE;
+        this.lastY = Double.MAX_VALUE;
     }
 
     @Override
     public void onMouseDrag(Workplace workplace, MouseEvent event) {
+        if (this.lastX == Double.MAX_VALUE || this.lastY == Double.MAX_VALUE) {
+            this.lastX = event.getSceneX();
+            this.lastY = event.getSceneY();
+        }
+
         if (this.getParent() == null) {
             event.consume();
             return;
@@ -90,6 +98,11 @@ public class ModelNode extends Drawable {
 
     @Override
     public void onMouseClick(Workplace workplace, MouseEvent event) {
+        if (this.lastX == Double.MAX_VALUE || this.lastY == Double.MAX_VALUE) {
+            this.lastX = event.getSceneX();
+            this.lastY = event.getSceneY();
+        }
+
         PaintWindow paintWindow = workplace.getSelectedPaintWindow();
 
         for (PaintWindow pW : workplace.getAllWindows()) {
@@ -206,7 +219,9 @@ public class ModelNode extends Drawable {
                     if (mouseClick.getX() >= nX && mouseClick.getX() <= nXFar && mouseClick.getY() >= nY && mouseClick.getY() <= nYFar) {
                         if (modelNode == this) continue;
                         if (modelNode instanceof GroupingNode) continue;
-                        if (type) modelNode.onMouseClick(workplace, event);
+                        if (type) {
+                            modelNode.onMouseClick(workplace, event);
+                        }
                         else {
                             if (!pW.getSelectedNodes().contains(modelNode)) continue;
                             modelNode.onMouseDrag(workplace, event);
